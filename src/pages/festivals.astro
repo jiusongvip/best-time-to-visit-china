@@ -1,0 +1,73 @@
+---
+import "../styles/global.css";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Nav from "../components/Nav.astro";
+
+const festivals = [
+  { name: "Chinese New Year (Spring Festival)", date: "Late Jan - Early Feb 2026", type: "Public Holiday", duration: "7 days", crowd: "Extreme", crowdColor: "bg-red-500", desc: "The most important holiday in China. Families reunite, red envelopes are exchanged, fireworks light up the sky, and temple fairs fill the streets. Expect everything to close for 3-7 days and transportation to be chaotic.", tips: "Book flights 3+ months ahead. Many shops and restaurants close. Temple fairs in Beijing are a must-see cultural experience." },
+  { name: "Lantern Festival", date: "Mid February 2026", type: "Cultural", duration: "1 day", crowd: "Moderate", crowdColor: "bg-amber-400", desc: "Marks the end of Chinese New Year celebrations. Cities are lit up with intricate lantern displays, and families eat tangyuan (sweet glutinous rice balls).", tips: "The best lantern displays are in Nanjing (Qinhuai Lantern Fair) and Shanghai (Yuyuan Garden)." },
+  { name: "Qing Ming Festival (Tomb Sweeping Day)", date: "Early April 2026", type: "Public Holiday", duration: "3 days", crowd: "High", crowdColor: "bg-red-400", desc: "Families visit ancestral graves to clean and make offerings. Also a popular time for spring outings and flying kites.", tips: "Popular tourist sites get crowded with domestic travelers. Book trains and hotels early for this long weekend." },
+  { name: "Labor Day", date: "May 1-5 2026", type: "Public Holiday", duration: "5 days", crowd: "Very High", crowdColor: "bg-red-500", desc: "One of China's “Golden Weeks.” Millions of Chinese take domestic trips. Every major attraction, from the Great Wall to West Lake, reaches capacity.", tips: "If you can, travel AFTER the holiday (May 6+). Prices return to normal and crowds vanish overnight." },
+  { name: "Dragon Boat Festival", date: "Late May / Early June 2026", type: "Public Holiday", duration: "3 days", crowd: "Moderate", crowdColor: "bg-amber-400", desc: "Commemorates the poet Qu Yuan. Dragon boat races are held on rivers across the country, and zongzi (sticky rice dumplings) are eaten.", tips: "Best dragon boat races: Hong Kong, Guangzhou, and along the Yangtze River. Book riverside dining for the best views." },
+  { name: "Mid-Autumn Festival", date: "Mid September 2026", type: "Public Holiday", duration: "3 days", crowd: "Moderate", crowdColor: "bg-amber-400", desc: "Families gather to admire the full moon and eat mooncakes. Lanterns are displayed, and the atmosphere is romantic and reflective.", tips: "Mooncakes are everywhere --- try the traditional lotus seed paste with salted egg yolk. Best viewed from a rooftop bar in Shanghai or a lakeside in Hangzhou." },
+  { name: "National Day Golden Week", date: "October 1-7 2026", type: "Public Holiday", duration: "7 days", crowd: "Extreme", crowdColor: "bg-red-500", desc: "The busiest travel week on Earth. Hundreds of millions of Chinese travel domestically. Every train, hotel, and attraction is maxed out. The Great Wall becomes a sea of people.", tips: "Avoid at all costs. If you must travel near this time, arrive after October 8. The weather is still perfect and crowds drop 90%." },
+  { name: "Double Ninth Festival", date: "Late October 2026", type: "Cultural", duration: "1 day", crowd: "Low", crowdColor: "bg-emerald-500", desc: "A day for honoring elders and climbing mountains. Many Chinese families hike together, making it a great day to see local culture in action.", tips: "Join a local hiking group for an authentic experience. The autumn foliage at this time is spectacular." },
+  { name: "Harbin Ice & Snow Festival", date: "Dec 2026 - Feb 2027", type: "Cultural", duration: "2 months", crowd: "Moderate", crowdColor: "bg-amber-400", desc: "The world's largest ice and snow sculpture festival. Massive illuminated ice castles, snow sculptures, and winter activities in temperatures as low as -30°C.", tips: "Dress for extreme cold. The festival officially opens January 5, but soft openings start in late December. Visit at night for the full illuminated effect." },
+];
+---
+
+<BaseLayout title="Chinese Festivals 2026: Calendar, Crowds & Tips" description="Complete calendar of Chinese festivals in 2026 with dates, crowd levels & travel tips. Plan around Chinese New Year, Mid-Autumn, Golden Week & more.">
+  <section class="min-h-[100dvh]">
+    <Nav />
+    <div class="max-w-7xl mx-auto px-4 py-6">
+      <p class="text-sm font-medium tracking-wide text-accent-600 uppercase mb-4">Festivals</p>
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-zinc-900 mb-4 leading-none">Chinese Festivals Calendar</h1>
+      <p class="text-lg text-zinc-500 max-w-2xl leading-relaxed mb-16">Plan your trip around China's most important celebrations --- or avoid them entirely --- with exact dates and crowd predictions for 2026.</p>
+
+      <h2 class="text-2xl font-bold text-zinc-900 mb-4">How to Use This Calendar</h2>
+      <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-12">
+        <p class="text-sm font-semibold text-amber-800 mb-2">How to use this calendar</p>
+        <p class="text-sm text-amber-700">Festivals marked <span class="font-semibold">Extreme</span> (red) mean massive crowds and price surges. <span class="font-semibold">Moderate</span> (amber) means manageable with planning. <span class="font-semibold">Low</span> (green) festivals barely affect your trip. If a festival excites you, plan around it. If not, use this to avoid those dates.</p>
+      </div>
+
+      <h2 class="text-2xl font-bold text-zinc-900 mb-6">9 Major Festivals in 2026</h2>
+      <div class="space-y-6">
+        {festivals.map((f) => (
+          <div class="bg-white border border-zinc-200 rounded-2xl p-6 md:p-8">
+            <div class="md:flex md:items-start md:justify-between gap-8">
+              <div class="flex-1">
+                <div class="flex items-center gap-3 mb-3 flex-wrap">
+                  <h3 class="text-xl font-bold text-zinc-900">{f.name}</h3>
+                  <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-zinc-100 text-zinc-600">{f.type}</span>
+                  <span class={`px-2.5 py-1 rounded-full text-xs font-semibold text-white ${f.crowdColor}`}>{f.crowd} crowds</span>
+                </div>
+                <p class="text-sm text-zinc-500 mb-3">{f.date} * {f.duration}</p>
+                <p class="text-sm text-zinc-700 leading-relaxed mb-4 max-w-2xl">{f.desc}</p>
+                <div class="bg-zinc-50 rounded-lg p-4 border border-zinc-100">
+                  <p class="text-xs font-semibold text-accent-600 mb-1">Travel Tips</p>
+                  <p class="text-sm text-zinc-600">{f.tips}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <h2 class="text-2xl font-bold text-zinc-900 mt-12 mb-6">Festival Travel Survival Tips</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        <div class="bg-white border border-zinc-200 rounded-xl p-5">
+          <h3 class="text-lg font-bold text-zinc-900 mb-2">The Two "Extreme" Festivals</h3>
+          <p class="text-sm text-zinc-600">Chinese New Year and National Day Golden Week shut down the country. Avoid travel entirely during these periods — prices triple and everything is booked solid.</p>
+        </div>
+        <div class="bg-white border border-zinc-200 rounded-xl p-5">
+          <h3 class="text-lg font-bold text-zinc-900 mb-2">Plan Around, Not During</h3>
+          <p class="text-sm text-zinc-600">The best strategy: arrive 3-5 days after a holiday ends. You'll get good weather, thin crowds, and prices that are 30-50% lower than during the festival itself.</p>
+        </div>
+        <div class="bg-white border border-zinc-200 rounded-xl p-5">
+          <h3 class="text-lg font-bold text-zinc-900 mb-2">Cultural Festivals Are Worth It</h3>
+          <p class="text-sm text-zinc-600">Lantern Festival, Dragon Boat, and Mid-Autumn have manageable crowds and offer authentic cultural experiences. They're the best festivals for travelers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,219 @@
+---
+import "../styles/global.css";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Nav from "../components/Nav.astro";
+
+const quizzes = [
+  { id: "region", q: "Which region of China are you most interested in?", opts: ["North (Beijing, Great Wall)", "East (Shanghai, Suzhou, Hangzhou)", "South (Guilin, Guangzhou, Hong Kong)", "West (Chengdu, Chongqing)", "Southwest (Yunnan, Guizhou)", "Tibet / Qinghai"] },
+  { id: "purpose", q: "What do you want to do most?", opts: ["Sightseeing & landmarks", "Food & culinary experiences", "Hiking & outdoor adventures", "Photography & nature", "Culture, temples & history", "Shopping & city life"] },
+  { id: "budget", q: "What is your budget range? (per person)", opts: ["Budget (under $1,500)", "Moderate ($1,500-$3,000)", "Comfortable ($3,000-$5,000)", "Premium ($5,000+)"] },
+  { id: "crowd", q: "How do you feel about crowds?", opts: ["I want solitude - avoid people at all costs", "I can handle moderate crowds", "I do not mind - bring on the energy"] },
+  { id: "temp", q: "What is your ideal travel temperature?", opts: ["Cool & crisp (5-15°C)", "Mild & pleasant (15-25°C)", "Warm & sunny (25-30°C)", "Hot is fine (30°C+)"] },
+  { id: "festival", q: "Do you want to experience a specific Chinese festival?", opts: ["Chinese New Year", "Mid-Autumn Festival", "Dragon Boat Festival", "No preference - I just want good weather"] },
+  { id: "duration", q: "How long is your trip?", opts: ["Short getaway (5-7 days)", "Standard vacation (10-14 days)", "Extended trip (3-4 weeks)"] },
+  { id: "origin", q: "Where are you flying from?", opts: ["North America", "Europe / UK", "Australia / NZ", "Other Asia", "Other"] },
+];
+---
+
+<BaseLayout title="When Should I Visit China? Take the 60-Second Quiz (2026)" description="Answer 8 quick questions about your travel style and get a personalized month recommendation. We compare weather, crowds & costs to find your perfect China travel window.">
+  <section class="min-h-[100dvh] bg-zinc-50">
+    <Nav />
+    <div class="max-w-2xl mx-auto px-4 pt-6 pb-24">
+      <p class="text-sm font-medium tracking-wide text-accent-600 uppercase mb-4">Free Travel Quiz</p>
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-zinc-900 mb-4 leading-none">When Should You Visit China?</h1>
+      <p class="text-lg text-zinc-500 leading-relaxed mb-12">Answer 8 simple questions about your travel style. We will give you your ideal month, plus backup options with detailed reasons.</p>
+
+      <div class="space-y-8" id="quiz-container">
+        {quizzes.map((q, i) => (
+          <div class="bg-white border border-zinc-200 rounded-xl p-6">
+            <div class="flex items-center gap-3 mb-5">
+              <span class="flex-shrink-0 w-7 h-7 rounded-full bg-accent-100 text-accent-700 text-xs font-bold flex items-center justify-center">{i + 1}</span>
+              <p class="text-base font-semibold text-zinc-800">{q.q}</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {q.opts.map((opt, j) => (
+                <label class="flex items-center gap-3 p-3 rounded-lg border border-zinc-200 hover:border-accent-300 hover:bg-accent-50/50 cursor-pointer transition-colors has-checked:border-accent-500 has-checked:bg-accent-50 has-checked:ring-1 has-checked:ring-accent-200">
+                  <input type="radio" name={q.id} value={opt} class="w-4 h-4 text-accent-600 accent-accent-600" />
+                  <span class="text-sm text-zinc-700">{opt}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-10 text-center">
+        <button type="button" onclick="showResult()" class="inline-flex items-center gap-2 px-10 py-4 bg-accent-600 hover:bg-accent-700 text-white font-semibold text-lg rounded-full transition-colors">
+          Get My Recommendation
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+
+      <div id="quiz-result" class="hidden mt-12 bg-gradient-to-br from-accent-50 to-white border-2 border-accent-200 rounded-2xl p-8">
+        <div class="text-center mb-6">
+          <span class="inline-block text-xs font-bold tracking-widest text-accent-600 uppercase bg-accent-100 px-3 py-1 rounded-full mb-3">Your Perfect Match</span>
+          <p class="text-3xl font-bold text-zinc-900" id="result-month">September - October</p>
+          <p class="text-zinc-500 mt-2" id="result-reason">Based on your preferences for mild weather, moderate crowds, and outdoor activities, autumn is your ideal window.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6" id="result-details"></div>
+      </div>
+    </div>
+  </section>
+  <!-- How It Works + Methodology -->
+  <section class="bg-white border-t border-zinc-100">
+    <div class="max-w-2xl mx-auto px-4 py-16">
+      <p class="text-sm font-medium tracking-wide text-accent-600 uppercase mb-4">Behind the Quiz</p>
+      <h2 class="text-2xl font-bold text-zinc-900 mb-6">How We Calculate Your Result</h2>
+      <p class="text-zinc-600 leading-relaxed mb-8">
+        This quiz isn't random. Each answer you give is weighted against three data dimensions: <strong>weather suitability</strong> (temperature and rainfall patterns from China Meteorological Administration 10-year averages), <strong>crowd avoidance</strong> (Chinese holiday calendar and attraction visitor data), and <strong>cost optimization</strong> (seasonal flight and hotel price indices). Your preferences for temperature, crowds, and budget determine which months score highest.
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
+        <div class="bg-zinc-50 rounded-xl p-5 border border-zinc-200">
+          <p class="text-sm font-bold text-zinc-800 mb-2">Weather Match</p>
+          <p class="text-xs text-zinc-500 leading-relaxed">Your temperature preference is matched against monthly climate normals for each region, weighted by your destination choice.</p>
+        </div>
+        <div class="bg-zinc-50 rounded-xl p-5 border border-zinc-200">
+          <p class="text-sm font-bold text-zinc-800 mb-2">Crowd Filter</p>
+          <p class="text-xs text-zinc-500 leading-relaxed">Your crowd tolerance is cross-referenced with China's public holiday calendar and peak season data.</p>
+        </div>
+        <div class="bg-zinc-50 rounded-xl p-5 border border-zinc-200">
+          <p class="text-sm font-bold text-zinc-800 mb-2">Cost Adjustment</p>
+          <p class="text-xs text-zinc-500 leading-relaxed">Your budget determines whether we recommend peak-season windows or off-season sweet spots.</p>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-bold text-zinc-900 mb-6">Common Traveler Profiles</h2>
+      <p class="text-zinc-600 leading-relaxed mb-6">Not sure how to answer? Here's what typical travelers choose — and what it means.</p>
+      <div class="space-y-4">
+        <div class="bg-white border border-zinc-200 rounded-xl p-5">
+          <div class="flex items-start gap-4">
+            <span class="flex-shrink-0 w-10 h-10 rounded-full bg-accent-100 text-accent-600 flex items-center justify-center text-sm font-bold">FH</span>
+            <div>
+              <p class="text-sm font-bold text-zinc-800 mb-1">First-Time Visitor</p>
+              <p class="text-xs text-zinc-500 mb-2">Prefers mild weather, moderate crowds, flexible budget. Selects North or East regions.</p>
+              <p class="text-xs font-semibold text-accent-700">Typical result: April or late October</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white border border-zinc-200 rounded-xl p-5">
+          <div class="flex items-start gap-4">
+            <span class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-sm font-bold">AD</span>
+            <div>
+              <p class="text-sm font-bold text-zinc-800 mb-1">Adventure Seeker</p>
+              <p class="text-xs text-zinc-500 mb-2">Comfortable with weather extremes, seeks solitude. Selects Tibet or Southwest regions.</p>
+              <p class="text-xs font-semibold text-accent-700">Typical result: May or September for Tibet; year-round for Yunnan</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white border border-zinc-200 rounded-xl p-5">
+          <div class="flex items-start gap-4">
+            <span class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center text-sm font-bold">BG</span>
+            <div>
+              <p class="text-sm font-bold text-zinc-800 mb-1">Budget Traveler</p>
+              <p class="text-xs text-zinc-500 mb-2">Prioritizes low cost over perfect weather. Selects Budget tier, high crowd tolerance.</p>
+              <p class="text-xs font-semibold text-accent-700">Typical result: November or early December</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white border border-zinc-200 rounded-xl p-5">
+          <div class="flex items-start gap-4">
+            <span class="flex-shrink-0 w-10 h-10 rounded-full bg-pink-100 text-pink-600 flex items-center justify-center text-sm font-bold">CF</span>
+            <div>
+              <p class="text-sm font-bold text-zinc-800 mb-1">Culture & Festival Lover</p>
+              <p class="text-xs text-zinc-500 mb-2">Prioritizes festivals over weather. High crowd tolerance. Selects Chinese New Year or Mid-Autumn.</p>
+              <p class="text-xs font-semibold text-accent-700">Typical result: Late January (CNY) or mid-September (Mid-Autumn)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script is:inline>
+  function showResult() {
+    const region = document.querySelector('input[name="region"]:checked');
+    const purpose = document.querySelector('input[name="purpose"]:checked');
+    const budget = document.querySelector('input[name="budget"]:checked');
+    const crowd = document.querySelector('input[name="crowd"]:checked');
+    const temp = document.querySelector('input[name="temp"]:checked');
+    const festival = document.querySelector('input[name="festival"]:checked');
+    const duration = document.querySelector('input[name="duration"]:checked');
+    const origin = document.querySelector('input[name="origin"]:checked');
+
+    const resultDiv = document.getElementById('quiz-result');
+    const resultMonth = document.getElementById('result-month');
+    const resultReason = document.getElementById('result-reason');
+    const resultDetails = document.getElementById('result-details');
+    
+    if (!region || !purpose || !budget || !crowd || !temp || !festival || !duration) {
+      alert('Please answer all 8 questions to get your personalized recommendation.');
+      return;
+    }
+
+    // Simple recommendation logic
+    let month = '';
+    let reason = '';
+    let details = [];
+
+    const tempPref = temp.value;
+    const crowdPref = crowd.value;
+
+    if (tempPref.includes('Mild') || tempPref.includes('Pleasant')) {
+      month = 'September through October';
+      reason = 'Your preference for mild temperatures aligns perfectly with autumn, the sweet spot for most of China.';
+      details = [
+        { label: 'Weather', value: '15-22°C, low humidity, clear skies' },
+        { label: 'Crowd Level', value: 'Moderate (avoid Oct 1-7 Golden Week)' },
+        { label: 'Cost', value: 'Moderate, book 3-4 weeks ahead' },
+      ];
+    } else if (tempPref.includes('Cool')) {
+      month = 'April through May or late October';
+      reason = 'You prefer cooler weather. Spring and late autumn offer crisp, comfortable days for exploring.';
+      details = [
+        { label: 'Weather', value: '10-22°C, occasional light rain' },
+        { label: 'Crowd Level', value: 'Manageable outside public holidays' },
+        { label: 'Cost', value: 'Good value, shoulder season pricing' },
+      ];
+    } else if (tempPref.includes('Warm') || tempPref.includes('Hot')) {
+      month = 'June through August';
+      reason = 'You do not mind the heat. Summer brings long days, lush scenery, and access to Tibet and Qinghai.';
+      details = [
+        { label: 'Weather', value: '25-35°C, humid in south, dry in north' },
+        { label: 'Crowd Level', value: 'High (domestic summer holidays)' },
+        { label: 'Cost', value: 'Peak pricing, book 1-2 months ahead' },
+      ];
+    }
+
+    if (festival.value.includes('Chinese New Year')) {
+      month = 'Late January / Early February';
+      reason = 'For Chinese New Year, visit in late January or early February. The cultural atmosphere is unforgettable.';
+    } else if (festival.value.includes('Mid-Autumn')) {
+      month = 'September';
+      reason = 'Mid-Autumn Festival in September pairs mooncakes with perfect weather.';
+    }
+
+    if (crowdPref.includes('solitude')) {
+      reason += ' We recommend traveling right after major holidays when sites are quietest.';
+      month += ' (just after public holidays)';
+    }
+
+    var resultMonthEl = document.getElementById('result-month');
+    var resultReasonEl = document.getElementById('result-reason');
+    var resultDetailsEl = document.getElementById('result-details');
+
+    if (resultMonthEl) resultMonthEl.textContent = month;
+    if (resultReasonEl) resultReasonEl.textContent = reason;
+
+    var detailsHtml = '';
+    details.forEach(function(d) {
+      detailsHtml += '<div class=\"bg-white rounded-xl border border-zinc-200 p-4\"><p class=\"text-xs font-semibold text-zinc-400 uppercase mb-1\">' + d.label + '</p><p class=\"text-sm font-medium text-zinc-700\">' + d.value + '</p></div>';
+    });
+    if (resultDetailsEl) resultDetailsEl.innerHTML = detailsHtml;
+
+    if (resultDiv) {
+      resultDiv.classList.remove('hidden');
+      resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+</script>

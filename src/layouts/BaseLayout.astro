@@ -1,0 +1,86 @@
+---
+// BaseLayout.astro - Design Read: travel planning content-tool hybrid
+// Dial: VARIANCE=6 MOTION=5 DENSITY=4
+// Aesthetic: Tailwind + custom teal accent + Geist + restrained motion
+export interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+}
+
+const { title, description, ogImage = "/og-default.png" } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
+
+// BreadcrumbList — only for subpages
+let breadcrumbSchema = "";
+const pathParts = Astro.url.pathname.split('/').filter(Boolean);
+if (pathParts.length > 0) {
+  const baseUrl = canonicalURL.replace(Astro.url.pathname, '/');
+  const items = [{ "@type": "ListItem", "position": 1, "name": "Home", "item": baseUrl }];
+  for (let i = 0; i < pathParts.length; i++) {
+    const part = pathParts[i];
+    const name = part.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase());
+    const item = baseUrl + pathParts.slice(0, i + 1).join('/');
+    items.push({ "@type": "ListItem", "position": (i + 2), "name": name, "item": item });
+  }
+  breadcrumbSchema = JSON.stringify({ "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": items });
+}
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImage} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <title>{title}</title>
+    <!-- BreadcrumbList Schema -->
+    {breadcrumbSchema && <script type="application/ld+json" set:html={breadcrumbSchema} />}
+    <!-- Organization + WebSite Schema -->
+    <script type="application/ld+json" set:html={`{
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "When to Visit China",
+      "url": "https://when-to-visit-china.com",
+      "logo": "https://when-to-visit-china.com/favicon.svg",
+      "description": "Expert travel guide helping you find the best time to visit China. Month-by-month weather, crowd calendars, festival dates, and region-specific advice."
+    }`} />
+    <script type="application/ld+json" set:html={`{
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "When to Visit China",
+      "url": "https://when-to-visit-china.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://when-to-visit-china.com/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }`} />
+    <!-- Person Schema (Author) -->
+    <script type="application/ld+json" set:html={`{
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Wei Zhang",
+      "jobTitle": "Founder & Lead Editor",
+      "url": "https://when-to-visit-china.com/about",
+      "description": "Travel writer and China specialist with over a decade of firsthand experience across 20+ Chinese cities. Founder of When to Visit China."
+    }`} />
+  </head>
+  <body class="bg-white text-zinc-900 antialiased font-sans">
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-accent-600 focus:text-white focus:rounded-lg focus:outline-none">Skip to content</a>
+
+    <main id="main-content"><slot /></main>
+  </body>
+</html>

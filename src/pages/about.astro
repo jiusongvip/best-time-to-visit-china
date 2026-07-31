@@ -1,0 +1,89 @@
+---
+import "../styles/global.css";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Nav from "../components/Nav.astro";
+---
+
+<BaseLayout title="About Us — Who's Behind When to Visit China" description="Meet Wei Zhang, founder of When to Visit China. Learn about our data-driven methodology, climate sources, and editorial policy for trustworthy travel advice.">
+  <section class="min-h-[100dvh]">
+    <Nav />
+    <div class="max-w-3xl mx-auto px-4 py-6">
+      <p class="text-sm font-medium tracking-wide text-accent-600 uppercase mb-4">About</p>
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-zinc-900 mb-4 leading-none">Who's Behind This Guide</h1>
+      <p class="text-lg text-zinc-500 leading-relaxed mb-12">The story behind the data, the people behind the words.</p>
+
+      <!-- Author Bio -->
+      <div class="bg-white border border-zinc-200 rounded-2xl p-8 mb-12">
+        <div class="flex items-start gap-5 mb-6">
+          <div class="w-16 h-16 rounded-full bg-accent-100 flex items-center justify-center text-accent-600 text-2xl font-bold flex-shrink-0">W</div>
+          <div>
+            <h2 class="text-xl font-bold text-zinc-900">Wei Zhang</h2>
+            <p class="text-sm text-zinc-500">Founder & Lead Editor</p>
+          </div>
+        </div>
+        <p class="text-zinc-700 leading-relaxed mb-4">
+          I've spent over a decade exploring China's cities, mountains, and remote corners — from the frozen streets of Harbin in January to the misty rice terraces of Guilin in April. I built this guide because I kept hearing the same question from friends, colleagues, and fellow travelers: <em>"When should I actually go?"</em>
+        </p>
+        <p class="text-zinc-700 leading-relaxed mb-4">
+          The answer always started with "it depends" — and that felt like a cop-out. So I set out to build something that doesn't just tell you the best month, but shows you <em>why</em>, compares your options, and lets you make the call based on what matters to <em>you</em>.
+        </p>
+        <p class="text-zinc-700 leading-relaxed">
+          Every recommendation on this site comes from a combination of aggregated climate data, years of on-the-ground travel experience, and — most importantly — a genuine desire to help you have the trip you're dreaming about.
+        </p>
+      </div>
+
+      <!-- Methodology -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-bold text-zinc-900 mb-6">How We Build Our Recommendations</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="bg-white border border-zinc-200 rounded-xl p-6">
+            <p class="text-sm font-bold text-zinc-800 mb-2">Climate Data</p>
+            <p class="text-sm text-zinc-600 leading-relaxed">
+              Temperature ranges and rain days are based on 10-year averages (2016-2025) from the China Meteorological Administration (CMA) for each region. We update these figures annually using the most recent complete-year dataset.
+            </p>
+          </div>
+          <div class="bg-white border border-zinc-200 rounded-xl p-6">
+            <p class="text-sm font-bold text-zinc-800 mb-2">Flight Prices</p>
+            <p class="text-sm text-zinc-600 leading-relaxed">
+              Round-trip flight cost estimates are sourced from aggregated Google Flights data for US departure cities, sampled monthly. Figures represent median prices and are refreshed quarterly.
+            </p>
+          </div>
+          <div class="bg-white border border-zinc-200 rounded-xl p-6">
+            <p class="text-sm font-bold text-zinc-800 mb-2">Crowd Intelligence</p>
+            <p class="text-sm text-zinc-600 leading-relaxed">
+              Crowd level estimates combine official Chinese holiday calendars, tourism board visitor statistics, and crowd-sourced reports from major attraction operators. Peak period assessments are verified against ticket sell-out patterns.
+            </p>
+          </div>
+          <div class="bg-white border border-zinc-200 rounded-xl p-6">
+            <p class="text-sm font-bold text-zinc-800 mb-2">First-Hand Experience</p>
+            <p class="text-sm text-zinc-600 leading-relaxed">
+              Our seasonal narratives and regional tips are based on firsthand travel across 20+ Chinese cities. If we haven't been there in that season, we don't write about it as if we have.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Editorial Policy -->
+      <div class="bg-zinc-50 border border-zinc-200 rounded-2xl p-8 mb-12">
+        <h2 class="text-xl font-bold text-zinc-900 mb-4">Editorial Policy</h2>
+        <ul class="space-y-3 text-sm text-zinc-700 leading-relaxed">
+          <li class="flex gap-2"><span class="text-accent-600 font-bold flex-shrink-0">1.</span> All content is written by humans with direct travel experience. We do not publish AI-generated content without expert human review and editing.</li>
+          <li class="flex gap-2"><span class="text-accent-600 font-bold flex-shrink-0">2.</span> Weather and price data are updated at minimum quarterly. Festival dates are updated annually based on the Chinese lunar calendar.</li>
+          <li class="flex gap-2"><span class="text-accent-600 font-bold flex-shrink-0">3.</span> We do not accept payment for recommendations. No sponsored rankings. No paid placements. If we recommend a time or place, it's because we believe it's the right call — period.</li>
+          <li class="flex gap-2"><span class="text-accent-600 font-bold flex-shrink-0">4.</span> Corrections: If you find an error, email us. We'll fix it and note the correction publicly. Accuracy matters more than pride.</li>
+        </ul>
+      </div>
+
+      <!-- Why This Site Exists -->
+      <div class="bg-gradient-to-br from-accent-50 to-white border border-accent-200 rounded-2xl p-8">
+        <h2 class="text-xl font-bold text-zinc-900 mb-4">Why We Built This</h2>
+        <p class="text-zinc-700 leading-relaxed">
+          Most "best time to visit" guides give you a single sentence answer. China isn't a single place — it spans five climate zones, 9.6 million square kilometers, and the largest annual human migration on Earth. A one-size-fits-all answer doesn't work here.
+        </p>
+        <p class="text-zinc-700 leading-relaxed mt-3">
+          We built an interactive tool, not just an article, because we believe travel planning deserves better than generic advice. Pick your region. Pick your dates. Compare. Decide. We'll give you the data — the choice is yours.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

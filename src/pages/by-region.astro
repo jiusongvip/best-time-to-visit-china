@@ -1,0 +1,77 @@
+---
+import "../styles/global.css";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Nav from "../components/Nav.astro";
+
+const regionGuides = [
+  { name: "Beijing & North China", slug: "beijing", best: "April-May & September-October", avoid: "July-August (heat), Jan-Feb (freezing)", months: "Mar-May & Sep-Nov", temp: "Spring 10-22°C / Autumn 8-20°C", highlights: "Great Wall, Forbidden City, Summer Palace", tip: "Avoid Golden Week (Oct 1-7) at all costs. Go mid-October for perfect foliage." },
+  { name: "Shanghai & East China", slug: "shanghai", best: "March-May & October-November", avoid: "July-August (extreme humidity), Jan-Feb (damp cold)", months: "Mar-May & Oct-Nov", temp: "Spring 15-22°C / Autumn 17-24°C", highlights: "The Bund, Yu Garden, Suzhou canals, Hangzhou West Lake", tip: "The plum rain season (meiyu) hits in June-July. Pack a quality rain jacket." },
+  { name: "Guilin & South China", slug: "guilin", best: "April-May & September-October", avoid: "June-August (heavy rain)", months: "Apr-May & Sep-Nov", temp: "Spring 18-25°C / Autumn 20-27°C", highlights: "Li River, Yangshuo karst peaks, Longji Rice Terraces", tip: "Summer rains can cause river closures. Spring and autumn offer the famous misty Guilin views." },
+  { name: "Chengdu & Sichuan", slug: "chengdu", best: "March-June & September-November", avoid: "July-August (hot & rainy)", months: "Mar-Jun & Sep-Nov", temp: "15-28°C across best months", highlights: "Giant Pandas, Jinli Ancient Street, Sichuan cuisine", tip: "Sichuan is notoriously cloudy year-round. Do not expect blue skies, but the food more than compensates." },
+  { name: "Yunnan (Kunming, Dali, Lijiang)", slug: "yunnan", best: "March-May & October-November", avoid: "June-August (monsoon)", months: "Year-round (mild climate)", temp: "Year-round 15-24°C (Kunming: City of Eternal Spring)", highlights: "Stone Forest, Tiger Leaping Gorge, Shangri-La, Erhai Lake", tip: "Yunnan is the safest bet for any month. Altitude varies dramatically --- pack for multiple climates." },
+  { name: "Tibet (Lhasa & Everest)", slug: "tibet", best: "May-October", avoid: "November-April (freezing, many roads closed)", months: "May-Oct", temp: "Summer 15-25°C daytime, near freezing at night", highlights: "Potala Palace, Jokhang Temple, Everest Base Camp", tip: "Permits required. Book through a registered tour operator. Altitude sickness is real --- spend 2-3 days acclimating in Lhasa." },
+  { name: "Xi'an & Central China", slug: "xian", best: "March-May & September-October", avoid: "July-August (hot & crowded)", months: "Mar-May & Sep-Nov", temp: "Spring 12-24°C / Autumn 10-22°C", highlights: "Terracotta Warriors, City Wall, Muslim Quarter", tip: "The Terracotta Warriors are indoors but get very crowded. Arrive at opening time (8:30 AM) for the best experience." },
+  { name: "Hong Kong & Macau", slug: "hongkong", best: "October-December", avoid: "June-September (typhoon season)", months: "Oct-Dec", temp: "20-28°C, low humidity", highlights: "Victoria Peak, Star Ferry, Macau casinos", tip: "October to December is the golden window: comfortable, dry, and packed with events like the Wine & Dine Festival." },
+];
+---
+
+<BaseLayout title="Best Time to Visit China by Region: 8 Zones Compared" description="China's climate varies dramatically by region. Compare the best travel seasons for Beijing, Shanghai, Xi'an, Guilin, Tibet, Yunnan & more with our regional guide.">
+  <section class="min-h-[100dvh]">
+    <Nav />
+    <div class="max-w-7xl mx-auto px-4 py-6">
+      <p class="text-sm font-medium tracking-wide text-accent-600 uppercase mb-4">By Region</p>
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-zinc-900 mb-4 leading-none">Best Time to Visit China by Region</h1>
+      <p class="text-lg text-zinc-500 max-w-2xl leading-relaxed mb-16">China spans five climate zones. Each region has its own perfect season --- here is exactly when to go where.</p>
+
+      <h2 class="text-2xl font-bold text-zinc-900 mb-6">How to Use This Regional Guide</h2>
+      <p class="text-sm text-zinc-600 mb-10 max-w-3xl">Each card below covers one travel region. Check the "Best" window for ideal travel dates, the "Avoid" window for worst conditions, and the "Local Tip" for insider advice. Click any region name to jump to its details.</p>
+
+      <h2 class="text-2xl font-bold text-zinc-900 mb-6">8 Regions Compared</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {regionGuides.map((r) => (
+          <div id={r.slug} class="bg-white border border-zinc-200 rounded-2xl p-6 md:p-8 hover:border-accent-200 transition-colors">
+            <h3 class="text-xl font-bold text-zinc-900 mb-4">{r.name}</h3>
+            <div class="space-y-4">
+              <div class="flex items-start gap-3">
+                <span class="flex-shrink-0 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-700">Best</span>
+                <p class="text-sm text-zinc-700">{r.best}</p>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="flex-shrink-0 px-2.5 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-600">Avoid</span>
+                <p class="text-sm text-zinc-600">{r.avoid}</p>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="flex-shrink-0 px-2.5 py-1 rounded-full text-xs font-semibold bg-zinc-100 text-zinc-600">Ideal</span>
+                <p class="text-sm text-zinc-700">{r.months} * {r.temp}</p>
+              </div>
+              <div>
+                <p class="text-xs font-semibold text-zinc-400 mb-1">Must-See</p>
+                <p class="text-sm text-zinc-700">{r.highlights}</p>
+              </div>
+              <div class="bg-zinc-50 rounded-lg p-3 border border-zinc-100">
+                <p class="text-xs font-semibold text-accent-600 mb-0.5">Local Tip</p>
+                <p class="text-sm text-zinc-600">{r.tip}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <h2 class="text-2xl font-bold text-zinc-900 mt-12 mb-6">Regional Travel Tips</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        <div class="bg-white border border-zinc-200 rounded-xl p-5">
+          <h3 class="text-lg font-bold text-zinc-900 mb-2">Book Early for Peak Season</h3>
+          <p class="text-sm text-zinc-600">For April-May and September-October (the best windows for most regions), book flights and hotels 2-3 months ahead. Prices surge 30-50% during these months.</p>
+        </div>
+        <div class="bg-white border border-zinc-200 rounded-xl p-5">
+          <h3 class="text-lg font-bold text-zinc-900 mb-2">Avoid Golden Week Everywhere</h3>
+          <p class="text-sm text-zinc-600">October 1-7 is the worst travel week in China. Every region is overwhelmed. If you must visit, arrive after October 8 for perfect weather and empty attractions.</p>
+        </div>
+        <div class="bg-white border border-zinc-200 rounded-xl p-5">
+          <h3 class="text-lg font-bold text-zinc-900 mb-2">Mix Regions for Variety</h3>
+          <p class="text-sm text-zinc-600">A 2-week trip can combine two regions: Beijing + Xi'an for history, Shanghai + Guilin for scenery, or Chengdu + Yunnan for food and nature.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

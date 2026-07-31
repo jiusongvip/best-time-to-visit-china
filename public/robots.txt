@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+Sitemap: https://when-to-visit-china.com/sitemap.xml
+
+# AI crawlers — allow browsing, block training
+User-agent: GPTBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+# Allow ChatGPT real-time browsing
+User-agent: ChatGPT-User
+Allow: /

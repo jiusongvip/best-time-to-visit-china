@@ -1,0 +1,318 @@
+{
+  "summary": {
+    "health_score": 57,
+    "business_type": "Travel Guide / Content Publisher (SEO-first information site)",
+    "top_findings": [
+      "Missing canonical tags on all 9 pages — duplicate content risk",
+      "No author bylines, about page, or E-E-A-T trust signals",
+      "Missing schema types: WebSite, Organization, BreadcrumbList",
+      "No social share image (og-default.png doesn't exist)",
+      "No on-page photography — travel content without images"
+    ],
+    "quick_wins": [
+      "Add self-referencing canonical tags to BaseLayout (10 min)",
+      "Add WebSite + Organization JSON-LD schema to homepage (15 min)",
+      "Add font-display: swap to Google Fonts link (1 min)",
+      "Create a simple OG image (30 min)",
+      "Add AI crawler directives to robots.txt (5 min)"
+    ]
+  },
+  "categories": [
+    {
+      "name": "Technical SEO",
+      "score": 55,
+      "what_works": [
+        "robots.txt present and correctly configured",
+        "XML sitemap valid with 8 URLs and appropriate priorities",
+        "Clean URL structure throughout",
+        "Mobile responsive with viewport meta and Tailwind responsive utilities",
+        "Astro SSG delivers full content in initial HTML — no JS dependency for indexing"
+      ],
+      "findings": [
+        {
+          "title": "Missing canonical tags on all pages",
+          "severity": "Critical",
+          "description": "No <link rel='canonical'> tag exists in BaseLayout or any page. This exposes the site to duplicate content issues from URL variations, www vs non-www, and parameter-based URLs.",
+          "recommendation": "Add a self-referencing canonical tag to the BaseLayout <head> that Astro generates per-page."
+        },
+        {
+          "title": "No www/non-www redirect",
+          "severity": "Critical",
+          "description": "No 301 redirect is configured between www and non-www versions. Both could be indexed simultaneously, splitting link equity.",
+          "recommendation": "Configure a 301 redirect from one version to the other at the hosting/CDN level."
+        },
+        {
+          "title": "Missing security headers",
+          "severity": "High",
+          "description": "No CSP, HSTS, X-Frame-Options, X-Content-Type-Options, or Referrer-Policy headers are set. Security is a trust signal Google considers in ranking.",
+          "recommendation": "Add security headers via Astro middleware or hosting config (Netlify/Vercel/Cloudflare)."
+        },
+        {
+          "title": "No AI crawler directives in robots.txt",
+          "severity": "High",
+          "description": "robots.txt has no rules for GPTBot, ClaudeBot, Google-Extended, or PerplexityBot. Without directives, all AI bots crawl freely.",
+          "recommendation": "Add explicit AI crawler rules based on your content strategy (allow browsing, optionally block training)."
+        },
+        {
+          "title": "IndexNow not implemented",
+          "severity": "Medium",
+          "description": "Bing, Yandex, and Naver support IndexNow for instant indexing notifications. Currently not configured.",
+          "recommendation": "Generate an IndexNow key and add ping logic to the build pipeline."
+        }
+      ]
+    },
+    {
+      "name": "Content Quality",
+      "score": 68,
+      "what_works": [
+        "Homepage content is rich, engaging, and demonstrates genuine first-hand travel experience",
+        "FAQ page is comprehensive with 12 well-structured questions",
+        "Monthly guide provides granular, data-backed recommendations per month",
+        "Content is unique, substantive, and reader-focused — no keyword stuffing",
+        "Readability is excellent with varied sentence structure and conversational tone"
+      ],
+      "findings": [
+        {
+          "title": "No author bylines or credentials anywhere",
+          "severity": "High",
+          "description": "No page identifies who wrote the content. For travel advice (a YMYL-adjacent topic), Google expects visible authorship. The trust section claims firsthand experience but doesn't name anyone.",
+          "recommendation": "Add author bylines with bios. Create an About page with credentials and methodology."
+        },
+        {
+          "title": "Missing 'Who / How / Why' signals",
+          "severity": "High",
+          "description": "Google's helpful content heuristic asks who created the content, how it was created, and why. None of these are visible. The trust section mentions data sources but doesn't cite them specifically.",
+          "recommendation": "Add author bios, a methodology section explaining data sources, and make the site's purpose explicit."
+        },
+        {
+          "title": "No about, contact, or legal pages",
+          "severity": "Medium",
+          "description": "Missing /about/, /contact/, privacy policy, and terms of service pages. These are baseline trust signals for both users and search engines.",
+          "recommendation": "Create an About page, a simple contact page, and a privacy policy page."
+        },
+        {
+          "title": "Static copyright/update dates",
+          "severity": "Medium",
+          "description": "The copyright year and 'Updated Jul 2026' are hardcoded. If not actively updated, dates will become stale, signaling neglect.",
+          "recommendation": "Use Astro's build-time date injection or add a CMS-backed lastmod mechanism."
+        }
+      ]
+    },
+    {
+      "name": "On-Page SEO",
+      "score": 82,
+      "what_works": [
+        "All 9 pages have unique, keyword-rich title tags (50-70 char)",
+        "All pages have unique, compelling meta descriptions (120-160 char)",
+        "Every page has exactly one H1 aligned with title intent",
+        "Logical heading hierarchy (H1→H2→H3) throughout",
+        "Excellent internal linking — nav, footer, and contextual CTAs"
+      ],
+      "findings": [
+        {
+          "title": "Homepage H1 could incorporate year or differentiator",
+          "severity": "Medium",
+          "description": "'Best Time to Visit China' is keyword-rich but could include '2026' or a unique angle to better differentiate from competitors.",
+          "recommendation": "Consider 'Best Time to Visit China in 2026' in the visible H1 (already in the title tag)."
+        },
+        {
+          "title": "Subpages lack secondary keyword targeting in headings",
+          "severity": "Medium",
+          "description": "While primary keywords are covered, subpages don't target complementary queries in H2/H3 headings (e.g., /festivals/ could include 'Chinese New Year travel tips').",
+          "recommendation": "Audit each subpage for secondary keyword opportunities in subheadings."
+        },
+        {
+          "title": "No visible lastmod dates on content pages",
+          "severity": "Low",
+          "description": "Only the homepage has a freshness indicator. Content pages benefit from visible update dates for user trust and crawl prioritization.",
+          "recommendation": "Add 'Last updated' timestamps to key content pages."
+        }
+      ]
+    },
+    {
+      "name": "Schema / Structured Data",
+      "score": 25,
+      "what_works": [
+        "Homepage includes basic Article JSON-LD schema",
+        "All pages use valid JSON-LD format"
+      ],
+      "findings": [
+        {
+          "title": "Only one schema type exists across entire site",
+          "severity": "High",
+          "description": "Only the homepage has schema markup. The 8 subpages carry no structured data at all, missing opportunities for rich results and entity resolution.",
+          "recommendation": "Add appropriate schema to every page: Article for guides, QAPage for FAQ, BreadcrumbList site-wide."
+        },
+        {
+          "title": "Missing WebSite and Organization schema",
+          "severity": "High",
+          "description": "No WebSite (with SearchAction) or Organization schema exists. These are foundational for Sitelinks Search Box and Knowledge Graph eligibility.",
+          "recommendation": "Add WebSite schema to homepage with SearchAction. Add Organization schema with name, url, and logo."
+        },
+        {
+          "title": "Article schema missing key properties",
+          "severity": "Medium",
+          "description": "Homepage Article schema lacks datePublished, dateModified, mainEntityOfPage, and image properties — all recommended for rich result eligibility.",
+          "recommendation": "Add datePublished, dateModified, mainEntityOfPage, and image to the Article schema."
+        },
+        {
+          "title": "FAQ page lacks QAPage schema",
+          "severity": "Medium",
+          "description": "While FAQPage rich results are retired (May 2026), QAPage schema still aids AI Overview and AI search entity resolution.",
+          "recommendation": "Add QAPage schema to the /faq/ page with individual Question/Answer items."
+        }
+      ]
+    },
+    {
+      "name": "Performance (CWV)",
+      "score": 70,
+      "what_works": [
+        "Astro SSG delivers full static HTML — excellent LCP potential",
+        "Tailwind CSS with Vite tree-shaking for minimal CSS",
+        "No render-blocking third-party scripts or ad networks",
+        "React islands use client:visible for deferred hydration"
+      ],
+      "findings": [
+        {
+          "title": "OG image file missing",
+          "severity": "High",
+          "description": "BaseLayout references /og-default.png as social share image, but no such file exists. Every social share will appear without a preview image.",
+          "recommendation": "Create og-default.png (1200x630px) in the public/ directory."
+        },
+        {
+          "title": "Google Fonts loads synchronously without display=swap",
+          "severity": "Medium",
+          "description": "The Google Fonts stylesheet can block text rendering (FOIT). Missing display=swap parameter.",
+          "recommendation": "Add &display=swap to the Google Fonts URL. Better: self-host Geist fonts."
+        },
+        {
+          "title": "Scroll-reveal animations may contribute to CLS",
+          "severity": "Medium",
+          "description": "The .reveal class uses opacity:0 + translateY without reserving layout space. As elements become visible on scroll, layout may shift.",
+          "recommendation": "Reserve space with min-height or use will-change + contain-intrinsic-size."
+        },
+        {
+          "title": "React island bundle size",
+          "severity": "Low",
+          "description": "React + Recharts adds ~95KB gzipped for chart islands. Consider if charts could be rendered server-side for users who don't interact.",
+          "recommendation": "Explore Astro's server-islands or static SVG charts as fallback."
+        }
+      ]
+    },
+    {
+      "name": "AI Search Readiness",
+      "score": 38,
+      "what_works": [
+        "Well-structured content with clear sections and data-rich tables",
+        "FAQ page provides natural Q&A structure for AI extraction",
+        "Clean semantic HTML aids machine readability"
+      ],
+      "findings": [
+        {
+          "title": "No Organization schema for entity resolution",
+          "severity": "High",
+          "description": "Without Organization markup, AI systems cannot resolve your site as a named entity, limiting appearance in AI-generated recommendations and citations.",
+          "recommendation": "Add Organization JSON-LD schema with name, url, logo, and description."
+        },
+        {
+          "title": "No author attribution for AI citations",
+          "severity": "High",
+          "description": "AI systems (ChatGPT, Perplexity) increasingly cite named authors. Anonymous content is less likely to surface as a trustworthy source.",
+          "recommendation": "Add author bylines with Person schema linked to Article schema."
+        },
+        {
+          "title": "No llms.txt file",
+          "severity": "Medium",
+          "description": "The emerging llms.txt standard gives AI systems a curated index of your content. Not having one misses AI search discovery opportunities.",
+          "recommendation": "Create an llms.txt at the site root with summaries of each page."
+        },
+        {
+          "title": "No explicit AI crawler strategy",
+          "severity": "Medium",
+          "description": "All AI crawlers have unrestricted access. Consider whether you want to allow GPTBot/ClaudeBot training or only browsing.",
+          "recommendation": "Add AI crawler rules to robots.txt based on your content strategy."
+        }
+      ]
+    },
+    {
+      "name": "Images",
+      "score": 20,
+      "what_works": [
+        "Favicon provided in both .ico and .svg formats"
+      ],
+      "findings": [
+        {
+          "title": "No on-page images anywhere on the site",
+          "severity": "High",
+          "description": "The entire site is text-only with CSS-decorated cards. Travel content without photography severely limits engagement, shareability, and perceived quality.",
+          "recommendation": "Add destination photos, seasonal imagery, and festival photos to key pages. Travel content is inherently visual."
+        },
+        {
+          "title": "Missing OG social share image",
+          "severity": "High",
+          "description": "/og-default.png doesn't exist. Social shares have no preview image, reducing click-through from social media and messaging apps.",
+          "recommendation": "Create og-default.png (1200x630px) immediately. Consider unique OG images per page."
+        }
+      ]
+    }
+  ],
+  "action_plan": {
+    "phases": [
+      {
+        "name": "Phase 1: Critical Fixes",
+        "timeframe": "Week 1",
+        "items": [
+          "Add self-referencing canonical tags to BaseLayout",
+          "Configure www/non-www redirect at hosting level",
+          "Add WebSite + Organization JSON-LD schema to homepage",
+          "Create og-default.png social share image (1200x630px)",
+          "Add display=swap to Google Fonts URL or self-host fonts"
+        ]
+      },
+      {
+        "name": "Phase 2: High-Impact Improvements",
+        "timeframe": "Weeks 2-3",
+        "items": [
+          "Add author bylines and Person schema to all content pages",
+          "Create About page with credentials, methodology, and data sources",
+          "Create Contact page and Privacy Policy page",
+          "Add BreadcrumbList schema site-wide",
+          "Add QAPage schema to /faq/ page",
+          "Add datePublished/dateModified to Article schema",
+          "Add security headers (CSP, HSTS, X-Frame-Options)",
+          "Add AI crawler directives to robots.txt"
+        ]
+      },
+      {
+        "name": "Phase 3: Content & Authority",
+        "timeframe": "Month 2",
+        "items": [
+          "Add destination and seasonal photography throughout the site",
+          "Create dedicated landing pages for high-value long-tail queries",
+          "Add secondary keyword targeting to subpage headings",
+          "Create llms.txt file for AI search discovery",
+          "Implement IndexNow for Bing/Yandex indexing",
+          "Add visible lastmod dates to content pages",
+          "Research and acquire backlinks from travel blogs and China tourism sites"
+        ]
+      },
+      {
+        "name": "Phase 4: Monitoring & Iteration",
+        "timeframe": "Ongoing",
+        "items": [
+          "Set up Google Search Console and monitor index coverage",
+          "Set up Bing Webmaster Tools for non-Google search visibility",
+          "Monitor Core Web Vitals in CrUX and optimize as needed",
+          "Track keyword rankings for target queries",
+          "A/B test OG images for social share click-through",
+          "Regularly update weather data and festival dates for freshness",
+          "Consider self-hosting fonts for faster LCP"
+        ]
+      }
+    ]
+  },
+  "artifacts": {
+    "findings_dir": "findings/",
+    "screenshots_dir": "screenshots/"
+  }
+}

@@ -1,0 +1,83 @@
+---
+import "../styles/global.css";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Nav from "../components/Nav.astro";
+import { monthlyData } from "../data/weather.ts";
+---
+
+<BaseLayout title="China Month-by-Month Travel Guide: Weather & Crowds" description="Complete month-by-month breakdown of weather, festivals, crowds & costs for traveling in China. Compare all 12 months side by side and plan your perfect trip.">
+  <section class="min-h-[100dvh]">
+    <Nav />
+    <div class="max-w-7xl mx-auto px-4 py-6">
+      <p class="text-sm font-medium tracking-wide text-accent-600 uppercase mb-4">Month by Month</p>
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-zinc-900 mb-4 leading-none">China Travel by Month</h1>
+      <p class="text-lg text-zinc-500 max-w-2xl leading-relaxed mb-16">A complete guide to weather, festivals, crowds, and where to go for every month of the year.</p>
+
+      <h2 class="text-2xl font-bold text-zinc-900 mb-6">How to Choose Your Perfect Month</h2>
+      <p class="text-sm text-zinc-600 mb-10 max-w-3xl">China's best travel window depends on three factors: weather comfort, crowd levels, and price. Use the data below to find the sweet spot for your trip.</p>
+
+      <h2 class="text-2xl font-bold text-zinc-900 mb-6">12 Months of Weather, Crowds & Packing Tips</h2>
+      <div class="space-y-6">
+        {monthlyData.map((m) => (
+          <div class="bg-white border border-zinc-200 rounded-2xl p-6 md:p-8">
+            <div class="md:flex md:items-start md:justify-between gap-8 mb-6">
+              <div>
+                <h3 class="text-2xl font-bold text-zinc-900 mb-1">{m.label}</h3>
+                <p class="text-zinc-500">{m.tempLow}&deg;C - {m.tempHigh}&deg;C * {m.rainDays} rain days * Crowd level: {m.crowdLevel}/5</p>
+              </div>
+              <div class="mt-4 md:mt-0 flex items-center gap-2">
+                <span class={`px-3 py-1.5 rounded-full text-xs font-semibold ${m.crowdLevel <= 2 ? 'bg-emerald-100 text-emerald-700' : m.crowdLevel <= 3 ? 'bg-amber-100 text-amber-700' : 'bg-red-100 text-red-700'}`}>
+                  Crowd: {m.crowdLevel}/5
+                </span>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div>
+                <p class="text-xs font-semibold text-zinc-400 uppercase mb-2">Best Regions</p>
+                <ul class="space-y-1">
+                  {m.bestRegions.map(r => <li class="text-sm text-zinc-700 flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-accent-500"></span>{r}</li>)}
+                </ul>
+              </div>
+              <div>
+                <p class="text-xs font-semibold text-zinc-400 uppercase mb-2">Highlights</p>
+                <ul class="space-y-1">
+                  {m.highlights.map(h => <li class="text-sm text-zinc-700 flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>{h}</li>)}
+                </ul>
+              </div>
+              <div>
+                <p class="text-xs font-semibold text-zinc-400 uppercase mb-2">Watch Out For</p>
+                <ul class="space-y-1">
+                  {m.downsides.map(d => <li class="text-sm text-zinc-700 flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>{d}</li>)}
+                </ul>
+              </div>
+              <div>
+                <p class="text-xs font-semibold text-zinc-400 uppercase mb-2">What to Pack</p>
+                <p class="text-sm text-zinc-700">{m.packing}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <h2 class="text-2xl font-bold text-zinc-900 mt-12 mb-6">Seasonal Snapshot</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div class="bg-white border border-zinc-200 rounded-xl p-5">
+          <h3 class="text-lg font-bold text-zinc-900 mb-2">Spring (Mar–May)</h3>
+          <p class="text-sm text-zinc-600">Mild weather across most of China. Cherry blossoms in the east, rapeseed flowers in Yunnan. Crowds build toward May holiday.</p>
+        </div>
+        <div class="bg-white border border-zinc-200 rounded-xl p-5">
+          <h3 class="text-lg font-bold text-zinc-900 mb-2">Summer (Jun–Aug)</h3>
+          <p class="text-sm text-zinc-600">Hot and humid in the east. Best for Tibet and high-altitude areas. Peak domestic tourist season — book everything early.</p>
+        </div>
+        <div class="bg-white border border-zinc-200 rounded-xl p-5">
+          <h3 class="text-lg font-bold text-zinc-900 mb-2">Autumn (Sep–Nov)</h3>
+          <p class="text-sm text-zinc-600">The consensus best season. Clear skies, comfortable temps, stunning foliage. Avoid Oct 1–7 Golden Week at all costs.</p>
+        </div>
+        <div class="bg-white border border-zinc-200 rounded-xl p-5">
+          <h3 class="text-lg font-bold text-zinc-900 mb-2">Winter (Dec–Feb)</h3>
+          <p class="text-sm text-zinc-600">Cold in the north, mild in the south. Lowest prices and fewest tourists. Harbin Ice Festival is the standout winter draw.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

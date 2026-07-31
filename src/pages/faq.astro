@@ -1,0 +1,70 @@
+---
+import "../styles/global.css";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Nav from "../components/Nav.astro";
+
+const faqs = [
+  { q: "What is the best month to visit China?", a: "April, May, September, and October are generally the best months across China's most popular destinations. You'll get comfortable temperatures (15-26°C), manageable rainfall, and beautiful scenery --- spring blooms or autumn colors depending on the season. For the absolute best experience, aim for the second half of April or the last two weeks of October (after Golden Week)." },
+  { q: "When is the cheapest time to travel to China?", a: "November through February (excluding the Chinese New Year week) offers the lowest flight and hotel prices. Flights from the US can drop below $600 round-trip, and 4-star hotels often run 40-50% below peak rates. Early December is the single cheapest window --- cold but manageable with proper clothing, and you'll have attractions nearly to yourself." },
+  { q: "What is the worst time to visit China?", a: "Two periods to seriously reconsider: Chinese New Year (late Jan / early Feb) when the entire country is in transit and many businesses close for up to a week, and National Day Golden Week (Oct 1-7) when every major attraction reaches capacity. July-August is also punishingly hot and humid in most cities, with 35°C+ temperatures and 80%+ humidity in Shanghai, Beijing, and Guangzhou." },
+  { q: "Is China crowded during Golden Week?", a: "Extremely. Golden Week (Oct 1-7) is the busiest travel period in the world, with hundreds of millions of domestic trips. Popular sites like the Forbidden City sell out days in advance. Train tickets vanish within seconds of release. Hotel prices can triple. If you must travel near October, arrive after the 8th --- crowds vanish overnight and the weather is still perfect." },
+  { q: "What is the weather like in China in October?", a: "October is arguably China's best weather month. Beijing averages 10-19°C with crisp, clear skies and stunning autumn foliage. Shanghai is 17-23°C. Xi'an and Guilin are equally pleasant. Just avoid the first week (Golden Week) and you'll have a near-perfect trip. Pack a light jacket for evenings and comfortable walking shoes." },
+  { q: "Can I visit China during Chinese New Year?", a: "Yes, but with significant caveats. The festival atmosphere is incredible --- lanterns, temple fairs, fireworks, and family reunions create an unforgettable cultural experience. However, transportation is chaotic (the world's largest annual human migration), many restaurants and shops close for 3-7 days, and prices surge dramatically. If cultural immersion is your primary goal, it is absolutely worth it. If convenience matters more, choose another time." },
+  { q: "When is the rainy season in China?", a: "Southern China (Shanghai, Guangzhou, Guilin, Hong Kong) sees heavy rain from June through August, with typhoon risk on the southeast coast peaking in August. The “plum rain” season (meiyu) in June-July affects the Yangtze River basin with weeks of drizzle. Northern China (Beijing, Xi'an) is much drier year-round but can get brief heavy downpours in July-August. Western China (Yunnan, Sichuan) has its monsoon roughly May-September." },
+  { q: "Do I need a visa to visit China?", a: "Most foreign visitors need a visa. The standard Tourist (L) visa allows 30-90 days. Apply at your nearest Chinese embassy or consulate 1-2 months before travel. As of 2024-2026, China has expanded its visa-free transit policy: citizens of 54 countries (including the US, UK, EU, Australia) can stay 72-144 hours (3-6 days) visa-free when transiting through major hubs like Beijing, Shanghai, Guangzhou, and Chengdu. Check the latest policy before booking." },
+  { q: "Is China safe for tourists?", a: "China is generally very safe for tourists. Violent crime against foreigners is extremely rare. Petty theft (pickpocketing) can occur in crowded tourist areas and on public transport. The biggest practical risks are: crossing streets (drivers do not always yield to pedestrians), food safety at street stalls (stick to busy ones with high turnover), and altitude sickness in Tibet. Solo female travelers report feeling safe in most Chinese cities." },
+  { q: "How much does a trip to China cost?", a: "Budget travelers can manage $50-70/day (hostels, street food, public transport). Mid-range travelers should budget $100-180/day (3-4 star hotels, restaurants, guided tours). Luxury travelers can expect $300+/day. Major cost drivers: international flights ($750-1,850 round-trip from US), domestic flights/trains ($50-200 per leg), hotels ($30 budget to $200+ luxury/night), attractions ($3-20 entry fees). Plan for $1,500-3,000/person for a 10-day mid-range trip excluding international flights." },
+  { q: "Should I book a tour or travel independently?", a: "Independent travel in China is easier than you might think. Major cities have English signage on subways and at tourist sites. Translation apps (Google Translate, Baidu Translate) handle menus and signs. Didi (the Chinese Uber) has an English interface. However, a tour or private guide is worth considering for: Tibet (mandatory), rural areas with no English, or if you want historical context at sites like the Forbidden City. Many travelers do a hybrid --- independent in cities, guided for specific excursions." },
+  { q: "How far in advance should I book?", a: "International flights: 2-4 months ahead for best prices. Hotels: 2-4 weeks for normal periods, 1-2 months for peak (CNY, Golden Week, summer). Train tickets: available 15 days before departure, book immediately for popular routes (Beijing-Shanghai, Beijing-Xi'an). Attractions like the Forbidden City and Potala Palace require advance booking. During Golden Week and CNY, book everything the moment reservations open." },
+];
+
+const qaPageSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map((faq) => ({
+    "@type": "Question",
+    "name": faq.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.a,
+    },
+  })),
+});
+
+const faqCategories = [
+  { name: "Timing & Weather", faqs: faqs.slice(0, 6) },
+  { name: "Practicalities", faqs: faqs.slice(6) },
+];
+---
+
+<BaseLayout title="China Travel FAQ: Everything You Need to Know Before You Go" description="Answers to 12 common China travel questions: best months to visit, cheapest times, visa requirements, safety, costs, weather by season & more expert advice.">
+  <!-- QAPage Schema -->
+  <script type="application/ld+json" set:html={qaPageSchema} />
+  <section class="min-h-[100dvh]">
+    <Nav />
+    <div class="max-w-3xl mx-auto px-4 py-6">
+      <p class="text-sm font-medium tracking-wide text-accent-600 uppercase mb-4">FAQ</p>
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-zinc-900 mb-4 leading-none">China Travel FAQ</h1>
+      <p class="text-lg text-zinc-500 leading-relaxed mb-16">Everything you need to know before planning your trip to China.</p>
+
+      {faqCategories.map((cat) => (
+        <div class="mb-12">
+          <h2 class="text-xl font-bold text-zinc-800 mb-6 pb-3 border-b border-zinc-200">{cat.name}</h2>
+          <div class="space-y-3">
+            {cat.faqs.map((faq) => (
+              <details class="group border border-zinc-200 rounded-xl overflow-hidden">
+                <summary class="list-none p-5 cursor-pointer flex items-center justify-between gap-4">
+                  <span class="text-sm font-semibold text-zinc-800">{faq.q}</span>
+                  <svg class="w-5 h-5 text-zinc-300 flex-shrink-0 group-open:rotate-180 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                </summary>
+                <div class="px-5 pb-5 pt-0 border-t border-zinc-100">
+                  <p class="text-sm text-zinc-600 leading-relaxed pt-4">{faq.a}</p>
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

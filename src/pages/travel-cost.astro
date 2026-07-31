@@ -1,0 +1,192 @@
+---
+import "../styles/global.css";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Nav from "../components/Nav.astro";
+import CostChart from "../components/islands/CostChart";
+import HotelComparison from "../components/islands/HotelComparison";
+
+const costComparison = [
+  { category: "Hostel / Budget Hotel", low: 15, mid: 35, high: 60, note: "per night" },
+  { category: "3-Star Hotel", low: 40, mid: 70, high: 120, note: "per night" },
+  { category: "4-Star Hotel", low: 70, mid: 120, high: 200, note: "per night" },
+  { category: "5-Star / Luxury", low: 120, mid: 200, high: 500, note: "per night" },
+  { category: "Local Restaurant Meal", low: 3, mid: 8, high: 20, note: "per person" },
+  { category: "Mid-Range Restaurant", low: 10, mid: 20, high: 40, note: "per person" },
+  { category: "High-End Dining", low: 30, mid: 60, high: 150, note: "per person" },
+  { category: "Subway / Bus (single)", low: 0.30, mid: 0.50, high: 1, note: "per ride" },
+  { category: "Didi / Taxi (5 km)", low: 3, mid: 5, high: 10, note: "per trip" },
+  { category: "High-Speed Train (Beijing to Shanghai)", low: 70, mid: 90, high: 130, note: "2nd class" },
+];
+
+const itineraries = [
+  {
+    name: "Budget Backpacker (10 days)",
+    total: "$1,080",
+    perDay: "$108",
+    breakdown: [
+      { item: "Flights (US-Beijing round-trip, Nov)", cost: "$750" },
+      { item: "Hostels (9 nights at $15/night)", cost: "$135" },
+      { item: "Street food + local restaurants", cost: "$80" },
+      { item: "Public transport (subway, buses)", cost: "$25" },
+      { item: "Attractions (Great Wall, Forbidden City, Summer Palace)", cost: "$60" },
+      { item: "Sim card + incidentals", cost: "$30" },
+    ],
+  },
+  {
+    name: "Mid-Range Comfort (10 days)",
+    total: "$2,310",
+    perDay: "$231",
+    breakdown: [
+      { item: "Flights (US-Beijing round-trip, shoulder season)", cost: "$950" },
+      { item: "4-star hotels (9 nights at $90/night avg)", cost: "$810" },
+      { item: "Mix of local + mid-range restaurants", cost: "$200" },
+      { item: "Didi + high-speed trains between cities", cost: "$150" },
+      { item: "Attractions + 2 guided tours", cost: "$150" },
+      { item: "Sim card + travel insurance + tips", cost: "$50" },
+    ],
+  },
+  {
+    name: "Premium Experience (10 days)",
+    total: "$4,140",
+    perDay: "$414",
+    breakdown: [
+      { item: "Flights (US-Beijing round-trip, premium economy)", cost: "$1,500" },
+      { item: "5-star hotels (9 nights at $200/night avg)", cost: "$1,800" },
+      { item: "Fine dining + best local restaurants", cost: "$400" },
+      { item: "Private car + driver + high-speed trains", cost: "$250" },
+      { item: "VIP tours, private guides, skip-line passes", cost: "$250" },
+      { item: "Premium sim, comprehensive insurance, incidentals", cost: "$80" },
+    ],
+  },
+];
+
+const cityCosts = [
+  { city: "Beijing", tier: "Tier 1", hotel: "$60-150", food: "$5-30", transport: "$0.50-5", vibe: "Moderate. Wide range from budget to luxury." },
+  { city: "Shanghai", tier: "Tier 1", hotel: "$70-180", food: "$5-35", transport: "$0.50-5", vibe: "Slightly pricier than Beijing, especially dining and nightlife." },
+  { city: "Guangzhou", tier: "Tier 1", hotel: "$55-140", food: "$3-25", transport: "$0.50-4", vibe: "Best value among Tier 1 cities. Amazing cheap street food." },
+  { city: "Xi'an", tier: "Tier 2", hotel: "$35-90", food: "$3-20", transport: "$0.30-4", vibe: "Very affordable. Even mid-range feels luxurious here." },
+  { city: "Chengdu", tier: "Tier 1.5", hotel: "$50-120", food: "$3-20", transport: "$0.30-4", vibe: "Great value. World-class food at local prices." },
+  { city: "Guilin / Yangshuo", tier: "Tier 3", hotel: "$25-70", food: "$2-15", transport: "$0.30-3", vibe: "Rural beauty, rural prices. Bargain for everything." },
+  { city: "Kunming / Dali", tier: "Tier 2-3", hotel: "$30-80", food: "$3-15", transport: "$0.30-3", vibe: "Yunnan is generally cheap. Great value guesthouses." },
+  { city: "Lhasa (Tibet)", tier: "Special", hotel: "$40-150", food: "$5-25", transport: "$1-8", vibe: "Limited supply. Book through tour operator. Expect premium pricing." },
+];
+---
+
+<BaseLayout title="China Travel Cost Guide: Flights, Hotels & Budgets" description="Complete cost breakdown for traveling in China: flight prices by month, hotel costs by season & city, three sample itineraries at every budget level.">
+  <section class="min-h-[100dvh]">
+    <Nav />
+    <div class="max-w-7xl mx-auto px-4 py-6">
+      <p class="text-sm font-medium tracking-wide text-accent-600 uppercase mb-4">Travel Cost</p>
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-zinc-900 mb-4 leading-none">China Travel Cost Guide</h1>
+      <p class="text-lg text-zinc-500 max-w-2xl leading-relaxed mb-16">Everything you will actually spend, broken down by season, city, and travel style.</p>
+
+      <!-- Flights & Hotels Charts -->
+      <div class="mb-16">
+        <h2 class="text-2xl font-bold text-zinc-900 mb-6">Flights & Hotels by Season</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <CostChart client:visible />
+          <HotelComparison client:visible />
+        </div>
+      </div>
+
+      <!-- Cost Comparison Table -->
+      <div class="mb-16">
+        <h2 class="text-2xl font-bold text-zinc-900 mb-3">Everyday Costs at a Glance</h2>
+        <p class="text-zinc-500 mb-6">Prices in USD. Low = budget option, Mid = comfortable, High = premium.</p>
+        <div class="overflow-x-auto rounded-xl border border-zinc-200">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="bg-zinc-50 border-b border-zinc-200">
+                <th class="text-left p-3 font-semibold text-zinc-600">Category</th>
+                <th class="text-center p-3 font-semibold text-emerald-600">Budget</th>
+                <th class="text-center p-3 font-semibold text-amber-600">Mid</th>
+                <th class="text-center p-3 font-semibold text-red-500">Premium</th>
+                <th class="text-left p-3 font-semibold text-zinc-400 text-xs">Unit</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-zinc-100">
+              {costComparison.map((row) => (
+                <tr class="hover:bg-zinc-50/50">
+                  <td class="p-3 font-medium text-zinc-700">{row.category}</td>
+                  <td class="p-3 text-center text-emerald-700 font-medium">${row.low}</td>
+                  <td class="p-3 text-center text-amber-700 font-medium">${row.mid}</td>
+                  <td class="p-3 text-center text-red-600 font-medium">${row.high}</td>
+                  <td class="p-3 text-zinc-400 text-xs">{row.note}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Sample Itineraries -->
+      <div class="mb-16">
+        <h2 class="text-2xl font-bold text-zinc-900 mb-3">Real Itineraries: What a Trip Actually Costs</h2>
+        <p class="text-zinc-500 mb-6">Excluding international flights in the total breakdown but shown separately for reference.</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {itineraries.map((iti) => (
+            <div class="bg-white border border-zinc-200 rounded-2xl p-6">
+              <p class="text-base font-bold text-zinc-900 mb-1">{iti.name}</p>
+              <div class="flex items-baseline gap-2 mb-4">
+                <span class="text-3xl font-bold text-accent-600">{iti.total}</span>
+                <span class="text-sm text-zinc-400">{iti.perDay}/day</span>
+              </div>
+              <div class="space-y-2">
+                {iti.breakdown.map((b) => (
+                  <div class="flex items-center justify-between text-sm">
+                    <span class="text-zinc-500">{b.item}</span>
+                    <span class="font-semibold text-zinc-700">{b.cost}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Cost by City -->
+      <div class="mb-16">
+        <h2 class="text-2xl font-bold text-zinc-900 mb-3">How Much Each City Costs</h2>
+        <p class="text-zinc-500 mb-6">China's cities range from world-class expensive to rural cheap. Here is the spread.</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {cityCosts.map((c) => (
+            <div class="bg-white border border-zinc-200 rounded-xl p-5">
+              <div class="flex items-center justify-between mb-3">
+                <p class="text-base font-bold text-zinc-800">{c.city}</p>
+                <span class="text-[10px] font-semibold tracking-widest uppercase px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-500">{c.tier}</span>
+              </div>
+              <div class="space-y-2 text-xs">
+                <div class="flex justify-between"><span class="text-zinc-400">Hotel</span><span class="font-medium text-zinc-600">{c.hotel}</span></div>
+                <div class="flex justify-between"><span class="text-zinc-400">Meal</span><span class="font-medium text-zinc-600">{c.food}</span></div>
+                <div class="flex justify-between"><span class="text-zinc-400">Transport</span><span class="font-medium text-zinc-600">{c.transport}</span></div>
+              </div>
+              <p class="text-xs text-zinc-500 mt-3 leading-relaxed border-t border-zinc-100 pt-3">{c.vibe}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Money-Saving Tips -->
+      <div class="bg-zinc-50 border border-zinc-200 rounded-2xl p-8">
+        <h2 class="text-xl font-bold text-zinc-900 mb-4">Money-Saving Tips for China</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {[
+            { tip: "Fly indirect (via Seoul, Tokyo, or Hong Kong) and save 20-30% on long-haul flights." },
+            { tip: "Travel in November or early December: flights drop to $750, hotels are half price." },
+            { tip: "Use high-speed trains instead of flights between nearby cities. Beijing-Shanghai is 4.5 hours for $90." },
+            { tip: "Eat where locals eat. A bowl of Lanzhou noodles costs $2 and is better than most hotel breakfasts." },
+            { tip: "Book hotels on Chinese platforms (Trip.com, Meituan) for lower prices than Booking.com or Agoda." },
+            { tip: "Avoid Golden Week and CNY. Prices triple and availability vanishes. No discount is worth the crowds." },
+            { tip: "Use Didi (Chinese Uber) instead of taxis. Fixed pricing, no haggling, English interface." },
+            { tip: "Buy a local SIM card at the airport ($10-20 for 30 days of data). Free WiFi is patchy outside hotels." },
+          ].map((t) => (
+            <div class="flex items-start gap-3 bg-white rounded-lg p-4 border border-zinc-100">
+              <span class="flex-shrink-0 w-6 h-6 rounded-full bg-accent-100 text-accent-600 text-xs font-bold flex items-center justify-center mt-0.5">$</span>
+              <p class="text-sm text-zinc-600 leading-relaxed">{t.tip}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

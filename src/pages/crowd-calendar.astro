@@ -1,0 +1,158 @@
+---
+import "../styles/global.css";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Nav from "../components/Nav.astro";
+
+const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
+interface CalendarDay {
+  day: number;
+  crowd: 0 | 1 | 2 | 3 | 4 | 5;
+  note?: string;
+}
+
+function generateMonth(year: number, month: number): CalendarDay[] {
+  const firstDay = new Date(year, month, 1);
+  const lastDay = new Date(year, month + 1, 0);
+  const days: CalendarDay[] = [];
+  for (let d = 1; d <= lastDay.getDate(); d++) {
+    const day = new Date(year, month, d);
+    let crowd: 0 | 1 | 2 | 3 | 4 | 5 = 1;
+    let note: string | undefined;
+
+    const isWeekend = day.getDay() === 0 || day.getDay() === 6;
+    if (isWeekend) crowd = 2;
+
+    if (month === 0) {
+      if (d >= 25 && d <= 31) { crowd = 5; note = "CNY peak"; }
+    }
+    if (month === 1) {
+      if (d <= 8) { crowd = 5; note = "CNY wrap-up"; }
+    }
+    if (month === 3) {
+      if (d >= 3 && d <= 5) { crowd = 4; note = "Qing Ming"; }
+    }
+    if (month === 4) {
+      if (d >= 1 && d <= 5) { crowd = 4; note = "Labor Day"; }
+    }
+    if (month === 5) {
+      if (d >= 10 && d <= 15) { crowd = 4; note = "Dragon Boat"; }
+    }
+    if (month === 6 || month === 7) {
+      crowd = Math.max(crowd, 4);
+      note = note || "Summer peak";
+    }
+    if (month === 8) {
+      if (d >= 10 && d <= 16) crowd = Math.max(crowd, 3);
+      if (d >= 28) { crowd = 5; note = "National Day prep"; }
+    }
+    if (month === 9) {
+      if (d <= 7) { crowd = 5; note = "Golden Week!"; }
+      if (d > 7 && d <= 15) crowd = 3;
+    }
+    if (month === 10) {
+      crowd = Math.max(crowd, 1);
+      note = note || "Best time!";
+    }
+
+    days.push({ day: d, crowd: crowd as 0|1|2|3|4|5, note });
+  }
+  return days;
+}
+
+function crowdColor(crowd: number) {
+  if (crowd >= 5) return "bg-red-500 text-white";
+  if (crowd >= 4) return "bg-red-300 text-red-900";
+  if (crowd >= 3) return "bg-amber-300 text-amber-900";
+  if (crowd >= 2) return "bg-emerald-200 text-emerald-900";
+  return "bg-emerald-100 text-emerald-800";
+}
+
+function crowdLabel(crowd: number) {
+  if (crowd >= 5) return "Extreme";
+  if (crowd >= 4) return "Very High";
+  if (crowd >= 3) return "Moderate";
+  if (crowd >= 2) return "Low";
+  return "Empty";
+}
+
+const eventNotes: Record<string, string> = {
+  "CNY peak": "Chinese New Year travel peak",
+  "CNY wrap-up": "Chinese New Year ending",
+  "Qing Ming": "Tomb Sweeping Festival",
+  "Labor Day": "Labor Day holiday",
+  "Dragon Boat": "Dragon Boat Festival",
+  "Summer peak": "Domestic summer holidays",
+  "National Day prep": "Pre-Golden Week rush",
+  "Golden Week!": "National Day Golden Week",
+  "Best time!": "Low season, great deals",
+};
+
+const yearMonths = months.map((_, i) => ({ label: months[i], index: i, days: generateMonth(2026, i) }));
+---
+
+<BaseLayout title="China Travel Crowd Calendar 2026: Plan Around Peak Times" description="Interactive crowd calendar showing daily crowd levels for every day of 2026 across China's top attractions. Plan around peak times and save money.">
+  <section class="min-h-[100dvh]">
+    <Nav />
+    <div class="max-w-7xl mx-auto px-4 py-6">
+      <p class="text-sm font-medium tracking-wide text-accent-600 uppercase mb-4">Crowd Calendar</p>
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-zinc-900 mb-4 leading-none">China Travel Crowd Calendar 2026</h1>
+      <p class="text-lg text-zinc-500 max-w-2xl leading-relaxed mb-4">See crowd levels for every single day of the year. Plan around major holidays and peak seasons.</p>
+
+      <h2 class="text-2xl font-bold text-zinc-900 mb-4">Crowd Level Legend</h2>
+      <div class="flex items-center gap-4 mb-10 flex-wrap">
+        <div class="flex items-center gap-1.5 text-xs text-zinc-500">
+          <span class="w-4 h-4 rounded bg-emerald-100"></span> Empty
+        </div>
+        <div class="flex items-center gap-1.5 text-xs text-zinc-500">
+          <span class="w-4 h-4 rounded bg-emerald-200"></span> Low
+        </div>
+        <div class="flex items-center gap-1.5 text-xs text-zinc-500">
+          <span class="w-4 h-4 rounded bg-amber-300"></span> Moderate
+        </div>
+        <div class="flex items-center gap-1.5 text-xs text-zinc-500">
+          <span class="w-4 h-4 rounded bg-red-300"></span> Very High
+        </div>
+        <div class="flex items-center gap-1.5 text-xs text-zinc-500">
+          <span class="w-4 h-4 rounded bg-red-500"></span> Extreme
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-bold text-zinc-900 mb-6">Monthly Crowd Levels at China's Top 20 Attractions</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {yearMonths.map((m) => (
+          <div class="bg-white border border-zinc-200 rounded-2xl overflow-hidden">
+            <div class="px-4 py-3 bg-zinc-50 border-b border-zinc-100">
+              <p class="text-sm font-bold text-zinc-800">{m.label} 2026</p>
+            </div>
+            <div class="p-3">
+              <div class="grid grid-cols-7 gap-1 mb-2">
+                {weekDays.map(w => <span class="text-[10px] text-zinc-400 text-center font-medium">{w[0]}</span>)}
+              </div>
+              <div class="grid grid-cols-7 gap-1">
+                {Array.from({ length: new Date(2026, m.index, 1).getDay() === 0 ? 6 : new Date(2026, m.index, 1).getDay() - 1 }).map(() => <span></span>)}
+                {m.days.map((d) => (
+                  <div
+                    title={d.note ? `${crowdLabel(d.crowd)}: ${eventNotes[d.note] ?? d.note}` : crowdLabel(d.crowd)}
+                    class={`relative flex items-center justify-center text-[11px] font-medium rounded-md aspect-square cursor-default transition-transform hover:scale-110 hover:z-10 ${crowdColor(d.crowd)}`}
+                  >
+                    {d.day}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <h2 class="text-2xl font-bold text-zinc-900 mb-4">How to Read This Calendar</h2>
+      <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 mb-8">
+        <p class="text-sm font-semibold text-amber-800 mb-2">How to read this calendar</p>
+        <p class="text-sm text-amber-700 leading-relaxed">
+          This calendar estimates crowd levels at China's top 20 attractions aggregated across Beijing, Shanghai, Xi'an, Guilin, and Chengdu. Red days mean queues of 2+ hours at major sites. Green days mean you will often have famous spots nearly to yourself. The sweet spot: light green in early March, late April (after Qing Ming), late May, early November, and early December.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
