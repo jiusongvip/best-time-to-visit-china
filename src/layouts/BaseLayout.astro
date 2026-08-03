@@ -9,7 +9,11 @@ export interface Props {
 }
 
 const { title, description, ogImage = "/og-default.png" } = Astro.props;
-const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
+// og:image 统一转为绝对 URL（社交平台抓取器无法解析相对路径）
+const ogImageURL = ogImage.startsWith("http") ? ogImage : new URL(ogImage, Astro.site).href;
+let canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
+// 全站规范：URL 无尾斜杠（trailingSlash: never），首页 pathname 为 "/" 需去除
+if (canonicalURL.endsWith("/")) canonicalURL = canonicalURL.slice(0, -1);
 
 // BreadcrumbList — only for subpages
 let breadcrumbSchema = "";
@@ -37,11 +41,13 @@ if (pathParts.length > 0) {
     <meta name="description" content={description} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage} />
+    <meta property="og:image" content={ogImageURL} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -61,12 +67,7 @@ if (pathParts.length > 0) {
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "When to Visit China",
-      "url": "https://when-to-visit-china.com",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://when-to-visit-china.com/search?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
+      "url": "https://when-to-visit-china.com"
     }`} />
     <!-- Person Schema (Author) -->
     <script type="application/ld+json" set:html={`{
