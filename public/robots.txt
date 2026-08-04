@@ -15,3 +15,13 @@ Disallow: /
 # Allow ChatGPT real-time browsing
 User-agent: ChatGPT-User
 Allow: /
+
+# Allow Perplexity / Claude / Gemini browsing for AI citations
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: GoogleOther
+Allow: /

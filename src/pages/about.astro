@@ -2,9 +2,10 @@
 import "../styles/global.css";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
 ---
 
-<BaseLayout title="About Us — Who's Behind When to Visit China" description="Meet Wei Zhang, founder of When to Visit China. Learn about our data-driven methodology, climate sources, and editorial policy for trustworthy travel advice.">
+<BaseLayout title="About When to Visit China: Our Founder & Editorial Policy" description="Meet Wei Zhang, founder of When to Visit China. Learn about our data-driven methodology, climate sources, and editorial policy for trustworthy travel advice.">
   <section class="min-h-[100dvh]">
     <Nav />
     <div class="max-w-3xl mx-auto px-4 py-6">
@@ -39,19 +40,19 @@ import Nav from "../components/Nav.astro";
           <div class="bg-white border border-zinc-200 rounded-xl p-6">
             <p class="text-sm font-bold text-zinc-800 mb-2">Climate Data</p>
             <p class="text-sm text-zinc-600 leading-relaxed">
-              Temperature ranges and rain days are based on 10-year averages (2016-2025) from the China Meteorological Administration (CMA) for each region. We update these figures annually using the most recent complete-year dataset.
+              Temperature ranges and rain days are based on 10-year averages (2016-2025) from the <a href="https://www.cma.gov.cn/en/" target="_blank" rel="noopener" class="text-accent-600 hover:text-accent-700 underline">China Meteorological Administration (CMA)</a> for each region. We update these figures annually using the most recent complete-year dataset.
             </p>
           </div>
           <div class="bg-white border border-zinc-200 rounded-xl p-6">
             <p class="text-sm font-bold text-zinc-800 mb-2">Flight Prices</p>
             <p class="text-sm text-zinc-600 leading-relaxed">
-              Round-trip flight cost estimates are sourced from aggregated Google Flights data for US departure cities, sampled monthly. Figures represent median prices and are refreshed quarterly.
+              Round-trip flight cost estimates are sourced from aggregated <a href="https://www.google.com/travel/flights" target="_blank" rel="noopener" class="text-accent-600 hover:text-accent-700 underline">Google Flights</a> data for US departure cities, sampled monthly. Figures represent median prices and are refreshed quarterly.
             </p>
           </div>
           <div class="bg-white border border-zinc-200 rounded-xl p-6">
             <p class="text-sm font-bold text-zinc-800 mb-2">Crowd Intelligence</p>
             <p class="text-sm text-zinc-600 leading-relaxed">
-              Crowd level estimates combine official Chinese holiday calendars, tourism board visitor statistics, and crowd-sourced reports from major attraction operators. Peak period assessments are verified against ticket sell-out patterns.
+              Crowd level estimates combine official Chinese holiday calendars, tourism board visitor statistics, and crowd-sourced reports from major attraction operators. Peak period assessments are verified against ticket sell-out patterns published by the <a href="https://www.mct.gov.cn/" target="_blank" rel="noopener" class="text-accent-600 hover:text-accent-700 underline">Ministry of Culture and Tourism</a>.
             </p>
           </div>
           <div class="bg-white border border-zinc-200 rounded-xl p-6">
@@ -86,4 +87,5 @@ import Nav from "../components/Nav.astro";
       </div>
     </div>
   </section>
+  <Footer />
 </BaseLayout>

@@ -9,7 +9,7 @@ import ComparisonTool from "../components/islands/ComparisonTool";
 import Footer from "../components/Footer.astro";
 
 const pageTitle = "Best Time to Visit China 2026: Month-by-Month Guide";
-const pageDesc = "Plan your perfect China trip with our interactive guide. Compare weather, crowds & costs by month and region. Take the free 60-second quiz.";
+const pageDesc = "Find the best time to visit China with our interactive guide. Compare weather, crowds & costs by month and region, then take the free 60-second quiz.";
 
 const quickFacts = [
   { label: "Overall Best", value: "April-May & Sept-Oct", icon: "M5 13l4 4L19 7" },
@@ -50,22 +50,34 @@ const faqs = [
   { q: "Can I visit China during Chinese New Year?", a: "Yes, but with caveats. The festival atmosphere is incredible --- lanterns, temple fairs, fireworks. However, transportation is chaotic, many restaurants and shops close for 3-7 days, and prices surge. If cultural immersion is your goal, it's worth it; if convenience matters more, choose another time." },
   { q: "When is the rainy season in China?", a: "Southern China (Shanghai, Guangzhou, Guilin) sees heavy rain from June through August, with typhoon risk on the southeast coast peaking in August. Northern China is much drier. The “plum rain” season (meiyu) in June-July affects the Yangtze River basin." },
 ];
+
+const faqPageSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map((faq) => ({
+    "@type": "Question",
+    "name": faq.q,
+    "acceptedAnswer": { "@type": "Answer", "text": faq.a },
+  })),
+});
 ---
 
-<BaseLayout title={pageTitle} description={pageDesc}>
+<BaseLayout title={pageTitle} description={pageDesc} ogImage="/images/og-china-best-time.webp">
   <!-- JSON-LD Schema -->
   <script type="application/ld+json" set:html={`{
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": "${pageTitle}",
     "description": "${pageDesc}",
-    "author": { "@type": "Organization", "name": "When to Visit China" },
-    "publisher": { "@type": "Organization", "name": "When to Visit China" },
+    "author": { "@type": "Person", "name": "Wei Zhang", "url": "https://when-to-visit-china.com/about" },
+    "publisher": { "@type": "Organization", "name": "When to Visit China", "logo": { "@type": "ImageObject", "url": "https://when-to-visit-china.com/favicon.svg" } },
     "datePublished": "2026-01-15",
     "dateModified": "2026-07-31",
     "mainEntityOfPage": { "@type": "WebPage", "@id": "https://when-to-visit-china.com" },
-    "image": "https://when-to-visit-china.com/og-default.png"
+    "image": "https://when-to-visit-china.com/images/og-china-best-time.webp"
   }`} />
+  <!-- FAQPage Schema (AI citation signal) -->
+  <script type="application/ld+json" set:html={faqPageSchema} />
 
   <!-- ======== NAV ======== -->
   <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-zinc-100">
@@ -164,6 +176,7 @@ const faqs = [
 
   <!-- ======== 2. QUICK SUMMARY CARDS ======== -->
   <section class="reveal max-w-7xl mx-auto px-4 pt-8 relative z-10">
+    <p class="text-center text-zinc-500 text-sm md:text-base max-w-3xl mx-auto mb-8 leading-relaxed">The best time to visit China is April&ndash;May or September&ndash;October for most travelers &mdash; but the right answer depends on your region, budget, and travel style. Use this guide to compare weather, crowds, and costs before you book.</p>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
       {quickFacts.map((fact) => (
         <div class="bg-white rounded-2xl border border-zinc-200 shadow-sm p-6 flex items-start gap-4">
@@ -308,6 +321,7 @@ const faqs = [
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div class="bg-gradient-to-br from-pink-50 to-rose-50 border border-pink-200 rounded-2xl p-6 md:p-8">
+        <img src="/images/spring-beijing.webp" alt="The Great Wall at Mutianyu with cherry blossoms in April spring" width="800" height="450" loading="lazy" class="w-full h-auto rounded-xl mb-6" />
         <p class="text-xs font-semibold tracking-widest text-pink-500 uppercase mb-4">Spring &middot; April &middot; Beijing</p>
         <h3 class="text-xl font-bold text-zinc-900 mb-3">Cherry Blossoms and Clear Skies</h3>
         <p class="text-sm text-zinc-600 leading-relaxed mb-4">6:30 AM. You step onto the Great Wall at Mutianyu as the morning mist clears. Temperature: 16&deg;C, no humidity, visibility stretching to the mountains beyond. By 9 AM you have the watchtowers nearly to yourself. Lunch is jianbing from a roadside stall in Huairou &mdash; crispy crepe, egg, hoisin, 12 RMB. Afternoon: the Forbidden City under a piercing blue sky, cherry blossoms framing the Hall of Supreme Harmony. Evening: Peking duck at a courtyard restaurant in a hutong, the skin crackling under your teeth. You walk home through Nanluoguxiang as lanterns flicker on. You realize you have not checked your phone in eight hours.</p>
@@ -316,6 +330,7 @@ const faqs = [
         </div>
       </div>
       <div class="bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-200 rounded-2xl p-6 md:p-8">
+        <img src="/images/summer-yunnan.webp" alt="Erhai Lake and Cangshan mountains near Dali, Yunnan in July summer" width="800" height="450" loading="lazy" class="w-full h-auto rounded-xl mb-6" />
         <p class="text-xs font-semibold tracking-widest text-emerald-600 uppercase mb-4">Summer &middot; July &middot; Yunnan</p>
         <h3 class="text-xl font-bold text-zinc-900 mb-3">Escape to the Roof of Southeast Asia</h3>
         <p class="text-sm text-zinc-600 leading-relaxed mb-4">While Shanghai sweats through 35&deg;C and 80% humidity, you are at 2,400 meters in Lijiang. Morning: a bike ride around Erhai Lake near Dali, the Cangshan mountains reflecting perfectly in still water. Temperature: 22&deg;C. Lunch: crossing-the-bridge noodles at a family-run shop where the owner has been making the same broth for 30 years. Afternoon: Tiger Leaping Gorge. The Jinsha River roars 2,000 meters below as you hike one of the world&rsquo;s deepest canyons. Evening: old town Lijiang, stone streets lit by paper lanterns, Naxi musicians playing ancient melodies. You order a second round of yak butter tea. Nobody back home will believe this is the same country as Beijing.</p>
@@ -324,6 +339,7 @@ const faqs = [
         </div>
       </div>
       <div class="bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 rounded-2xl p-6 md:p-8">
+        <img src="/images/autumn-xian.webp" alt="Terracotta Warriors in Xi'an under golden October autumn light" width="800" height="450" loading="lazy" class="w-full h-auto rounded-xl mb-6" />
         <p class="text-xs font-semibold tracking-widest text-amber-600 uppercase mb-4">Autumn &middot; October &middot; Xi&rsquo;an</p>
         <h3 class="text-xl font-bold text-zinc-900 mb-3">Golden Light and Ancient Stones</h3>
         <p class="text-sm text-zinc-600 leading-relaxed mb-4">8:00 AM. You are the first person through the doors at the Terracotta Warriors museum. Pit 1 stretches before you in silence &mdash; 2,000 clay soldiers, each face unique, bathed in the low golden light of an October morning. No jostling, no selfie sticks. Just you and two millennia of history. After lunch at the Muslim Quarter &mdash; hand-pulled biangbiang noodles, cumin-dusted lamb skewers, a pomegranate juice for the road &mdash; you bike the 14-kilometer Xi&rsquo;an City Wall as the sun sets behind the Bell Tower. The air is crisp, 19&deg;C, the perfect temperature for a sweater and a sense of wonder. Dinner is hot pot, and the conversation is about how this might be the best day of the trip.</p>
@@ -332,6 +348,7 @@ const faqs = [
         </div>
       </div>
       <div class="bg-gradient-to-br from-sky-50 to-indigo-50 border border-sky-200 rounded-2xl p-6 md:p-8">
+        <img src="/images/winter-harbin.webp" alt="Illuminated ice castle at the Harbin Ice and Snow Festival in January" width="800" height="450" loading="lazy" class="w-full h-auto rounded-xl mb-6" />
         <p class="text-xs font-semibold tracking-widest text-sky-600 uppercase mb-4">Winter &middot; January &middot; Harbin</p>
         <h3 class="text-xl font-bold text-zinc-900 mb-3">Ice Castles at -25&deg;C</h3>
         <p class="text-sm text-zinc-600 leading-relaxed mb-4">It is -25&deg;C and your eyelashes have frozen. You do not care. You are standing inside a life-sized ice castle illuminated in electric blue and neon pink, part of the Harbin Ice and Snow Festival &mdash; the largest ice sculpture event on Earth. Morning: you brave the cold at Sun Island to see snow sculptures the size of apartment buildings. Lunch: guobaorou (sweet and sour pork) and a flask of baijiu for warmth at a Russian-influenced Harbin restaurant. Afternoon: Siberian tigers at the Harbin Tiger Park, impossibly massive, their breath visible in the frozen air. Evening: back to the ice city, now glowing under thousands of LED lights. You feel like you have wandered into a fairytale. You have never been this cold. You have never been this happy.</p>
@@ -388,8 +405,8 @@ const faqs = [
       <p class="text-zinc-500 max-w-2xl leading-relaxed">Flight and hotel prices swing dramatically. Pick the right month and save 40-50%.</p>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <CostChart client:visible />
-      <HotelComparison client:visible />
+      <CostChart />
+      <HotelComparison />
     </div>
   </section>
 
@@ -503,12 +520,12 @@ const faqs = [
   </section>
 
 <style>
-  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease-out, transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1); }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
+  html.js .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease-out, transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1); }
+  html.js .reveal.visible { opacity: 1; transform: translateY(0); }
 </style>
 <script>
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); observer.unobserve(e.target); } });
+    entries.forEach(e => { if (e.isIntersecting && e.target instanceof Element) { e.target.classList.add("visible"); observer.unobserve(e.target); } });
   }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
   document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
   
@@ -517,7 +534,8 @@ const faqs = [
   const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   const banner = document.getElementById("season-banner");
   if (banner) {
-    banner.querySelector(".season-month").textContent = monthNames[monthIdx];
+    const monthEl = banner.querySelector(".season-month");
+    if (monthEl) monthEl.textContent = monthNames[monthIdx];
     banner.classList.remove("hidden");
   }
 

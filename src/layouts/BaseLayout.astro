@@ -37,6 +37,7 @@ if (pathParts.length > 0) {
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="index, follow" />
     <link rel="canonical" href={canonicalURL} />
     <meta name="description" content={description} />
     <meta property="og:title" content={title} />
@@ -52,8 +53,12 @@ if (pathParts.length > 0) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
     <title>{title}</title>
-    <!-- BreadcrumbList Schema -->
-    {breadcrumbSchema && <script type="application/ld+json" set:html={breadcrumbSchema} />}
+    <!-- 无 JS 兑底：仅在 JS 可用时才应用 .reveal 隐藏/动画（内容默认可见） -->
+    <script is:inline>document.documentElement.classList.add('js');</script>
+    {breadcrumbSchema && <>
+      <!-- BreadcrumbList Schema -->
+      <script type="application/ld+json" set:html={breadcrumbSchema} />
+    </>}
     <!-- Organization + WebSite Schema -->
     <script type="application/ld+json" set:html={`{
       "@context": "https://schema.org",

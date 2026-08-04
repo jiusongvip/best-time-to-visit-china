@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
 
 const festivals = [
   { name: "Chinese New Year (Spring Festival)", date: "Late Jan - Early Feb 2026", type: "Public Holiday", duration: "7 days", crowd: "Extreme", crowdColor: "bg-red-500", desc: "The most important holiday in China. Families reunite, red envelopes are exchanged, fireworks light up the sky, and temple fairs fill the streets. Expect everything to close for 3-7 days and transportation to be chaotic.", tips: "Book flights 3+ months ahead. Many shops and restaurants close. Temple fairs in Beijing are a must-see cultural experience." },
@@ -16,7 +17,7 @@ const festivals = [
 ];
 ---
 
-<BaseLayout title="Chinese Festivals 2026: Calendar, Crowds & Tips" description="Complete calendar of Chinese festivals in 2026 with dates, crowd levels & travel tips. Plan around Chinese New Year, Mid-Autumn, Golden Week & more.">
+<BaseLayout title="Chinese Festivals 2026: Calendar, Crowd Levels & Travel Tips" description="Complete calendar of Chinese festivals in 2026 with dates, crowd levels & travel tips. Plan around Chinese New Year, Mid-Autumn, Golden Week & more.">
   <section class="min-h-[100dvh]">
     <Nav />
     <div class="max-w-7xl mx-auto px-4 py-6">
@@ -70,4 +71,5 @@ const festivals = [
       </div>
     </div>
   </section>
+  <Footer />
 </BaseLayout>

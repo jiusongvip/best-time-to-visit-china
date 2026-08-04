@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
 import { monthlyData } from "../data/weather.ts";
 ---
 
@@ -80,4 +81,5 @@ import { monthlyData } from "../data/weather.ts";
       </div>
     </div>
   </section>
+  <Footer />
 </BaseLayout>

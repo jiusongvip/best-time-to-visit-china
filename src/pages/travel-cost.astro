@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
 import CostChart from "../components/islands/CostChart";
 import HotelComparison from "../components/islands/HotelComparison";
 
@@ -83,9 +84,10 @@ const cityCosts = [
       <!-- Flights & Hotels Charts -->
       <div class="mb-16">
         <h2 class="text-2xl font-bold text-zinc-900 mb-6">Flights & Hotels by Season</h2>
+        <p class="text-zinc-500 mb-6">Price indices are estimated from median <a href="https://www.google.com/travel/flights" target="_blank" rel="noopener" class="text-accent-600 hover:text-accent-700 underline">Google Flights</a> and hotel booking data sampled monthly. Actual prices vary by departure city and booking date.</p>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <CostChart client:visible />
-          <HotelComparison client:visible />
+          <CostChart />
+          <HotelComparison />
         </div>
       </div>
 
@@ -189,4 +191,5 @@ const cityCosts = [
       </div>
     </div>
   </section>
+  <Footer />
 </BaseLayout>

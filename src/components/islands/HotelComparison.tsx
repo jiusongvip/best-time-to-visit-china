@@ -1,35 +1,42 @@
-import { BarChart, Bar, XAxis, Tooltip, ResponsiveContainer, Cell } from "recharts";
-
 const hotelData = [
-  { name: "Off-Peak\n(Nov-Feb*)", price: 55, fill: "#10b981" },
-  { name: "Shoulder\n(Mar-Apr, Sep-Oct)", price: 80, fill: "#f59e0b" },
-  { name: "Peak\n(May-Aug, CNY, GW)", price: 100, fill: "#ef4444" },
+  { short: "Off-Peak", sub: "Nov-Feb*", price: 55, fill: "#10b981" },
+  { short: "Shoulder", sub: "Mar-Apr, Sep-Oct", price: 80, fill: "#f59e0b" },
+  { short: "Peak", sub: "May-Aug, CNY, GW", price: 100, fill: "#ef4444" },
 ];
 
-function CustomLabel(props: any) {
-  const { x, y, width, value } = props;
-  return (
-    <text x={x + width / 2} y={y - 8} textAnchor="middle" fill="#71717a" fontSize={13} fontWeight={600}>
-      {value}%
-    </text>
-  );
-}
-
 export default function HotelComparison() {
+  const W = 560, H = 260, PL = 44, PR = 8, PT = 24, PB = 40;
+  const chartW = W - PL - PR;
+  const chartH = H - PT - PB;
+  const step = chartW / hotelData.length;
+  const barW = Math.min(80, step * 0.5);
+  const y = (price: number) => PT + chartH - (price / 100) * chartH;
+
   return (
-    <div className="bg-white border border-zinc-200 rounded-xl p-6 min-h-[400px]">
-      <p className="text-sm font-semibold text-zinc-700 mb-6">
+    <div className="bg-white border border-zinc-200 rounded-xl p-6">
+      <p className="text-sm font-semibold text-zinc-700 mb-4">
         4-Star Hotels: Price Index by Season (% of peak)
       </p>
-      <ResponsiveContainer width="100%" height={260}>
-        <BarChart data={hotelData} margin={{ top: 20, right: 0, bottom: 0, left: -16 }} barCategoryGap="30%">
-          <XAxis dataKey="name" tick={{ fontSize: 12, fill: "#71717a", lineHeight: 16 }} axisLine={{ stroke: "#e4e4e7" }} tickLine={false} interval={0} height={50} />
-          <Tooltip contentStyle={{ borderRadius: 12, border: "1px solid #e4e4e7" }} formatter={(value: number) => [`${value}% of peak`, "Price Index"]} cursor={{ fill: "#f4f4f5" }} />
-          <Bar dataKey="price" radius={[8, 8, 0, 0]} maxBarSize={80} label={<CustomLabel />}>
-            {hotelData.map((entry) => <Cell key={entry.name} fill={entry.fill} />)}
-          </Bar>
-        </BarChart>
-      </ResponsiveContainer>
+      <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto" role="img" aria-label="Four-star hotel price index by season as a percentage of peak prices">
+        {[0, 50, 100].map((t) => (
+          <g key={t}>
+            <line x1={PL} x2={W - PR} y1={y(t)} y2={y(t)} stroke="#f4f4f5" />
+            <text x={PL - 6} y={y(t) + 4} textAnchor="end" fontSize="11" fill="#a1a1aa">{t}%</text>
+          </g>
+        ))}
+        {hotelData.map((d, i) => {
+          const x = PL + i * step + (step - barW) / 2;
+          const h = (d.price / 100) * chartH;
+          return (
+            <g key={d.short}>
+              <rect x={x} y={y(d.price)} width={barW} height={h} rx={8} fill={d.fill} />
+              <text x={x + barW / 2} y={y(d.price) - 8} textAnchor="middle" fontSize="13" fill="#71717a" fontWeight={600}>{d.price}%</text>
+              <text x={x + barW / 2} y={H - PB + 14} textAnchor="middle" fontSize="11" fill="#71717a" fontWeight={500}>{d.short}</text>
+              <text x={x + barW / 2} y={H - PB + 27} textAnchor="middle" fontSize="9" fill="#a1a1aa">{d.sub}</text>
+            </g>
+          );
+        })}
+      </svg>
       <div className="grid grid-cols-1 gap-2 mt-5">
         <div className="flex items-start gap-2">
           <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 mt-1 flex-shrink-0" />

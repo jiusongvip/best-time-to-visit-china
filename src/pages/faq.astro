@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
 
 const faqs = [
   { q: "What is the best month to visit China?", a: "April, May, September, and October are generally the best months across China's most popular destinations. You'll get comfortable temperatures (15-26°C), manageable rainfall, and beautiful scenery --- spring blooms or autumn colors depending on the season. For the absolute best experience, aim for the second half of April or the last two weeks of October (after Golden Week)." },
@@ -65,6 +66,11 @@ const faqCategories = [
           </div>
         </div>
       ))}
+      <div class="bg-zinc-50 border border-zinc-200 rounded-xl p-6 mt-10">
+        <p class="text-sm font-semibold text-zinc-800 mb-2">Official Sources</p>
+        <p class="text-sm text-zinc-600 leading-relaxed">For the latest visa rules, check the official <a href="https://www.visaforchina.cn/" target="_blank" rel="noopener" class="text-accent-600 hover:text-accent-700 underline">China Visa Application Service Center</a>. Weather and climate data come from the <a href="https://www.cma.gov.cn/en/" target="_blank" rel="noopener" class="text-accent-600 hover:text-accent-700 underline">China Meteorological Administration</a>.</p>
+      </div>
     </div>
   </section>
+  <Footer />
 </BaseLayout>

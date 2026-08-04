@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
 
 const regionGuides = [
   { name: "Beijing & North China", slug: "beijing", best: "April-May & September-October", avoid: "July-August (heat), Jan-Feb (freezing)", months: "Mar-May & Sep-Nov", temp: "Spring 10-22°C / Autumn 8-20°C", highlights: "Great Wall, Forbidden City, Summer Palace", tip: "Avoid Golden Week (Oct 1-7) at all costs. Go mid-October for perfect foliage." },
@@ -74,4 +75,5 @@ const regionGuides = [
       </div>
     </div>
   </section>
+  <Footer />
 </BaseLayout>
