@@ -2,11 +2,10 @@
 import "../styles/global.css";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { monthlyData } from "../data/weather.ts";
-// TEMP: disable react islands for debugging
-// import CostChart from "../components/islands/CostChart";
-// import HotelComparison from "../components/islands/HotelComparison";
-// import ChinaMap from "../components/islands/ChinaMap";
-// import ComparisonTool from "../components/islands/ComparisonTool";
+import CostChart from "../components/islands/CostChart";
+import HotelComparison from "../components/islands/HotelComparison";
+import ChinaMap from "../components/islands/ChinaMap";
+import ComparisonTool from "../components/islands/ComparisonTool";
 import Footer from "../components/Footer.astro";
 import Icon from "../components/Icon.astro";
 
@@ -223,7 +222,7 @@ const faqPageSchema = JSON.stringify({
       <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-[1.02] text-zinc-900 mb-5">China is a continent-<br /><em class="font-normal italic">sized country</em></h2>
       <p class="text-zinc-500 max-w-2xl leading-relaxed">Every region has its own perfect season. Hover to see the best months, then click for the full guide.</p>
     </div>
-    <div class="text-center text-zinc-400 py-8 border border-dashed border-zinc-200 rounded-xl">Interactive Map (disabled for debug)</div>
+    <ChinaMap client:visible />
   </section>
 
   <!-- ======== COMPARISON TOOL ======== -->
@@ -233,7 +232,7 @@ const faqPageSchema = JSON.stringify({
       <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-[1.02] text-zinc-900 mb-5">April or October?<br /><em class="font-normal italic">Beijing or Shanghai?</em></h2>
       <p class="text-zinc-500 max-w-2xl leading-relaxed">Stop opening multiple tabs. Compare any two months or regions side by side and get a clear verdict.</p>
     </div>
-    <div class="text-center text-zinc-400 py-8 border border-dashed border-zinc-200 rounded-xl">Comparison Tool (disabled for debug)</div>
+    <ComparisonTool client:visible />
   </section>
 
   <!-- ======== 4. TRAVEL PURPOSE GRID ======== -->
@@ -446,8 +445,8 @@ const faqPageSchema = JSON.stringify({
       <p class="text-zinc-500 max-w-2xl leading-relaxed">Flight and hotel prices swing dramatically. Pick the right month and save 40-50%.</p>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <div class="text-center text-zinc-400 py-8 border border-dashed border-zinc-200 rounded-xl">Cost Chart (disabled for debug)</div>
-      <div class="text-center text-zinc-400 py-8 border border-dashed border-zinc-200 rounded-xl">Hotel Comparison (disabled for debug)</div>
+      <CostChart />
+      <HotelComparison />
     </div>
   </section>
 
@@ -584,8 +583,6 @@ const faqPageSchema = JSON.stringify({
   <Footer />
 
 <script>
-  // reveal disabled for debugging
-
   const now = new Date();
   const monthIdx = now.getMonth();
   const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];

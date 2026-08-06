@@ -70,18 +70,6 @@ if (pathParts.length > 0) {
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
     <title>{title}</title>
     <script is:inline>document.documentElement.classList.add('js');</script>
-    <!-- Reset on bfcache restore (cached broken pages) -->
-    <script is:inline>window.addEventListener('pageshow',function(e){if(e.persisted)location.reload();});</script>
-    <!-- Dev error catcher: if any JS error happens and body is blank, show the error -->
-    <script is:inline>
-      window.addEventListener('error',function(e){
-        setTimeout(function(){
-          if(document.body&&document.body.innerText.trim().length<50){
-            document.body.innerHTML='<div style="padding:40px;font-family:monospace;color:red;white-space:pre-wrap">JS ERROR: '+e.message+'\\n\\n'+e.filename+':'+e.lineno+'</div>';
-          }
-        },200);
-      });
-    </script>
     {breadcrumbSchema && <>
       <!-- BreadcrumbList Schema -->
       <script type="application/ld+json" set:html={breadcrumbSchema} />
