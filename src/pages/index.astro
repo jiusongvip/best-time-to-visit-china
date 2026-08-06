@@ -7,6 +7,7 @@ import HotelComparison from "../components/islands/HotelComparison";
 import ChinaMap from "../components/islands/ChinaMap";
 import ComparisonTool from "../components/islands/ComparisonTool";
 import Footer from "../components/Footer.astro";
+import Icon from "../components/Icon.astro";
 
 const pageTitle = "Best Time to Visit China 2026: Month-by-Month Guide";
 const pageDesc = "Find the best time to visit China with our interactive guide. Compare weather, crowds & costs by month and region, then take the free 60-second quiz.";
@@ -18,10 +19,10 @@ const quickFacts = [
 ];
 
 const travelPurposes = [
-  { label: "Outdoor / Hiking", best: "Sep-Oct", desc: "Clear skies, cool temps --- Great Wall, Yellow Mountains, Tiger Leaping Gorge.", accent: "bg-emerald-50 text-emerald-700 border-emerald-200" },
-  { label: "Photography / Nature", best: "Mar-Apr", desc: "Cherry blossoms, spring colors, fewer tourists at iconic spots.", accent: "bg-pink-50 text-pink-700 border-pink-200" },
-  { label: "Culture / Festivals", best: "Jan-Feb", desc: "Chinese New Year, lantern festivals, temple fairs. Authentic cultural immersion.", accent: "bg-amber-50 text-amber-700 border-amber-200" },
-  { label: "Food & Culinary", best: "Sep-Nov", desc: "Autumn harvest, hairy crab season, Mid-Autumn mooncakes.", accent: "bg-orange-50 text-orange-700 border-orange-200" },
+  { label: "Outdoor / Hiking", best: "Sep-Oct", desc: "Clear skies, cool temps --- Great Wall, Yellow Mountains, Tiger Leaping Gorge.", accent: "bg-blue-50 text-blue-700 border-blue-200" },
+  { label: "Photography / Nature", best: "Mar-Apr", desc: "Cherry blossoms, spring colors, fewer tourists at iconic spots.", accent: "bg-sky-50 text-sky-700 border-sky-200" },
+  { label: "Culture / Festivals", best: "Jan-Feb", desc: "Chinese New Year, lantern festivals, temple fairs. Authentic cultural immersion.", accent: "bg-indigo-50 text-indigo-700 border-indigo-200" },
+  { label: "Food & Culinary", best: "Sep-Nov", desc: "Autumn harvest, hairy crab season, Mid-Autumn mooncakes.", accent: "bg-cyan-50 text-cyan-700 border-cyan-200" },
 ];
 
 const regions = ["North (Beijing)", "East (Shanghai)", "South (Guangzhou)", "West (Chengdu)", "Southwest (Yunnan)", "Tibet"];
@@ -33,6 +34,22 @@ const regionData: Record<string, (1|2|3)[]> = {
   "West (Chengdu)": [2,2,3,3,3,2,2,2,3,3,3,2],
   "Southwest (Yunnan)": [3,3,3,3,2,1,1,1,3,3,3,3],
   "Tibet": [1,1,1,2,3,3,3,3,3,3,1,1],
+};
+
+// One-line charm for each month (the "anytime" pitch)
+const monthCharm: Record<string, string> = {
+  january: "Harbin Ice & Snow Festival",
+  february: "Chinese New Year lanterns",
+  march: "Cherry blossoms bloom",
+  april: "Great Wall hiking weather",
+  may: "Yellow Mountains at their peak",
+  june: "Lush green Zhangjiajie",
+  july: "Escape to Tibet & Qinghai",
+  august: "Inner Mongolia grasslands",
+  september: "Golden Jiuzhaigou",
+  october: "Peak autumn colors",
+  november: "Crowd-free ancient cities",
+  december: "Shanghai Christmas lights",
 };
 
 const travelerStories = [
@@ -112,54 +129,60 @@ const faqPageSchema = JSON.stringify({
     </div>
   </nav>
 
-  <!-- ======== 1. HERO ======== -->
-  <section class="relative overflow-hidden bg-zinc-950 text-white">
-    <div class="absolute inset-0 bg-gradient-to-br from-accent-950/80 via-zinc-950 to-zinc-950"></div>
-    <div class="absolute top-0 right-0 w-2/3 h-full opacity-20 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-accent-400 via-accent-600 to-transparent"></div>
-    <div class="relative max-w-7xl mx-auto px-4 pt-20 pb-16 md:pt-24 md:pb-20">
-      <div class="text-center mb-10">
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-none mb-4">
-          Best Time to Visit China
+  <!-- ======== 1. HERO: TITLE OVER THE 12-MONTH IMAGE WALL ======== -->
+  <section id="month-wall" class="bg-white">
+    <div class="max-w-7xl mx-auto px-4 pt-12 md:pt-16">
+      <div class="text-center mb-2">
+        <p class="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.2em] uppercase text-zinc-400 mb-6">
+          <Icon name="calendar" class="w-3.5 h-3.5 text-accent-500" />
+          12 months, 12 reasons to go
+        </p>
+        <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.95] text-zinc-950">
+          Best time to visit<br />
+          <em class="font-normal italic">China</em>
         </h1>
-        <p class="text-lg text-zinc-400 max-w-lg mx-auto">Tell us what you know, we'll tell you what you need.</p>
+        <p class="text-base md:text-lg text-zinc-500 leading-relaxed mt-6 mb-8 max-w-xl mx-auto">Almost all year round &mdash; every month has somewhere that shines.</p>
+        <div class="flex flex-wrap justify-center gap-3 mb-4">
+          <a href="/when-to-go" class="inline-flex items-center gap-2 px-7 py-3.5 bg-accent-600 hover:bg-accent-700 text-white font-semibold rounded-full transition-colors">
+            Take the Free Quiz
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="/monthly-guide" class="inline-flex items-center gap-2 px-7 py-3.5 bg-white border border-zinc-300 text-zinc-900 font-semibold rounded-full hover:bg-zinc-50 transition-colors">
+            Compare the Months
+          </a>
+        </div>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
-        <!-- Route 1: I know my destination -->
-        <div class="bg-white/5 backdrop-blur border border-white/10 rounded-2xl p-6 hover:border-accent-500/50 hover:bg-white/[0.07] transition-all group">
-          <div class="w-10 h-10 rounded-xl bg-accent-500/20 flex items-center justify-center mb-4 group-hover:bg-accent-500/30 transition-colors">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="text-accent-400" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          </div>
-          <p class="text-sm font-bold text-white mb-1">I know my destination</p>
-          <p class="text-xs text-zinc-400 mb-4 leading-relaxed">Beijing? Yunnan? Tell us where and we'll tell you when.</p>
-          <a href="#china-map" class="inline-flex items-center gap-1.5 text-sm font-medium text-accent-400 group-hover:text-accent-300 transition-colors">
-            Pick a region
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
-          </a>
-        </div>
-        <!-- Route 2: I know my dates -->
-        <div class="bg-white/5 backdrop-blur border border-white/10 rounded-2xl p-6 hover:border-accent-500/50 hover:bg-white/[0.07] transition-all group">
-          <div class="w-10 h-10 rounded-xl bg-accent-500/20 flex items-center justify-center mb-4 group-hover:bg-accent-500/30 transition-colors">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="text-accent-400" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          </div>
-          <p class="text-sm font-bold text-white mb-1">I know my dates</p>
-          <p class="text-xs text-zinc-400 mb-4 leading-relaxed">Traveling in July? See which regions shine that month.</p>
-          <a href="#monthly-guide" class="inline-flex items-center gap-1.5 text-sm font-medium text-accent-400 group-hover:text-accent-300 transition-colors">
-            Jump to your month
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
-          </a>
-        </div>
-        <!-- Route 3: I'm starting fresh -->
-        <div class="bg-white/5 backdrop-blur border border-white/10 rounded-2xl p-6 hover:border-accent-500/50 hover:bg-white/[0.07] transition-all group">
-          <div class="w-10 h-10 rounded-xl bg-accent-500/20 flex items-center justify-center mb-4 group-hover:bg-accent-500/30 transition-colors">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="text-accent-400" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          </div>
-          <p class="text-sm font-bold text-white mb-1">I'm starting fresh</p>
-          <p class="text-xs text-zinc-400 mb-4 leading-relaxed">No clue where or when? Take our quiz and we'll figure it out together.</p>
-          <a href="/when-to-go" class="inline-flex items-center gap-1.5 text-sm font-medium text-accent-400 group-hover:text-accent-300 transition-colors">
-            Take the quiz
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
-          </a>
-        </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 pb-16">
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 items-start pt-8 lg:pt-28">
+        {monthlyData.map((m, i) => {
+          // Diagonal stagger rising toward the top-right (desktop only)
+          const col = i % 4;
+          const offset = col === 1 ? "lg:-mt-10" : col === 2 ? "lg:-mt-20" : col === 3 ? "lg:-mt-28" : "";
+          return (
+            <a href={`/month/${m.month}`} class={`group relative overflow-hidden rounded-2xl aspect-[4/5] block no-underline shadow-sm ${offset}`}>
+              <img src={m.image} alt={m.imageAlt} width="1200" height="800" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/85 via-zinc-950/20 to-transparent"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-4 md:p-5">
+                <p class="text-xs font-bold tracking-widest uppercase text-accent-300 mb-1">{m.label}</p>
+                <p class="text-base md:text-lg font-bold leading-snug text-white group-hover:text-accent-200 transition-colors">{monthCharm[m.month]}</p>
+                <div class="flex items-center gap-2 mt-2 text-xs text-zinc-300">
+                  <span>{m.tempLow}&deg; to {m.tempHigh}&deg;C</span>
+                  <span class="w-1 h-1 rounded-full bg-zinc-500"></span>
+                  <span class="flex items-center gap-1">
+                    {Array.from({length: m.crowdLevel}, () => <Icon name="users" class="w-3 h-3" />)}
+                  </span>
+                </div>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+      <div class="mt-10 text-center">
+        <a href="/monthly-guide" class="inline-flex items-center gap-1.5 text-sm font-medium text-accent-600 hover:text-accent-700 transition-colors">
+          Compare all 12 months side by side
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
       </div>
     </div>
   </section>
@@ -169,14 +192,14 @@ const faqPageSchema = JSON.stringify({
     <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between flex-wrap gap-2">
       <p class="text-sm text-accent-800">
         <span class="font-semibold">Traveling to China in <span class="season-month"></span>?</span>
-        Here is what you need to know &mdash; <a href="#monthly-guide" class="underline font-medium">see this month&rsquo;s guide</a> or <a href="/when-to-go" class="underline font-medium">take the quiz</a>.
+        Here is what you need to know &mdash; <a href="#month-wall" class="underline font-medium">find your month</a> or <a href="/when-to-go" class="underline font-medium">take the quiz</a>.
       </p>
     </div>
   </div>
 
   <!-- ======== 2. QUICK SUMMARY CARDS ======== -->
   <section class="reveal max-w-7xl mx-auto px-4 pt-8 relative z-10">
-    <p class="text-center text-zinc-500 text-sm md:text-base max-w-3xl mx-auto mb-8 leading-relaxed">The best time to visit China is April&ndash;May or September&ndash;October for most travelers &mdash; but the right answer depends on your region, budget, and travel style. Use this guide to compare weather, crowds, and costs before you book.</p>
+    <p class="text-center text-zinc-500 text-sm md:text-base max-w-3xl mx-auto mb-8 leading-relaxed">China is a continent-sized country, so honestly the best time to go is almost all year round &mdash; every month has somewhere that shines. For most travelers spring (April&ndash;May) and autumn (September&ndash;October) still win on weather and crowds, but the right answer depends on your region, budget, and travel style. Use this guide to compare weather, crowds, and costs.</p>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
       {quickFacts.map((fact) => (
         <div class="bg-white rounded-2xl border border-zinc-200 shadow-sm p-6 flex items-start gap-4">
@@ -194,75 +217,30 @@ const faqPageSchema = JSON.stringify({
 
   <!-- ======== NEW: INTERACTIVE MAP ======== -->
   <section class="reveal max-w-7xl mx-auto px-4 py-16" id="china-map">
-    <div class="mb-10">
-      <p class="text-sm font-medium tracking-wide text-accent-600 uppercase mb-3">Where to Go</p>
-      <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-zinc-900 mb-4">China Is a Continent-Sized Country</h2>
-      <p class="text-zinc-500 max-w-2xl leading-relaxed">Every region has its own perfect season. Hover any region to see the best months, then click for a full guide.</p>
+    <div class="mb-12">
+      <p class="text-xs font-semibold tracking-[0.2em] uppercase text-zinc-400 mb-5">Where to Go</p>
+      <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-[1.02] text-zinc-900 mb-5">China is a continent-<br /><em class="font-normal italic">sized country</em></h2>
+      <p class="text-zinc-500 max-w-2xl leading-relaxed">Every region has its own perfect season. Hover to see the best months, then click for the full guide.</p>
     </div>
     <ChinaMap client:visible />
   </section>
 
   <!-- ======== COMPARISON TOOL ======== -->
   <section class="reveal max-w-7xl mx-auto px-4 py-16">
-    <div class="mb-10">
-      <p class="text-sm font-medium tracking-wide text-accent-600 uppercase mb-3">Compare</p>
-      <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-zinc-900 mb-4">April or October? Beijing or Shanghai?</h2>
+    <div class="mb-12">
+      <p class="text-xs font-semibold tracking-[0.2em] uppercase text-zinc-400 mb-5">Compare</p>
+      <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-[1.02] text-zinc-900 mb-5">April or October?<br /><em class="font-normal italic">Beijing or Shanghai?</em></h2>
       <p class="text-zinc-500 max-w-2xl leading-relaxed">Stop opening multiple tabs. Compare any two months or regions side by side and get a clear verdict.</p>
     </div>
     <ComparisonTool client:visible />
-  </section>
-
-  <!-- ======== 3. MONTHLY TIMELINE ======== -->
-  <section id="monthly-guide" class="max-w-7xl mx-auto px-4 py-20 md:py-28">
-    <div class="mb-12">
-      <p class="text-sm font-medium tracking-wide text-accent-600 uppercase mb-3">Month by Month</p>
-      <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-zinc-900 mb-4">12 Months, One Perfect Trip</h2>
-      <p class="text-zinc-500 max-w-2xl leading-relaxed">Each month in China tells a different story. Click any month to see weather, festivals, and where to go.</p>
-    </div>
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-      {monthlyData.map((m) => (
-        <details class="group border border-zinc-200 rounded-xl overflow-hidden hover:border-accent-300 transition-colors cursor-pointer">
-          <summary class="list-none p-4 flex items-center justify-between">
-            <div>
-              <p class="text-sm font-semibold text-zinc-800">{m.label}</p>
-              <p class="text-xs text-zinc-400 mt-0.5">{m.tempLow}&deg;-{m.tempHigh}&deg;C</p>
-            </div>
-            <div class="flex items-center gap-1.5">
-              <span class={`inline-block w-2 h-2 rounded-full ${m.crowdLevel <= 2 ? 'bg-emerald-400' : m.crowdLevel <= 3 ? 'bg-amber-400' : 'bg-red-400'}`}></span>
-              <svg class="w-4 h-4 text-zinc-300 group-open:rotate-180 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-            </div>
-          </summary>
-          <div class="px-4 pb-4 space-y-2 border-t border-zinc-100 pt-3">
-            <div><span class="text-xs font-semibold text-zinc-400">Rain days: </span><span class="text-sm text-zinc-600">{m.rainDays}</span></div>
-            <div><span class="text-xs font-semibold text-zinc-400">Crowd level: </span><span class={`text-sm font-medium ${m.crowdLevel <= 2 ? 'text-emerald-600' : m.crowdLevel <= 3 ? 'text-amber-600' : 'text-red-600'}`}>{m.crowdLevel}/5</span></div>
-            <div>
-              <p class="text-xs font-semibold text-zinc-400 mb-1">Highlights</p>
-              <ul class="text-sm text-zinc-600 space-y-0.5">
-                {m.highlights.map(h => <li>&bull; {h}</li>)}
-              </ul>
-            </div>
-            <div>
-              <p class="text-xs font-semibold text-zinc-400 mb-1">Pack</p>
-              <p class="text-sm text-zinc-600">{m.packing}</p>
-            </div>
-          </div>
-        </details>
-      ))}
-    </div>
-    <div class="mt-6 text-center">
-      <a href="/monthly-guide" class="inline-flex items-center gap-1.5 text-sm font-medium text-accent-600 hover:text-accent-700 transition-colors">
-        See full monthly guide with charts
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
-    </div>
   </section>
 
   <!-- ======== 4. TRAVEL PURPOSE GRID ======== -->
   <section class="reveal bg-zinc-50 border-y border-zinc-100">
     <div class="max-w-7xl mx-auto px-4 py-20">
       <div class="mb-12">
-        <p class="text-sm font-medium tracking-wide text-accent-600 uppercase mb-3">Travel Style</p>
-        <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-zinc-900 mb-4">Your Trip, Your Season</h2>
+        <p class="text-xs font-semibold tracking-[0.2em] uppercase text-zinc-400 mb-5">Travel Style</p>
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-[1.02] text-zinc-900 mb-5">Your trip,<br /><em class="font-normal italic">your season</em></h2>
         <p class="text-zinc-500 max-w-2xl leading-relaxed">The best time depends on what you want to do. Match your travel style to the ideal season.</p>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -277,11 +255,67 @@ const faqPageSchema = JSON.stringify({
     </div>
   </section>
 
+  <!-- ======== ONLY SUMMER/WINTER (fixed-schedule travelers) ======== -->
+  <section class="reveal max-w-7xl mx-auto px-4 py-20">
+    <div class="mb-12">
+      <p class="text-xs font-semibold tracking-[0.2em] uppercase text-zinc-400 mb-5">Fixed Schedule</p>
+      <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-[1.02] text-zinc-900 mb-5">Only summer or<br /><em class="font-normal italic">winter available?</em></h2>
+      <p class="text-zinc-500 max-w-2xl leading-relaxed">Teachers, families, and busy professionals often have no choice but to travel during school holidays. Good news: you can still have a great China trip &mdash; you just need to plan smarter.</p>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div class="bg-white border border-zinc-200 rounded-2xl p-6 md:p-8">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="flex-shrink-0 inline-flex items-center justify-center w-9 h-9 rounded-xl bg-blue-100 text-blue-600 text-sm font-bold">Sun</span>
+          <h3 class="text-lg font-bold text-zinc-900">Summer (Jul-Aug): How to Beat the Crowds</h3>
+        </div>
+        <p class="text-sm text-zinc-600 leading-relaxed mb-4">Summer is China's peak season. These tactics keep the crowds manageable and the heat bearable.</p>
+        <ol class="space-y-3">
+          {[
+            { t: "Skip the famous section, not the sight. Walk the Great Wall at Jinshanling or Jiankou instead of packed Badaling." },
+            { t: "Go at opening (6 AM) or after 4 PM. Hotspots are busiest 10 AM-3 PM; evenings bring cooler air and better light." },
+            { t: "Swap the obvious spot for a hidden gem. See restored warriors at Xi'an's Lintong Museum instead of dodging crowds in Pit 1." },
+            { t: "Avoid August 1-15, the hottest peak of the peak. Late June is noticeably less crowded." },
+            { t: "Head for altitude. Tibet, Yunnan's Dali/Lijiang, and Inner Mongolia stay refreshingly cool while the lowlands bake." },
+          ].map((tip, i) => (
+            <li class="flex gap-3 text-sm text-zinc-600 leading-relaxed">
+              <span class="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 text-blue-700 text-xs font-bold flex items-center justify-center mt-0.5">{i + 1}</span>
+              <span>{tip.t}</span>
+            </li>
+          ))}
+        </ol>
+      </div>
+      <div class="bg-white border border-zinc-200 rounded-2xl p-6 md:p-8">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="flex-shrink-0 inline-flex items-center justify-center w-9 h-9 rounded-xl bg-sky-100 text-sky-700 text-sm font-bold">Snow</span>
+          <h3 class="text-lg font-bold text-zinc-900">Winter (Dec-Feb): Fewer Crowds, Lower Prices</h3>
+        </div>
+        <p class="text-sm text-zinc-600 leading-relaxed mb-4">Winter is the cheapest, quietest season &mdash; as long as you dress warmly and pick the right destinations.</p>
+        <ul class="space-y-3">
+          {[
+            { t: "Celebrate Harbin's Ice and Snow Festival &mdash; the largest on Earth, at -25°C." },
+            { t: "Escape the cold in Hainan (Sanya beaches), or enjoy mild, sunny days in Yunnan." },
+            { t: "Get flights from the US below $750 and 4-star hotels 40-50% off peak." },
+            { t: "Walk a nearly empty Great Wall &mdash; with gloves and layers, it is magical." },
+          ].map((tip) => (
+            <li class="flex gap-3 text-sm text-zinc-600 leading-relaxed">
+              <span class="flex-shrink-0 w-6 h-6 rounded-full bg-sky-100 text-sky-700 flex items-center justify-center mt-0.5"><Icon name="check" class="w-3.5 h-3.5" /></span>
+              <span>{tip.t}</span>
+            </li>
+          ))}
+        </ul>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="/festivals" class="inline-flex items-center gap-1.5 text-sm font-medium px-4 py-2.5 border border-zinc-300 rounded-full hover:border-accent-400 hover:text-accent-600 transition-colors">Plan around a festival</a>
+          <a href="/crowd-calendar" class="inline-flex items-center gap-1.5 text-sm font-medium px-4 py-2.5 border border-zinc-300 rounded-full hover:border-accent-400 hover:text-accent-600 transition-colors">Check crowd levels</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ======== 5. REGION MATRIX ======== -->
   <section class="reveal max-w-7xl mx-auto px-4 py-20">
     <div class="mb-12">
-      <p class="text-sm font-medium tracking-wide text-accent-600 uppercase mb-3">By Region</p>
-      <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-zinc-900 mb-4">China Is Not One Climate</h2>
+      <p class="text-xs font-semibold tracking-[0.2em] uppercase text-zinc-400 mb-5">By Region</p>
+      <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-[1.02] text-zinc-900 mb-5">China is not<br /><em class="font-normal italic">one climate</em></h2>
       <p class="text-zinc-500 max-w-2xl leading-relaxed">Northern China freezes while the south basks in sun. Check which regions shine each month.</p>
     </div>
     <div class="overflow-x-auto rounded-xl border border-zinc-200">
@@ -310,49 +344,55 @@ const faqPageSchema = JSON.stringify({
       <span><span class="inline-block w-3 h-3 rounded-full bg-amber-50 border border-amber-200 mr-1"></span> OK</span>
       <span><span class="inline-block w-3 h-3 rounded-full bg-red-50 border border-red-200 mr-1"></span> Avoid</span>
     </div>
+    <div class="mt-6">
+      <a href="/by-region" class="inline-flex items-center gap-1.5 text-sm font-medium text-accent-600 hover:text-accent-700 transition-colors">
+        Read the full region guides
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
   </section>
 
   <!-- ======== PERFECT DAY: FOUR SEASONS ======== -->
   <section class="reveal max-w-7xl mx-auto px-4 py-16">
-    <div class="mb-10">
-      <p class="text-sm font-medium tracking-wide text-accent-600 uppercase mb-3">A Perfect Day</p>
-      <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-zinc-900 mb-4">What China Feels Like in Every Season</h2>
+    <div class="mb-12">
+      <p class="text-xs font-semibold tracking-[0.2em] uppercase text-zinc-400 mb-5">A Perfect Day</p>
+      <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-[1.02] text-zinc-900 mb-5">What China feels like<br /><em class="font-normal italic">in every season</em></h2>
       <p class="text-zinc-500 max-w-2xl leading-relaxed">Data tells you when to go. These stories tell you why you will never forget it.</p>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div class="bg-gradient-to-br from-pink-50 to-rose-50 border border-pink-200 rounded-2xl p-6 md:p-8">
+      <div class="bg-gradient-to-br from-sky-50 to-blue-50 border border-sky-200 rounded-2xl p-6 md:p-8">
         <img src="/images/spring-beijing.webp" alt="The Great Wall at Mutianyu with cherry blossoms in April spring" width="800" height="450" loading="lazy" class="w-full h-auto rounded-xl mb-6" />
-        <p class="text-xs font-semibold tracking-widest text-pink-500 uppercase mb-4">Spring &middot; April &middot; Beijing</p>
+        <p class="text-xs font-semibold tracking-widest text-sky-600 uppercase mb-4">Spring &middot; April &middot; Beijing</p>
         <h3 class="text-xl font-bold text-zinc-900 mb-3">Cherry Blossoms and Clear Skies</h3>
         <p class="text-sm text-zinc-600 leading-relaxed mb-4">6:30 AM. You step onto the Great Wall at Mutianyu as the morning mist clears. Temperature: 16&deg;C, no humidity, visibility stretching to the mountains beyond. By 9 AM you have the watchtowers nearly to yourself. Lunch is jianbing from a roadside stall in Huairou &mdash; crispy crepe, egg, hoisin, 12 RMB. Afternoon: the Forbidden City under a piercing blue sky, cherry blossoms framing the Hall of Supreme Harmony. Evening: Peking duck at a courtyard restaurant in a hutong, the skin crackling under your teeth. You walk home through Nanluoguxiang as lanterns flicker on. You realize you have not checked your phone in eight hours.</p>
-        <div class="flex items-center gap-3 text-xs text-pink-600 font-medium">
+        <div class="flex items-center gap-3 text-xs text-sky-600 font-medium">
           <span>16&deg;C</span><span>&middot;</span><span>7 rain days</span><span>&middot;</span><span>Moderate crowds</span>
         </div>
       </div>
-      <div class="bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-200 rounded-2xl p-6 md:p-8">
+      <div class="bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-200 rounded-2xl p-6 md:p-8">
         <img src="/images/summer-yunnan.webp" alt="Erhai Lake and Cangshan mountains near Dali, Yunnan in July summer" width="800" height="450" loading="lazy" class="w-full h-auto rounded-xl mb-6" />
-        <p class="text-xs font-semibold tracking-widest text-emerald-600 uppercase mb-4">Summer &middot; July &middot; Yunnan</p>
+        <p class="text-xs font-semibold tracking-widest text-blue-600 uppercase mb-4">Summer &middot; July &middot; Yunnan</p>
         <h3 class="text-xl font-bold text-zinc-900 mb-3">Escape to the Roof of Southeast Asia</h3>
         <p class="text-sm text-zinc-600 leading-relaxed mb-4">While Shanghai sweats through 35&deg;C and 80% humidity, you are at 2,400 meters in Lijiang. Morning: a bike ride around Erhai Lake near Dali, the Cangshan mountains reflecting perfectly in still water. Temperature: 22&deg;C. Lunch: crossing-the-bridge noodles at a family-run shop where the owner has been making the same broth for 30 years. Afternoon: Tiger Leaping Gorge. The Jinsha River roars 2,000 meters below as you hike one of the world&rsquo;s deepest canyons. Evening: old town Lijiang, stone streets lit by paper lanterns, Naxi musicians playing ancient melodies. You order a second round of yak butter tea. Nobody back home will believe this is the same country as Beijing.</p>
-        <div class="flex items-center gap-3 text-xs text-emerald-600 font-medium">
+        <div class="flex items-center gap-3 text-xs text-blue-600 font-medium">
           <span>22&deg;C</span><span>&middot;</span><span>14 rain days (but not here)</span><span>&middot;</span><span>Manageable crowds</span>
         </div>
       </div>
-      <div class="bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 rounded-2xl p-6 md:p-8">
+      <div class="bg-gradient-to-br from-indigo-50 to-blue-50 border border-indigo-200 rounded-2xl p-6 md:p-8">
         <img src="/images/autumn-xian.webp" alt="Terracotta Warriors in Xi'an under golden October autumn light" width="800" height="450" loading="lazy" class="w-full h-auto rounded-xl mb-6" />
-        <p class="text-xs font-semibold tracking-widest text-amber-600 uppercase mb-4">Autumn &middot; October &middot; Xi&rsquo;an</p>
+        <p class="text-xs font-semibold tracking-widest text-indigo-600 uppercase mb-4">Autumn &middot; October &middot; Xi&rsquo;an</p>
         <h3 class="text-xl font-bold text-zinc-900 mb-3">Golden Light and Ancient Stones</h3>
         <p class="text-sm text-zinc-600 leading-relaxed mb-4">8:00 AM. You are the first person through the doors at the Terracotta Warriors museum. Pit 1 stretches before you in silence &mdash; 2,000 clay soldiers, each face unique, bathed in the low golden light of an October morning. No jostling, no selfie sticks. Just you and two millennia of history. After lunch at the Muslim Quarter &mdash; hand-pulled biangbiang noodles, cumin-dusted lamb skewers, a pomegranate juice for the road &mdash; you bike the 14-kilometer Xi&rsquo;an City Wall as the sun sets behind the Bell Tower. The air is crisp, 19&deg;C, the perfect temperature for a sweater and a sense of wonder. Dinner is hot pot, and the conversation is about how this might be the best day of the trip.</p>
-        <div class="flex items-center gap-3 text-xs text-amber-700 font-medium">
+        <div class="flex items-center gap-3 text-xs text-indigo-700 font-medium">
           <span>19&deg;C</span><span>&middot;</span><span>6 rain days</span><span>&middot;</span><span>&rarr; After Oct 8: perfect</span>
         </div>
       </div>
-      <div class="bg-gradient-to-br from-sky-50 to-indigo-50 border border-sky-200 rounded-2xl p-6 md:p-8">
+      <div class="bg-gradient-to-br from-slate-50 to-blue-50 border border-slate-200 rounded-2xl p-6 md:p-8">
         <img src="/images/winter-harbin.webp" alt="Illuminated ice castle at the Harbin Ice and Snow Festival in January" width="800" height="450" loading="lazy" class="w-full h-auto rounded-xl mb-6" />
-        <p class="text-xs font-semibold tracking-widest text-sky-600 uppercase mb-4">Winter &middot; January &middot; Harbin</p>
+        <p class="text-xs font-semibold tracking-widest text-slate-600 uppercase mb-4">Winter &middot; January &middot; Harbin</p>
         <h3 class="text-xl font-bold text-zinc-900 mb-3">Ice Castles at -25&deg;C</h3>
         <p class="text-sm text-zinc-600 leading-relaxed mb-4">It is -25&deg;C and your eyelashes have frozen. You do not care. You are standing inside a life-sized ice castle illuminated in electric blue and neon pink, part of the Harbin Ice and Snow Festival &mdash; the largest ice sculpture event on Earth. Morning: you brave the cold at Sun Island to see snow sculptures the size of apartment buildings. Lunch: guobaorou (sweet and sour pork) and a flask of baijiu for warmth at a Russian-influenced Harbin restaurant. Afternoon: Siberian tigers at the Harbin Tiger Park, impossibly massive, their breath visible in the frozen air. Evening: back to the ice city, now glowing under thousands of LED lights. You feel like you have wandered into a fairytale. You have never been this cold. You have never been this happy.</p>
-        <div class="flex items-center gap-3 text-xs text-sky-600 font-medium">
+        <div class="flex items-center gap-3 text-xs text-slate-600 font-medium">
           <span>-25&deg;C to -10&deg;C</span><span>&middot;</span><span>2 rain days (all snow)</span><span>&middot;</span><span>Low crowds</span>
         </div>
       </div>
@@ -364,8 +404,8 @@ const faqPageSchema = JSON.stringify({
     <div class="max-w-7xl mx-auto px-4 py-20">
       <div class="md:flex md:items-start md:justify-between gap-8 mb-12">
         <div class="max-w-xl">
-          <p class="text-sm font-medium tracking-wide text-accent-600 uppercase mb-3">Crowd Intelligence</p>
-          <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-zinc-900 mb-4">Dodge the Crowds</h2>
+          <p class="text-xs font-semibold tracking-[0.2em] uppercase text-zinc-400 mb-5">Crowd Intelligence</p>
+          <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-[1.02] text-zinc-900 mb-5">Dodge<br /><em class="font-normal italic">the crowds</em></h2>
           <p class="text-zinc-500 leading-relaxed">Know exactly when China's attractions are packed --- and when you can have them almost to yourself.</p>
         </div>
       </div>
@@ -400,8 +440,8 @@ const faqPageSchema = JSON.stringify({
   <!-- ======== 7. COST TREND ======== -->
   <section class="reveal max-w-7xl mx-auto px-4 py-20">
     <div class="mb-12">
-      <p class="text-sm font-medium tracking-wide text-accent-600 uppercase mb-3">Travel Cost</p>
-      <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-zinc-900 mb-4">When You'll Pay the Most (and the Least)</h2>
+      <p class="text-xs font-semibold tracking-[0.2em] uppercase text-zinc-400 mb-5">Travel Cost</p>
+      <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-[1.02] text-zinc-900 mb-5">Pay the most<br /><em class="font-normal italic">(or the least)</em></h2>
       <p class="text-zinc-500 max-w-2xl leading-relaxed">Flight and hotel prices swing dramatically. Pick the right month and save 40-50%.</p>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -414,8 +454,8 @@ const faqPageSchema = JSON.stringify({
   <section class="reveal bg-zinc-50 border-y border-zinc-100">
     <div class="max-w-7xl mx-auto px-4 py-20">
       <div class="mb-12">
-        <p class="text-sm font-medium tracking-wide text-accent-600 uppercase mb-3">Real Experiences</p>
-        <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-zinc-900 mb-4">Travelers Who Got It Right (and Wrong)</h2>
+        <p class="text-xs font-semibold tracking-[0.2em] uppercase text-zinc-400 mb-5">Real Experiences</p>
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-[1.02] text-zinc-900 mb-5">Travelers who got it<br /><em class="font-normal italic">right (and wrong)</em></h2>
         <p class="text-zinc-500 max-w-2xl leading-relaxed">Learn from real trips --- what worked, what didn't, and what they wish they'd known.</p>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -436,8 +476,8 @@ const faqPageSchema = JSON.stringify({
   <!-- ======== 9. FAQ ======== -->
   <section class="reveal max-w-7xl mx-auto px-4 py-20">
     <div class="max-w-3xl">
-      <p class="text-sm font-medium tracking-wide text-accent-600 uppercase mb-3">Common Questions</p>
-      <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-zinc-900 mb-10">Everything You Need to Know</h2>
+      <p class="text-xs font-semibold tracking-[0.2em] uppercase text-zinc-400 mb-5">Common Questions</p>
+      <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-[1.02] text-zinc-900 mb-10">Everything you<br /><em class="font-normal italic">need to know</em></h2>
       <div class="space-y-3">
         {faqs.map((faq) => (
           <details class="group border border-zinc-200 rounded-xl overflow-hidden">
@@ -454,81 +494,95 @@ const faqPageSchema = JSON.stringify({
     </div>
   </section>
 
-  <!-- ======== TRUST SIGNALS ======== -->
-  <section class="reveal max-w-7xl mx-auto px-4 py-16">
-    <div class="bg-white border border-zinc-200 rounded-2xl p-8 md:p-10">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-        <div>
-          <p class="text-xs font-semibold tracking-widest text-zinc-400 uppercase mb-3">Why Trust This Guide</p>
-          <h3 class="text-xl font-bold text-zinc-900 mb-3">Built by travelers, backed by data</h3>
-          <p class="text-sm text-zinc-600 leading-relaxed mb-4">Every recommendation is based on aggregated weather data (10-year averages), actual flight price tracking, crowd-sourced crowding reports, and firsthand experience traveling across 20+ Chinese cities. No AI-generated guesses. No sponsored rankings.</p>
-          <div class="flex flex-wrap gap-4 text-xs text-zinc-500">
-            <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> 10-year weather data</span>
-            <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Flight price tracking</span>
-            <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Crowd reports</span>
-            <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Updated <span id="last-updated">Jul 2026</span></span>
-          </div>
-        </div>
-        <div>
-          <p class="text-xs font-semibold tracking-widest text-zinc-400 uppercase mb-3">Act 3: Already Been?</p>
-          <h3 class="text-xl font-bold text-zinc-900 mb-3">Your next China trip starts here</h3>
-          <p class="text-sm text-zinc-600 leading-relaxed mb-4">Went in spring? Try autumn for a completely different experience. Visited the north? The south is a different country. Every return trip reveals a new China.</p>
-          <div class="flex flex-col sm:flex-row gap-3">
-            <a href="/by-region" class="inline-flex items-center gap-1.5 text-sm font-medium px-4 py-2.5 border border-zinc-300 rounded-full hover:border-accent-400 hover:text-accent-600 transition-colors">
-              Explore a new region
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
-            </a>
-            <a href="/festivals" class="inline-flex items-center gap-1.5 text-sm font-medium px-4 py-2.5 border border-zinc-300 rounded-full hover:border-accent-400 hover:text-accent-600 transition-colors">
-              Plan around a festival
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
-            </a>
-          </div>
-        </div>
+  <!-- ======== 10. LEARN MORE HUB (contextual internal links) ======== -->
+  <section class="reveal bg-zinc-50 border-y border-zinc-100">
+    <div class="max-w-7xl mx-auto px-4 py-20">
+      <div class="mb-12">
+        <p class="text-xs font-semibold tracking-[0.2em] uppercase text-zinc-400 mb-5">Keep Planning</p>
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-[1.02] text-zinc-900 mb-5">Want to learn more<br /><em class="font-normal italic">about visiting China?</em></h2>
+        <p class="text-zinc-500 max-w-2xl leading-relaxed">Dive deeper into the exact month, region, festival, or budget that fits your trip.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <a href="/when-to-go" class="group bg-white border border-zinc-200 rounded-xl p-6 hover:border-accent-300 transition-colors no-underline">
+          <p class="text-sm font-bold text-zinc-900 mb-1 group-hover:text-accent-600 transition-colors">Take the 60-Second Quiz</p>
+          <p class="text-sm text-zinc-500 leading-relaxed">Answer 8 questions and get your ideal month instantly.</p>
+        </a>
+        <a href="/monthly-guide" class="group bg-white border border-zinc-200 rounded-xl p-6 hover:border-accent-300 transition-colors no-underline">
+          <p class="text-sm font-bold text-zinc-900 mb-1 group-hover:text-accent-600 transition-colors">Month-by-Month Guide</p>
+          <p class="text-sm text-zinc-500 leading-relaxed">Weather, festivals, crowds & packing for every month of the year.</p>
+        </a>
+        <a href="/by-region" class="group bg-white border border-zinc-200 rounded-xl p-6 hover:border-accent-300 transition-colors no-underline">
+          <p class="text-sm font-bold text-zinc-900 mb-1 group-hover:text-accent-600 transition-colors">Region Guides</p>
+          <p class="text-sm text-zinc-500 leading-relaxed">Best time to visit Beijing, Shanghai, Xi'an, Yunnan, Tibet & more.</p>
+        </a>
+        <a href="/crowd-calendar" class="group bg-white border border-zinc-200 rounded-xl p-6 hover:border-accent-300 transition-colors no-underline">
+          <p class="text-sm font-bold text-zinc-900 mb-1 group-hover:text-accent-600 transition-colors">Crowd Calendar</p>
+          <p class="text-sm text-zinc-500 leading-relaxed">Golden Week, Chinese New Year & the quiet sweet spots.</p>
+        </a>
+        <a href="/festivals" class="group bg-white border border-zinc-200 rounded-xl p-6 hover:border-accent-300 transition-colors no-underline">
+          <p class="text-sm font-bold text-zinc-900 mb-1 group-hover:text-accent-600 transition-colors">Festival Dates</p>
+          <p class="text-sm text-zinc-500 leading-relaxed">Plan your trip around China's most spectacular celebrations.</p>
+        </a>
+        <a href="/travel-cost" class="group bg-white border border-zinc-200 rounded-xl p-6 hover:border-accent-300 transition-colors no-underline">
+          <p class="text-sm font-bold text-zinc-900 mb-1 group-hover:text-accent-600 transition-colors">Travel Cost Guide</p>
+          <p class="text-sm text-zinc-500 leading-relaxed">When flights and hotels are cheapest, and what trips really cost.</p>
+        </a>
+        <a href="/faq" class="group bg-white border border-zinc-200 rounded-xl p-6 hover:border-accent-300 transition-colors no-underline">
+          <p class="text-sm font-bold text-zinc-900 mb-1 group-hover:text-accent-600 transition-colors">Full FAQ</p>
+          <p class="text-sm text-zinc-500 leading-relaxed">More answers about weather, visas, and planning your China trip.</p>
+        </a>
+        <a href="/about" class="group bg-white border border-zinc-200 rounded-xl p-6 hover:border-accent-300 transition-colors no-underline">
+          <p class="text-sm font-bold text-zinc-900 mb-1 group-hover:text-accent-600 transition-colors">About Our Guide</p>
+          <p class="text-sm text-zinc-500 leading-relaxed">How this guide is built and why you can trust its recommendations.</p>
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- ======== 10. CTA + FOOTER ======== -->
-  <section class="reveal bg-zinc-950 text-white">
+  <!-- ======== TRUST SIGNALS ======== -->
+  <section class="reveal max-w-7xl mx-auto px-4 py-16">
+    <div class="bg-white border border-zinc-200 rounded-2xl p-8 md:p-10">
+      <div class="mb-8">
+        <p class="text-xs font-semibold tracking-[0.2em] uppercase text-zinc-400 mb-5">Why Trust This Guide</p>
+        <h3 class="text-2xl md:text-3xl font-bold tracking-tighter leading-tight text-zinc-900 mb-3">Built by travelers,<br /><em class="font-normal italic">backed by data</em></h3>
+        <p class="text-sm text-zinc-600 leading-relaxed max-w-3xl">Every recommendation is based on aggregated weather data (10-year averages), actual flight price tracking, crowd-sourced crowding reports, and firsthand experience traveling across 20+ Chinese cities. No AI-generated guesses. No sponsored rankings.</p>
+      </div>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-px bg-zinc-100 border border-zinc-100 rounded-xl overflow-hidden mb-6">
+        {[
+          { value: "10 yr", label: "of weather data per month & region", },
+          { value: "$750", label: "winter round-trip flights from the US", },
+          { value: "40–50%", label: "hotel savings in November & December", },
+          { value: "20+", label: "Chinese cities traveled firsthand" },
+        ].map((stat) => (
+          <div class="bg-white p-5">
+            <p class="text-2xl md:text-3xl font-bold text-accent-600">{stat.value}</p>
+            <p class="text-xs text-zinc-500 mt-1 leading-snug">{stat.label}</p>
+          </div>
+        ))}
+      </div>
+      <div class="flex flex-wrap gap-4 text-xs text-zinc-500">
+        <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> 10-year weather data</span>
+        <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> Flight price tracking</span>
+        <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> Crowd reports</span>
+        <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> Updated <span id="last-updated">Jul 2026</span></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== CTA ======== -->
+  <section class="reveal bg-accent-600 text-white">
     <div class="max-w-7xl mx-auto px-4 py-20 text-center">
-      <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">Still Not Sure?</h2>
-      <p class="text-zinc-400 max-w-md mx-auto mb-8 leading-relaxed">Answer 8 quick questions about your travel style and we'll tell you the exact best month for your China trip.</p>
-      <a href="/when-to-go" class="inline-flex items-center gap-2 px-8 py-4 bg-accent-500 hover:bg-accent-400 text-zinc-950 font-semibold rounded-full transition-colors text-lg">
+      <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-[1.02] mb-5">Still<br /><em class="font-normal italic">not sure?</em></h2>
+      <p class="text-accent-100 max-w-md mx-auto mb-8 leading-relaxed">Answer 8 quick questions about your travel style and we'll tell you the exact best month for your China trip.</p>
+      <a href="/when-to-go" class="inline-flex items-center gap-2 px-8 py-4 bg-white hover:bg-accent-50 text-accent-700 font-semibold rounded-full transition-colors text-lg">
         Take the Free Quiz
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
     </div>
-    <div class="border-t border-zinc-800 max-w-7xl mx-auto px-4 py-10">
-      <div class="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-zinc-500">
-        <p class="font-semibold text-zinc-300">When to Visit China</p>
-        <div class="flex items-center gap-6">
-          <a href="/" class="hover:text-zinc-300 transition-colors">Home</a>
-          <a href="/when-to-go" class="hover:text-zinc-300 transition-colors">Quiz</a>
-          <a href="/monthly-guide" class="hover:text-zinc-300 transition-colors">Monthly Guide</a>
-          <a href="/by-region" class="hover:text-zinc-300 transition-colors">By Region</a>
-        <a href="/festivals" class="hover:text-zinc-300 transition-colors">Festivals</a>
-        <a href="/crowd-calendar" class="hover:text-zinc-300 transition-colors">Crowds</a>
-        <a href="/faq" class="hover:text-zinc-300 transition-colors">FAQ</a>
-        <a href="/travel-cost" class="hover:text-zinc-300 transition-colors">Cost</a>
-        <a href="/about" class="hover:text-zinc-300 transition-colors">About</a>
-        <a href="/contact" class="hover:text-zinc-300 transition-colors">Contact</a>
-        <a href="/privacy" class="hover:text-zinc-300 transition-colors">Privacy</a>
-      </div>
-      <p class="text-zinc-600">&copy; 2026 When to Visit China. All times local.</p>
-      </div>
-    </div>
   </section>
+  <Footer />
 
-<style>
-  html.js .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease-out, transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1); }
-  html.js .reveal.visible { opacity: 1; transform: translateY(0); }
-</style>
 <script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting && e.target instanceof Element) { e.target.classList.add("visible"); observer.unobserve(e.target); } });
-  }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
-  document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
-  
   const now = new Date();
   const monthIdx = now.getMonth();
   const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];

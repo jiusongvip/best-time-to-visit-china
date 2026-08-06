@@ -3,6 +3,7 @@ import "../styles/global.css";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
+import PageHero from "../components/PageHero.astro";
 
 const quizzes = [
   { id: "region", q: "Which region of China are you most interested in?", opts: ["North (Beijing, Great Wall)", "East (Shanghai, Suzhou, Hangzhou)", "South (Guilin, Guangzhou, Hong Kong)", "West (Chengdu, Chongqing)", "Southwest (Yunnan, Guizhou)", "Tibet / Qinghai"] },
@@ -23,6 +24,8 @@ const quizzes = [
       <p class="text-sm font-medium tracking-wide text-accent-600 uppercase mb-4">Free Travel Quiz</p>
       <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-zinc-900 mb-4 leading-none">When Should You Visit China?</h1>
       <p class="text-lg text-zinc-500 leading-relaxed mb-12">Answer 8 simple questions about your travel style. We will give you your ideal month, plus backup options with detailed reasons.</p>
+
+      <PageHero image="/images/month-october.webp" alt="Autumn landscape in China during October, the recommended month" overlay="Free Travel Quiz" title="Answer 8 quick questions to find your perfect month" />
 
       <div class="space-y-8" id="quiz-container">
         {quizzes.map((q, i) => (
@@ -98,7 +101,7 @@ const quizzes = [
         </div>
         <div class="bg-white border border-zinc-200 rounded-xl p-5">
           <div class="flex items-start gap-4">
-            <span class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-sm font-bold">AD</span>
+            <span class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-sm font-bold">AD</span>
             <div>
               <p class="text-sm font-bold text-zinc-800 mb-1">Adventure Seeker</p>
               <p class="text-xs text-zinc-500 mb-2">Comfortable with weather extremes, seeks solitude. Selects Tibet or Southwest regions.</p>
@@ -108,7 +111,7 @@ const quizzes = [
         </div>
         <div class="bg-white border border-zinc-200 rounded-xl p-5">
           <div class="flex items-start gap-4">
-            <span class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center text-sm font-bold">BG</span>
+            <span class="flex-shrink-0 w-10 h-10 rounded-full bg-sky-100 text-sky-600 flex items-center justify-center text-sm font-bold">BG</span>
             <div>
               <p class="text-sm font-bold text-zinc-800 mb-1">Budget Traveler</p>
               <p class="text-xs text-zinc-500 mb-2">Prioritizes low cost over perfect weather. Selects Budget tier, high crowd tolerance.</p>
@@ -118,7 +121,7 @@ const quizzes = [
         </div>
         <div class="bg-white border border-zinc-200 rounded-xl p-5">
           <div class="flex items-start gap-4">
-            <span class="flex-shrink-0 w-10 h-10 rounded-full bg-pink-100 text-pink-600 flex items-center justify-center text-sm font-bold">CF</span>
+            <span class="flex-shrink-0 w-10 h-10 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-sm font-bold">CF</span>
             <div>
               <p class="text-sm font-bold text-zinc-800 mb-1">Culture & Festival Lover</p>
               <p class="text-xs text-zinc-500 mb-2">Prioritizes festivals over weather. High crowd tolerance. Selects Chinese New Year or Mid-Autumn.</p>

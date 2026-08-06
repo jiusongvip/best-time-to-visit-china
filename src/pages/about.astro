@@ -3,6 +3,7 @@ import "../styles/global.css";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
+import PageHero from "../components/PageHero.astro";
 ---
 
 <BaseLayout title="About When to Visit China: Our Founder & Editorial Policy" description="Meet Wei Zhang, founder of When to Visit China. Learn about our data-driven methodology, climate sources, and editorial policy for trustworthy travel advice.">
@@ -12,6 +13,8 @@ import Footer from "../components/Footer.astro";
       <p class="text-sm font-medium tracking-wide text-accent-600 uppercase mb-4">About</p>
       <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-zinc-900 mb-4 leading-none">Who's Behind This Guide</h1>
       <p class="text-lg text-zinc-500 leading-relaxed mb-12">The story behind the data, the people behind the words.</p>
+
+      <PageHero image="/images/region-guilin.webp" alt="Misty Guilin karst mountains rising above the Li River" overlay="About" title="Data-driven China travel advice from a decade of on-the-ground experience" />
 
       <!-- Author Bio -->
       <div class="bg-white border border-zinc-200 rounded-2xl p-8 mb-12">

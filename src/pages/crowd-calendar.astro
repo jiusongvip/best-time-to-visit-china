@@ -3,6 +3,7 @@ import "../styles/global.css";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
+import PageHero from "../components/PageHero.astro";
 
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 const weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -100,6 +101,8 @@ const yearMonths = months.map((_, i) => ({ label: months[i], index: i, days: gen
       <p class="text-sm font-medium tracking-wide text-accent-600 uppercase mb-4">Crowd Calendar</p>
       <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-zinc-900 mb-4 leading-none">China Travel Crowd Calendar 2026</h1>
       <p class="text-lg text-zinc-500 max-w-2xl leading-relaxed mb-4">See crowd levels for every single day of the year. Plan around major holidays and peak seasons.</p>
+
+      <PageHero image="/images/region-beijing.webp" alt="Crowded tourist square in Beijing with the Forbidden City entrance" overlay="Crowd Calendar" title="Avoid the 2 extreme weeks: CNY and October 1-7 Golden Week" />
 
       <h2 class="text-2xl font-bold text-zinc-900 mb-4">Crowd Level Legend</h2>
       <div class="flex items-center gap-4 mb-10 flex-wrap">

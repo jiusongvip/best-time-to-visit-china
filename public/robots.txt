@@ -1,6 +1,6 @@
 User-agent: *
 Allow: /
-Sitemap: https://when-to-visit-china.com/sitemap.xml
+Sitemap: https://when-to-visit-china.com/sitemap-index.xml
 
 # AI crawlers — allow browsing, block training
 User-agent: GPTBot
