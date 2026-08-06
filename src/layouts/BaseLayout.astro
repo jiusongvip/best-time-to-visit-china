@@ -16,16 +16,32 @@ let canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
 if (canonicalURL.endsWith("/")) canonicalURL = canonicalURL.slice(0, -1);
 
 // BreadcrumbList — only for subpages
+const pageLabels: Record<string, string> = {
+  "when-to-go": "When to Go Quiz",
+  "monthly-guide": "Month-by-Month Guide",
+  "by-region": "By Region",
+  "festivals": "Festivals",
+  "crowd-calendar": "Crowd Calendar",
+  "faq": "FAQ",
+  "travel-cost": "Travel Cost",
+  "about": "About",
+  "contact": "Contact",
+  "privacy": "Privacy",
+  "404": "404",
+};
 let breadcrumbSchema = "";
+let crumbs: { name: string; item: string }[] = [];
 const pathParts = Astro.url.pathname.split('/').filter(Boolean);
 if (pathParts.length > 0) {
   const baseUrl = canonicalURL.replace(Astro.url.pathname, '/');
   const items = [{ "@type": "ListItem", "position": 1, "name": "Home", "item": baseUrl }];
+  crumbs.push({ name: "Home", item: baseUrl });
   for (let i = 0; i < pathParts.length; i++) {
     const part = pathParts[i];
-    const name = part.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase());
+    const name = pageLabels[part] ?? part.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase());
     const item = baseUrl + pathParts.slice(0, i + 1).join('/');
     items.push({ "@type": "ListItem", "position": (i + 2), "name": name, "item": item });
+    crumbs.push({ name, item });
   }
   breadcrumbSchema = JSON.stringify({ "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": items });
 }
@@ -53,8 +69,19 @@ if (pathParts.length > 0) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
     <title>{title}</title>
-    <!-- 无 JS 兑底：仅在 JS 可用时才应用 .reveal 隐藏/动画（内容默认可见） -->
     <script is:inline>document.documentElement.classList.add('js');</script>
+    <!-- Reset on bfcache restore (cached broken pages) -->
+    <script is:inline>window.addEventListener('pageshow',function(e){if(e.persisted)location.reload();});</script>
+    <!-- Dev error catcher: if any JS error happens and body is blank, show the error -->
+    <script is:inline>
+      window.addEventListener('error',function(e){
+        setTimeout(function(){
+          if(document.body&&document.body.innerText.trim().length<50){
+            document.body.innerHTML='<div style="padding:40px;font-family:monospace;color:red;white-space:pre-wrap">JS ERROR: '+e.message+'\\n\\n'+e.filename+':'+e.lineno+'</div>';
+          }
+        },200);
+      });
+    </script>
     {breadcrumbSchema && <>
       <!-- BreadcrumbList Schema -->
       <script type="application/ld+json" set:html={breadcrumbSchema} />
@@ -87,6 +114,58 @@ if (pathParts.length > 0) {
   <body class="bg-white text-zinc-900 antialiased font-sans">
   <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-accent-600 focus:text-white focus:rounded-lg focus:outline-none">Skip to content</a>
 
+    {crumbs.length > 0 && (
+      <nav aria-label="Breadcrumb" class="max-w-7xl mx-auto px-4 pt-4">
+        <ol class="flex flex-wrap items-center gap-1.5 text-xs text-zinc-400">
+          {crumbs.map((c, i) => (
+            <li class="flex items-center gap-1.5">
+              {i > 0 && <span aria-hidden="true" class="text-zinc-300">/</span>}
+              {i < crumbs.length - 1 ? (
+                <a href={c.item} class="hover:text-accent-600 transition-colors">{c.name}</a>
+              ) : (
+                <span class="text-zinc-500 font-medium" aria-current="page">{c.name}</span>
+              )}
+            </li>
+          ))}
+        </ol>
+      </nav>
+    )}
+
     <main id="main-content"><slot /></main>
+
+    <!-- ======== PAGE HELPFULNESS FEEDBACK ======== -->
+    <div id="helpful-widget" class="max-w-7xl mx-auto px-4 pb-10">
+      <div class="flex items-center justify-between gap-4 border border-zinc-200 rounded-xl bg-zinc-50 px-5 py-4" data-state="idle">
+        <p class="text-sm font-medium text-zinc-700">Was this page helpful?</p>
+        <div class="flex items-center gap-2" data-buttons>
+          <button type="button" class="inline-flex items-center gap-1.5 px-4 py-1.5 text-sm font-semibold rounded-full border border-zinc-300 hover:border-accent-400 hover:text-accent-600 transition-colors" data-vote="yes">Yes</button>
+          <button type="button" class="inline-flex items-center gap-1.5 px-4 py-1.5 text-sm font-semibold rounded-full border border-zinc-300 hover:border-accent-400 hover:text-accent-600 transition-colors" data-vote="no">No</button>
+        </div>
+      </div>
+      <p class="hidden text-sm text-emerald-600 font-medium px-5 py-4" data-thanks>Thanks for your feedback.</p>
+    </div>
   </body>
+  <script>
+    (function () {
+      var key = "helpful:" + location.pathname;
+      var stored = null;
+      try { stored = localStorage.getItem(key); } catch (e) {}
+      if (stored) {
+        var card = document.querySelector("#helpful-widget [data-state]");
+        if (card) card.classList.add("hidden");
+        var thanks = document.querySelector("#helpful-widget [data-thanks]");
+        if (thanks) { thanks.classList.remove("hidden"); thanks.textContent = "Thanks for your feedback."; }
+      }
+      var buttons = document.querySelectorAll("#helpful-widget [data-vote]");
+      buttons.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var card = document.querySelector("#helpful-widget [data-state]");
+          var thanks = document.querySelector("#helpful-widget [data-thanks]");
+          if (card) card.classList.add("hidden");
+          if (thanks) { thanks.classList.remove("hidden"); thanks.textContent = "Thanks for your feedback."; }
+          try { localStorage.setItem(key, btn.getAttribute("data-vote")); } catch (e) {}
+        });
+      });
+    })();
+  </script>
 </html>

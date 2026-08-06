@@ -61,7 +61,7 @@ export default function ChinaMap() {
       <div className="text-center mt-6">
         <a href="/by-region" className="text-sm font-medium text-accent-600 hover:text-accent-700 inline-flex items-center gap-1">
           See all regions with detailed guides
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
       </div>
     </div>
@@ -82,7 +82,7 @@ function RegionCard({ region, active, setActive }: { region: Region; active: str
       onBlur={() => setActive(null)}
     >
       <p className="text-sm font-bold text-zinc-800 mb-1">{region.name}</p>
-      <p className={`text-xs font-semibold mb-1 ${isActive ? "text-accent-600" : "text-emerald-600"}`}>
+      <p className={`text-xs font-semibold mb-1 ${isActive ? "text-accent-600" : "text-blue-600"}`}>
         Best: {region.best}
       </p>
       <p className="text-[11px] text-zinc-400">{region.temp}</p>

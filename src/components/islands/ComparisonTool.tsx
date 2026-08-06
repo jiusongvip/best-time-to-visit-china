@@ -113,7 +113,7 @@ export default function ComparisonTool() {
           )}
           {mode === "regions" && (
             <div className="space-y-2 text-xs">
-              <div className="flex justify-between"><span className="text-zinc-400">Best months</span><span className="font-medium text-emerald-600">{itemA.best}</span></div>
+              <div className="flex justify-between"><span className="text-zinc-400">Best months</span><span className="font-medium text-blue-600">{itemA.best}</span></div>
               <div className="flex justify-between"><span className="text-zinc-400">Avoid</span><span className="font-medium text-red-500">{itemA.avoid}</span></div>
               <div className="flex justify-between"><span className="text-zinc-400">Temperature</span><span className="font-medium text-zinc-700">{itemA.temp}</span></div>
               <div className="flex justify-between"><span className="text-zinc-400">Highlight</span><span className="font-medium text-zinc-700 text-right max-w-[120px]">{itemA.highlight}</span></div>
@@ -137,7 +137,7 @@ export default function ComparisonTool() {
           )}
           {mode === "regions" && (
             <div className="space-y-2 text-xs">
-              <div className="flex justify-between"><span className="text-zinc-400">Best months</span><span className="font-medium text-emerald-600">{itemB.best}</span></div>
+              <div className="flex justify-between"><span className="text-zinc-400">Best months</span><span className="font-medium text-blue-600">{itemB.best}</span></div>
               <div className="flex justify-between"><span className="text-zinc-400">Avoid</span><span className="font-medium text-red-500">{itemB.avoid}</span></div>
               <div className="flex justify-between"><span className="text-zinc-400">Temperature</span><span className="font-medium text-zinc-700">{itemB.temp}</span></div>
               <div className="flex justify-between"><span className="text-zinc-400">Highlight</span><span className="font-medium text-zinc-700 text-right max-w-[120px]">{itemB.highlight}</span></div>

@@ -3,6 +3,7 @@ import "../styles/global.css";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
+import PageHero from "../components/PageHero.astro";
 
 const faqs = [
   { q: "What is the best month to visit China?", a: "April, May, September, and October are generally the best months across China's most popular destinations. You'll get comfortable temperatures (15-26°C), manageable rainfall, and beautiful scenery --- spring blooms or autumn colors depending on the season. For the absolute best experience, aim for the second half of April or the last two weeks of October (after Golden Week)." },
@@ -47,6 +48,8 @@ const faqCategories = [
       <p class="text-sm font-medium tracking-wide text-accent-600 uppercase mb-4">FAQ</p>
       <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-zinc-900 mb-4 leading-none">China Travel FAQ</h1>
       <p class="text-lg text-zinc-500 leading-relaxed mb-16">Everything you need to know before planning your trip to China.</p>
+
+      <PageHero image="/images/autumn-xian.webp" alt="Ancient Xi'an city wall bathed in golden autumn light" overlay="FAQ" title="Answers to the 12 questions travelers ask us most" />
 
       {faqCategories.map((cat) => (
         <div class="mb-12">

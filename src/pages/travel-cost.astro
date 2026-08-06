@@ -3,6 +3,7 @@ import "../styles/global.css";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
+import PageHero from "../components/PageHero.astro";
 import CostChart from "../components/islands/CostChart";
 import HotelComparison from "../components/islands/HotelComparison";
 
@@ -80,6 +81,8 @@ const cityCosts = [
       <p class="text-sm font-medium tracking-wide text-accent-600 uppercase mb-4">Travel Cost</p>
       <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-zinc-900 mb-4 leading-none">China Travel Cost Guide</h1>
       <p class="text-lg text-zinc-500 max-w-2xl leading-relaxed mb-16">Everything you will actually spend, broken down by season, city, and travel style.</p>
+
+      <PageHero image="/images/region-shanghai.webp" alt="Shanghai skyline at dusk with illuminated Pudong towers" overlay="Travel Cost" title="A 10-day trip costs $1,080 to $4,140 depending on your style" />
 
       <!-- Flights & Hotels Charts -->
       <div class="mb-16">
