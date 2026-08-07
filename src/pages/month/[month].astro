@@ -15,7 +15,7 @@ export function getStaticPaths() {
 }
 
 const { month } = Astro.props;
-const canonical = `https://when-to-visit-china.com/month/${month.month}`;
+const canonical = `https://best-time-to-visit-china.com/month/${month.month}`;
 const currentYear = 2026;
 
 // Match best regions to region guide slugs for internal linking
@@ -46,8 +46,8 @@ const articleSchema = JSON.stringify({
   "@type": "Article",
   "headline": title,
   "description": meta,
-  "author": { "@type": "Person", "name": "Wei Zhang", "url": "https://when-to-visit-china.com/about" },
-  "publisher": { "@type": "Organization", "name": "When to Visit China", "logo": { "@type": "ImageObject", "url": "https://when-to-visit-china.com/favicon.svg" } },
+  "author": { "@type": "Person", "name": "Wei Zhang", "url": "https://best-time-to-visit-china.com/about" },
+  "publisher": { "@type": "Organization", "name": "When to Visit China", "logo": { "@type": "ImageObject", "url": "https://best-time-to-visit-china.com/favicon.svg" } },
   "datePublished": "2026-01-15",
   "dateModified": "2026-07-31",
   "mainEntityOfPage": { "@type": "WebPage", "@id": canonical },

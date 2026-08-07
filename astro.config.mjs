@@ -6,7 +6,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://when-to-visit-china.com",
+  site: "https://best-time-to-visit-china.com",
   trailingSlash: "never",
   integrations: [react(), sitemap({
     filter: (page) => !page.includes("/404"),
