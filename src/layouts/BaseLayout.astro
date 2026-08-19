@@ -11,9 +11,9 @@ export interface Props {
 const { title, description, ogImage = "/og-default.png" } = Astro.props;
 // og:image 统一转为绝对 URL（社交平台抓取器无法解析相对路径）
 const ogImageURL = ogImage.startsWith("http") ? ogImage : new URL(ogImage, Astro.site).href;
-let canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
-// 全站规范：URL 无尾斜杠（trailingSlash: never），首页 pathname 为 "/" 需去除
-if (canonicalURL.endsWith("/")) canonicalURL = canonicalURL.slice(0, -1);
+const canonicalURL = Astro.url.pathname === "/"
+  ? new URL("/", Astro.site).href.replace(/\/$/, "")
+  : new URL(Astro.url.pathname, Astro.site).href;
 
 // BreadcrumbList — only for subpages
 const pageLabels: Record<string, string> = {
@@ -87,15 +87,15 @@ if (pathParts.length > 0) {
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "When to Visit China",
-      "url": "https://best-time-to-visit-china.com",
-      "logo": "https://best-time-to-visit-china.com/favicon.svg",
+      "url": "https://www.best-time-to-visit-china.com",
+      "logo": "https://www.best-time-to-visit-china.com/favicon.svg",
       "description": "Expert travel guide helping you find the best time to visit China. Month-by-month weather, crowd calendars, festival dates, and region-specific advice."
     }`} />
     <script type="application/ld+json" set:html={`{
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "When to Visit China",
-      "url": "https://best-time-to-visit-china.com"
+      "url": "https://www.best-time-to-visit-china.com"
     }`} />
     <!-- Person Schema (Author) -->
     <script type="application/ld+json" set:html={`{
@@ -103,7 +103,7 @@ if (pathParts.length > 0) {
       "@type": "Person",
       "name": "Wei Zhang",
       "jobTitle": "Founder & Lead Editor",
-      "url": "https://best-time-to-visit-china.com/about",
+      "url": "https://www.best-time-to-visit-china.com/about",
       "description": "Travel writer and China specialist with over a decade of firsthand experience across 20+ Chinese cities. Founder of When to Visit China."
     }`} />
   </head>

@@ -1,5 +1,5 @@
 # llms.txt for When to Visit China
-# https://best-time-to-visit-china.com
+# https://www.best-time-to-visit-china.com
 
 ## About This Site
 When to Visit China is a data-backed travel planning guide helping travelers find the best time to visit China. We combine climate data, crowd intelligence, and firsthand travel experience to provide month-by-month, region-by-region guidance.
@@ -7,7 +7,7 @@ When to Visit China is a data-backed travel planning guide helping travelers fin
 ## Core Pages
 
 ### Homepage
-https://best-time-to-visit-china.com
+https://www.best-time-to-visit-china.com
 Interactive guide covering best travel seasons, regional climate matrix, month timeline, crowd calendar, cost trends, and seasonal narratives. Includes comparison tool and interactive China region map.
 
 ### When to Go Quiz

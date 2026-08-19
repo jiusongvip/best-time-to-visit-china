@@ -59,7 +59,7 @@ export default function ChinaMap() {
       </div>
 
       <div className="text-center mt-6">
-        <a href="/by-region" className="text-sm font-medium text-accent-600 hover:text-accent-700 inline-flex items-center gap-1">
+        <a href="/by-region/" className="text-sm font-medium text-accent-600 hover:text-accent-700 inline-flex items-center gap-1">
           See all regions with detailed guides
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
