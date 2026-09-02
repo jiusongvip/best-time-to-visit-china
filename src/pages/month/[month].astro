@@ -27,9 +27,9 @@ const relatedRegions = (monthRegionSlugs[month.month] ?? [])
   .map((slug) => regionGuides.find((r) => r.slug === slug))
   .filter((r): r is NonNullable<typeof r> => Boolean(r));
 
-const title = `China in ${month.label} ${currentYear}: ${month.tempLow}–${month.tempHigh}°C, Crowds ${month.crowdLevel}/5 & Best Places`;
-const meta = `${month.label} in China: ${month.tempLow}–${month.tempHigh}°C, ${month.rainDays} rain days, crowd level ${month.crowdLevel}/5. Best for ${month.bestFor}. Where to go, what to pack and how to dodge the crowds in ${currentYear}.`;
-const desc = `${month.label} is best for ${month.bestFor}. Average ${month.tempLow}–${month.tempHigh}°C, ${month.rainDays} rainy days, crowd level ${month.crowdLevel}/5. See the best regions, packing list, festivals and tips to beat the summer rush.`;
+const title = `China Weather in ${month.label} ${currentYear}: ${month.tempLow}–${month.tempHigh}°C, Rain Days & Crowd Guide`;
+const meta = `China weather in ${month.label} ${currentYear}: averages ${month.tempLow}–${month.tempHigh}°C with ${month.rainDays} rainy days, crowd level ${month.crowdLevel}/5. Best regions, packing list and tips to dodge the crowds.`;
+const desc = `China weather in ${month.label} ${currentYear}: averages ${month.tempLow}–${month.tempHigh}°C, ${month.rainDays} rainy days, crowd level ${month.crowdLevel}/5. See the best regions, packing list, festivals and tips to beat the crowds.`;
 
 const articleSchema = JSON.stringify({
   "@context": "https://schema.org",
