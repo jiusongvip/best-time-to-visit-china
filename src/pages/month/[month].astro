@@ -3,9 +3,13 @@ import "../../styles/global.css";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Nav from "../../components/Nav.astro";
 import Footer from "../../components/Footer.astro";
-import { monthlyData } from "../../data/weather.ts";
+import { monthlyData, monthRegionSlugs } from "../../data/weather.ts";
 import { regionGuides } from "../../data/regions.ts";
 import Icon from "../../components/Icon.astro";
+import ChinaMap from "../../components/islands/ChinaMap";
+import CostChart from "../../components/islands/CostChart";
+import HotelComparison from "../../components/islands/HotelComparison";
+import ComparisonTool from "../../components/islands/ComparisonTool";
 
 export function getStaticPaths() {
   return monthlyData.map((m) => ({
@@ -18,28 +22,14 @@ const { month } = Astro.props;
 const canonical = `https://www.best-time-to-visit-china.com/month/${month.month}`;
 const currentYear = 2026;
 
-// Match best regions to region guide slugs for internal linking
-const regionSlugMap: Record<string, string[]> = {
-  january: ["beijing", "hongkong"],
-  february: ["beijing", "xian", "hongkong"],
-  march: ["shanghai", "yunnan"],
-  april: ["beijing", "guilin", "xian"],
-  may: ["chengdu", "yunnan"],
-  june: ["yunnan", "guilin", "chengdu"],
-  july: ["tibet", "yunnan"],
-  august: ["chengdu", "tibet"],
-  september: ["beijing", "xian", "guilin"],
-  october: ["beijing", "guilin", "xian"],
-  november: ["beijing", "xian", "shanghai", "hongkong"],
-  december: ["beijing", "shanghai", "hongkong"],
-};
-const relatedRegions = (regionSlugMap[month.month] ?? [])
+// Match best regions to region guide slugs for internal linking (shared with region pages)
+const relatedRegions = (monthRegionSlugs[month.month] ?? [])
   .map((slug) => regionGuides.find((r) => r.slug === slug))
   .filter((r): r is NonNullable<typeof r> => Boolean(r));
 
-const title = `China in ${month.label} ${currentYear}: Weather, Crowds & Where to Go`;
-const meta = `${month.label} in China: ${month.tempLow}°C to ${month.tempHigh}°C, ${month.rainDays} rain days, crowd level ${month.crowdLevel}/5. Best for ${month.bestFor}. Where to go and what to pack.`;
-const desc = `${month.label} is best for ${month.bestFor}. Average ${month.tempLow}°C to ${month.tempHigh}°C, ${month.rainDays} rainy days, crowd level ${month.crowdLevel}/5. Our guide covers the best regions, highlights, packing and what to avoid.`;
+const title = `China in ${month.label} ${currentYear}: ${month.tempLow}–${month.tempHigh}°C, Crowds ${month.crowdLevel}/5 & Best Places`;
+const meta = `${month.label} in China: ${month.tempLow}–${month.tempHigh}°C, ${month.rainDays} rain days, crowd level ${month.crowdLevel}/5. Best for ${month.bestFor}. Where to go, what to pack and how to dodge the crowds in ${currentYear}.`;
+const desc = `${month.label} is best for ${month.bestFor}. Average ${month.tempLow}–${month.tempHigh}°C, ${month.rainDays} rainy days, crowd level ${month.crowdLevel}/5. See the best regions, packing list, festivals and tips to beat the summer rush.`;
 
 const articleSchema = JSON.stringify({
   "@context": "https://schema.org",
@@ -49,13 +39,24 @@ const articleSchema = JSON.stringify({
   "author": { "@type": "Person", "name": "Wei Zhang", "url": "https://www.best-time-to-visit-china.com/about" },
   "publisher": { "@type": "Organization", "name": "When to Visit China", "logo": { "@type": "ImageObject", "url": "https://www.best-time-to-visit-china.com/favicon.svg" } },
   "datePublished": "2026-01-15",
-  "dateModified": "2026-07-31",
+  "dateModified": "2026-09-02",
   "mainEntityOfPage": { "@type": "WebPage", "@id": canonical },
 });
 ---
 
 <BaseLayout title={title} description={meta} ogImage={month.image}>
   <script type="application/ld+json" set:html={articleSchema} />
+  {month.faq && month.faq.length > 0 && (
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": month.faq.map((f) => ({
+        "@type": "Question",
+        "name": f.q,
+        "acceptedAnswer": { "@type": "Answer", "text": f.a },
+      })),
+    })} />
+  )}
 
   <section class="min-h-[100dvh]">
     <Nav />
@@ -115,6 +116,93 @@ const articleSchema = JSON.stringify({
         )}
       </div>
 
+      <!-- Regional weather table -->
+      {month.regionalWeather && month.regionalWeather.length > 0 && (
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-zinc-900 mb-6">{month.label} Weather by Region</h2>
+          <div class="overflow-x-auto border border-zinc-200 rounded-xl">
+            <table class="w-full text-sm">
+              <thead class="bg-zinc-50 text-zinc-500">
+                <tr>
+                  <th class="text-left font-semibold p-3">Region</th>
+                  <th class="text-left font-semibold p-3">Avg Temperature</th>
+                  <th class="text-left font-semibold p-3">Rainy Days</th>
+                  <th class="text-left font-semibold p-3">Conditions</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-zinc-100">
+                {month.regionalWeather.map((rw) => (
+                  <tr>
+                    <td class="p-3 font-medium text-zinc-800">{rw.region}</td>
+                    <td class="p-3 text-zinc-700">{rw.temp}</td>
+                    <td class="p-3 text-zinc-700">{rw.rain}</td>
+                    <td class="p-3 text-zinc-600">{rw.note}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
+
+      <!-- Interactive tools -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold text-zinc-900 mb-2">Plan Your Trip: Compare &amp; Decide</h2>
+        <p class="text-sm text-zinc-500 mb-6">Interactive tools to compare {month.label} against other months, scan regional weather at a glance, and check flight &amp; hotel costs before you book.</p>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <ChinaMap client:visible />
+          <div class="flex flex-col gap-6">
+            <CostChart client:visible />
+            <HotelComparison client:visible />
+          </div>
+        </div>
+        <div class="mt-6">
+          <ComparisonTool client:visible initialMode="months" initialA={month.month} initialB="october" />
+        </div>
+      </section>
+
+      <!-- Top destinations -->
+      {month.topDestinations && month.topDestinations.length > 0 && (
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-zinc-900 mb-6">Top Places to Visit in {month.label}</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {month.topDestinations.map((d, i) => (
+              <div class="bg-white border border-zinc-200 rounded-xl p-5">
+                <div class="flex items-baseline gap-2 mb-1">
+                  <span class="text-accent-600 font-bold">{i + 1}.</span>
+                  <h3 class="text-base font-bold text-zinc-900">{d.name}</h3>
+                </div>
+                <p class="text-xs font-semibold text-zinc-400 uppercase tracking-wide mb-2">{d.temp}</p>
+                <p class="text-sm text-zinc-700 leading-relaxed">{d.why}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- Tips -->
+      {month.tips && month.tips.length > 0 && (
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-zinc-900 mb-6">How to Beat the Crowds &amp; Heat in {month.label}</h2>
+          <ol class="space-y-3">
+            {month.tips.map((t) => (
+              <li class="flex gap-3 text-sm text-zinc-700 leading-relaxed">
+                <span class="flex-shrink-0 mt-0.5 w-5 h-5 rounded-full bg-accent-100 text-accent-700 flex items-center justify-center text-xs font-bold">•</span>
+                <span>{t}</span>
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
+
+      <!-- Verdict -->
+      {month.verdict && (
+        <section class="bg-accent-50 border border-accent-200 rounded-2xl p-6 mb-12">
+          <p class="text-xs font-bold tracking-widest text-accent-700 uppercase mb-2">Is {month.label} Worth Visiting?</p>
+          <p class="text-zinc-800 text-base leading-relaxed">{month.verdict}</p>
+        </section>
+      )}
+
       <!-- Highlights vs downsides -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
         <div class="bg-blue-50/50 border border-blue-200 rounded-xl p-6">
@@ -147,6 +235,21 @@ const articleSchema = JSON.stringify({
         <p class="text-sm text-zinc-700 leading-relaxed">{month.packing}</p>
       </div>
 
+      <!-- FAQ -->
+      {month.faq && month.faq.length > 0 && (
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-zinc-900 mb-6">Frequently Asked Questions</h2>
+          <div class="space-y-4">
+            {month.faq.map((f) => (
+              <div class="bg-white border border-zinc-200 rounded-xl p-5">
+                <h3 class="text-base font-bold text-zinc-900 mb-2">{f.q}</h3>
+                <p class="text-sm text-zinc-700 leading-relaxed">{f.a}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
       <!-- Prev / Next month -->
       <div class="flex flex-col sm:flex-row justify-between gap-3 border-t border-zinc-100 pt-8 mb-4">
         {(() => {
@@ -172,9 +275,21 @@ const articleSchema = JSON.stringify({
         })()}
       </div>
 
+      <!-- All 12 months nav (internal link cluster) -->
+      <section class="mb-8">
+        <h2 class="text-xl font-bold text-zinc-900 mb-4">Browse All 12 Months</h2>
+        <div class="flex flex-wrap gap-2">
+          {monthlyData.map((m) => (
+            m.month === month.month
+              ? <span class="px-3 py-1.5 rounded-full text-xs font-medium bg-accent-600 text-white">{m.label}</span>
+              : <a href={`/month/${m.month}`} class="px-3 py-1.5 rounded-full text-xs font-medium bg-white border border-zinc-200 text-zinc-600 hover:border-accent-300 hover:text-accent-600 transition-colors no-underline">{m.label}</a>
+          ))}
+        </div>
+      </section>
+
       <div class="text-center">
         <a href="/monthly-guide/" class="inline-flex items-center gap-1.5 text-sm font-medium text-accent-600 hover:text-accent-700 transition-colors">
-          Compare all 12 months
+          Compare all 12 months side by side
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
       </div>

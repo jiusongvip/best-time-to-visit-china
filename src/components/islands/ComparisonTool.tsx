@@ -44,10 +44,16 @@ function crowdColor(l: number) { return l <= 2 ? "text-emerald-600 bg-emerald-50
 
 type CompareMode = "months" | "regions";
 
-export default function ComparisonTool() {
-  const [mode, setMode] = useState<CompareMode>("months");
-  const [a, setA] = useState("april");
-  const [b, setB] = useState("october");
+interface ComparisonToolProps {
+  initialMode?: CompareMode;
+  initialA?: string;
+  initialB?: string;
+}
+
+export default function ComparisonTool({ initialMode = "months", initialA = "april", initialB = "october" }: ComparisonToolProps) {
+  const [mode, setMode] = useState<CompareMode>(initialMode);
+  const [a, setA] = useState(initialA);
+  const [b, setB] = useState(initialB);
 
   const items = mode === "months" ? monthlyCompare : regionCompare;
   const itemA = items[a as keyof typeof items];

@@ -4,6 +4,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
 import { monthlyData } from "../data/weather.ts";
+import { regionGuides } from "../data/regions.ts";
 ---
 
 <BaseLayout title="China Month-by-Month Travel Guide: Weather & Crowds" description="Complete month-by-month breakdown of weather, festivals, crowds & costs for traveling in China. Compare all 12 months side by side and plan your perfect trip.">
@@ -107,6 +108,17 @@ import { monthlyData } from "../data/weather.ts";
           <h3 class="text-lg font-bold text-zinc-900 mb-2">Winter (Dec–Feb)</h3>
           <p class="text-sm text-zinc-600">Cold in the north, mild in the south. Lowest prices and fewest tourists. Harbin Ice Festival is the standout winter draw.</p>
         </div>
+      </div>
+
+      <h2 class="text-2xl font-bold text-zinc-900 mt-12 mb-6">Explore China by Region</h2>
+      <p class="text-sm text-zinc-600 mb-6 max-w-3xl">Dig deeper into weather, crowds and the best time to visit each part of the country.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {regionGuides.map((r) => (
+          <a href={`/region/${r.slug}`} class="group bg-white border border-zinc-200 rounded-xl p-5 hover:border-accent-300 transition-colors no-underline">
+            <p class="text-sm font-bold text-zinc-900 mb-1 group-hover:text-accent-600 transition-colors">{r.name}</p>
+            <p class="text-xs text-blue-700 font-medium">Best: {r.best}</p>
+          </a>
+        ))}
       </div>
     </div>
   </section>

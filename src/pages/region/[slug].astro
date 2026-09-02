@@ -4,6 +4,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Nav from "../../components/Nav.astro";
 import Footer from "../../components/Footer.astro";
 import { regionGuides } from "../../data/regions.ts";
+import { monthlyData, monthRegionSlugs } from "../../data/weather.ts";
 import Icon from "../../components/Icon.astro";
 
 export function getStaticPaths() {
@@ -19,6 +20,9 @@ const canonical = `https://www.best-time-to-visit-china.com/region/${region.slug
 const related = region.related
   .map((slug) => regionGuides.find((r) => r.slug === slug))
   .filter((r): r is NonNullable<typeof r> => Boolean(r));
+
+// Reverse lookup: which months point to this region (builds the month <-> region cluster)
+const monthsHere = monthlyData.filter((m) => (monthRegionSlugs[m.month] ?? []).includes(region.slug));
 
 const faqSchema = JSON.stringify({
   "@context": "https://schema.org",
@@ -142,6 +146,14 @@ const articleSchema = JSON.stringify({
               <p class="text-sm text-zinc-600 leading-relaxed">{f.a}</p>
             </div>
           </details>
+        ))}
+      </div>
+
+      <!-- Best months to visit this region (cluster link back to month pages) -->
+      <h2 class="text-2xl font-bold text-zinc-900 mb-6">Best Months to Visit {region.shortName}</h2>
+      <div class="flex flex-wrap gap-2 mb-12">
+        {monthsHere.map((m) => (
+          <a href={`/month/${m.month}`} class="px-3 py-1.5 rounded-full text-xs font-medium bg-white border border-zinc-200 text-zinc-600 hover:border-accent-300 hover:text-accent-600 transition-colors no-underline">{m.label}</a>
         ))}
       </div>
 
