@@ -232,7 +232,24 @@ const articleSchema = JSON.stringify({
       <!-- Packing -->
       <div class="bg-zinc-50 border border-zinc-100 rounded-xl p-6 mb-12">
         <p class="text-xs font-bold tracking-wide text-accent-600 uppercase mb-2">What to Pack</p>
-        <p class="text-sm text-zinc-700 leading-relaxed">{month.packing}</p>
+        <p class="text-sm text-zinc-700 leading-relaxed mb-4">{month.packing}</p>
+        {month.wardrobe && month.wardrobe.length > 0 && (
+          <div class="grid gap-4 sm:grid-cols-2">
+            {month.wardrobe.map((w) => (
+              <div class="bg-white border border-zinc-200 rounded-lg p-4">
+                <p class="text-sm font-semibold text-zinc-900 mb-2">{w.region}</p>
+                <ul class="space-y-1.5">
+                  {w.items.map((it) => (
+                    <li class="flex gap-2 text-sm text-zinc-700 leading-snug">
+                      <span class="flex-shrink-0 mt-0.5 w-4 h-4 rounded-full bg-accent-100 text-accent-700 flex items-center justify-center text-[10px]">✓</span>
+                      {it}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       <!-- FAQ -->
