@@ -19,6 +19,9 @@ export interface RegionGuide {
   mustDo: string[];
   festivals: string[];
   faqs: { q: string; a: string }[];
+  h1?: string;
+  monthByMonth?: { slug: string; month: string; temp: string; rain: string; activity: string; tip: string }[];
+  comparison?: { region: string; when: string; weather: string; note: string; link: string }[];
   related: string[];
 }
 
@@ -111,22 +114,23 @@ export const regionGuides: RegionGuide[] = [
     shortName: "Guilin",
     slug: "guilin",
     question: "When is the best time to visit Guilin and South China?",
-    title: "Best Time to Visit Guilin: Yangshuo, Li River & Karst Peaks",
+    title: "Best Time to Visit Guilin & Yangshuo: Month-by-Month Guide (2026)",
+    h1: "What is the Best Month to Visit Guilin and Yangshuo?",
     meta: "The best time to visit Guilin is April-May and September-October for the famous misty karst views. Avoid the June-August monsoon. Full month-by-month guide to Yangshuo & the Li River.",
     image: "/images/region-guilin.webp",
     imageAlt: "Karst mountains along the Li River in Yangshuo, Guilin",
-    best: "April-May & September-October",
-    avoid: "June-August (heavy rain)",
+    best: "April-May & September-November",
+    avoid: "June-August (monsoon, heat & summer crowds)",
     months: "Apr-May & Sep-Nov",
     temp: "Spring 18-25°C / Autumn 20-27°C",
     highlights: "Li River, Yangshuo karst peaks, Longji Rice Terraces",
     budget: "$25-70 hotels / $2-15 meals / day",
     tip: "Summer rains can cause river closures. Spring and autumn offer the famous misty Guilin views.",
-    intro: "Guilin is a water town, and that's the key to timing your visit. The iconic misty karst views over the Li River appear in spring (April-May) and autumn (September-November), when the weather is mild and rain is light. Summer downpours (June-August) can flood the river and close cruises, while the terraced fields of Longji are at their best after late-May planting and again in October's golden harvest.",
+    intro: "Guilin and its satellite town Yangshuo share the same humid subtropical climate, so the best time to visit both is the same: April-May and late September-November. Yangshuo's karst peaks and the Li River look their finest in spring (April-May), when morning mist and fresh green rice fields create the classic postcard views, and in autumn (late September-November), when skies clear, temperatures sit at a comfortable 18-26°C, and crowds thin out after the National Day holiday. Summer downpours (June-August) can flood the Li River and suspend cruises, while the terraced fields of Longji peak after the late-May planting and again in October's golden harvest.",
     weather: [
       { season: "Spring (Apr-May)", temp: "18-25°C", note: "Light rain and morning mist create the classic Li River views. Rice terraces flood and shimmer." },
-      { season: "Summer (Jun-Aug)", temp: "27-33°C", note: "Hot, humid and rainy. Cruise closures are possible after heavy downpours." },
-      { season: "Autumn (Sep-Nov)", temp: "20-27°C", note: "Dry, clear and comfortable. Longji terraces turn golden in late September-October." },
+      { season: "Summer (Jun-Aug)", temp: "27-33°C", note: "Hot, humid and the wettest stretch of the year - June alone can bring 20+ rainy days and raise the Li River enough to suspend cruises. July-August is also China's summer-holiday peak, so Yangshuo's attractions get crowded." },
+      { season: "Autumn (Sep-Nov)", temp: "20-27°C", note: "Dry, clear and comfortable (18-26°C). Late September to mid-November is Yangshuo's sweet spot: great hiking, cycling and rock-climbing weather, with far fewer crowds than October's Golden Week." },
       { season: "Winter (Dec-Feb)", temp: "8-15°C", note: "Cool and misty, with few tourists. Views can be hazy, but prices are at their lowest." },
     ],
     mustDo: [
@@ -144,6 +148,31 @@ export const regionGuides: RegionGuide[] = [
       { q: "Can the Li River cruise close due to rain?", a: "Yes. Heavy summer rain raises water levels and can suspend cruises between Guilin and Yangshuo. Spring and autumn are far safer bets." },
       { q: "How many days do I need in Guilin?", a: "3-4 days is comfortable: one for the Li River cruise, one to explore Yangshuo, and one for the Longji Rice Terraces. Add a day if you want to hike the terraces." },
       { q: "Is Guilin good in winter?", a: "Temperatures sit around 8-15°C with a damp mist. Scenery can be moody and beautiful, crowds are thin, and hotels drop to $25-40/night. Pack a warm coat." },
+      { q: "What is the best month to visit Guilin?", a: "April, May, October and November are the standout months. April-May brings mild weather and the famous misty Li River karst views after the spring rains, while October-November offers clear, dry skies and comfortable 18-26°C days. For the fewest crowds, aim for late April or mid-to-late October rather than the busy National Day week (Oct 1-7)." },
+      { q: "Which month is best to visit Guilin, China?", a: "For most travelers October is the single best month - dry, sunny and 18-28°C - followed closely by April and November. Avoid June (peak monsoon with river-rise cruise closures) and July-August (heat plus domestic summer-holiday crowds). Spring (April-May) and autumn (September-November) are the two reliable windows; winter (Dec-Feb) is cool, misty and cheap but can be hazy." },
+      { q: "What is the best time to visit Yangshuo?", a: "Yangshuo shares Guilin's climate, so the best time is April-May and late September-November. Locals who have lived there for decades point to two sweet spots: late April to mid-May, and late September to mid-November, when it's 18-26°C, the Li River is clearest, and rainy days are fewest. Yangshuo's hidden-gem season is actually November-December: similar weather with 30-40% lower hotel prices and almost no crowds." },
+      { q: "Is April or October better for Guilin and Yangshuo?", a: "Both are excellent. April-May wins for the lush green landscape, misty river views and blooming rape flowers, but it has more rain showers. October-November wins for the most reliably dry, clear skies and comfortable temperatures, though early October (National Day, Oct 1-7) is very crowded - go after Oct 7. If you must pick one, October edges it for weather certainty." },
+      { q: "When should I avoid Guilin and Yangshuo?", a: "Skip June (the wettest month, with river-rise cruise closures and humidity) and try to avoid July-August (35°C heat plus China's summer-holiday crowds). Also steer clear of the major holiday weeks - Labor Day (May 1-5), National Day (Oct 1-7) and Chinese New Year - when prices jump 50-100% and hotels book out." },
+    ],
+    monthByMonth: [
+      { slug: "january", month: "January", temp: "8-12°C", rain: "8 days", activity: "Quietest, cheapest; misty karst", tip: "Damp cold; some hotels lack heating" },
+      { slug: "february", month: "February", temp: "10-14°C", rain: "10 days", activity: "Still quiet, pre-spring", tip: "Chinese New Year crowds possible" },
+      { slug: "march", month: "March", temp: "13-18°C", rain: "13 days", activity: "Spring warming, few tourists", tip: "Transitional; bring layers" },
+      { slug: "april", month: "April", temp: "18-24°C", rain: "14 days", activity: "Misty karst, rape flowers, Li River cruise", tip: "Best month for classic postcard views" },
+      { slug: "may", month: "May", temp: "22-28°C", rain: "16 days", activity: "Lush green terraces, Yangshuo cycling", tip: "Warm but showery; pack a light rain jacket" },
+      { slug: "june", month: "June", temp: "26-31°C", rain: "19 days", activity: "Avoid - monsoon peak, river rises", tip: "Cruises can suspend; humid & crowded" },
+      { slug: "july", month: "July", temp: "28-33°C", rain: "17 days", activity: "Avoid - hottest, summer-holiday crowds", tip: "Go early; caves for the afternoon" },
+      { slug: "august", month: "August", temp: "28-34°C", rain: "16 days", activity: "Avoid - heat + crowds", tip: "Same as July" },
+      { slug: "september", month: "September", temp: "25-31°C", rain: "11 days", activity: "Clearing skies, good hiking", tip: "Shoulder month; fewer crowds after Sep" },
+      { slug: "october", month: "October", temp: "21-27°C", rain: "8 days", activity: "Dry, clear, comfortable - top pick", tip: "Best weather certainty; avoid Oct 1-7" },
+      { slug: "november", month: "November", temp: "16-22°C", rain: "7 days", activity: "Cool, dry, cheap; Longji golden harvest", tip: "Hidden-gem month: 30-40% lower hotel prices" },
+      { slug: "december", month: "December", temp: "11-16°C", rain: "7 days", activity: "Quiet, misty, budget", tip: "Cool & hazy; pack a warm coat" },
+    ],
+    comparison: [
+      { region: "Beijing & North China", when: "Winter (Dec-Feb)", weather: "-5 to 5°C, dry & sunny", note: "Want snow on the Great Wall? Go north in winter - but Guilin stays green and misty all year.", link: "/region/beijing/" },
+      { region: "Tibet (Plateau)", when: "May-Oct only", weather: "15-25°C day, freezing nights", note: "Tibet closes Nov-Apr; Guilin is reachable any month, the easier year-round choice.", link: "/region/tibet/" },
+      { region: "Shanghai & East China", when: "Mar-May & Oct-Nov", weather: "15-24°C", note: "Similar comfortable windows, but Shanghai adds the humid June plum-rain season Guilin avoids by sitting further south.", link: "/region/shanghai/" },
+      { region: "Yunnan (South)", when: "Year-round", weather: "15-24°C", note: "If Guilin's spring showers worry you, Yunnan's 'Eternal Spring' is the driest southern alternative.", link: "/region/yunnan/" },
     ],
     related: ["yunnan", "hongkong", "shanghai"],
   },

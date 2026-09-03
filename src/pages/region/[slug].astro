@@ -55,7 +55,7 @@ const articleSchema = JSON.stringify({
     <Nav />
     <div class="max-w-4xl mx-auto px-4 py-8">
       <p class="text-sm font-medium tracking-wide text-accent-600 uppercase mb-4">Region Guide</p>
-      <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-zinc-900 mb-4 leading-none">{region.title}</h1>
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-zinc-900 mb-4 leading-none">{region.h1 ?? region.title}</h1>
       <p class="text-lg text-zinc-500 leading-relaxed mb-10">{region.meta}</p>
 
       <img src={region.image} alt={region.imageAlt} width="1200" height="800" fetchpriority="high" class="w-full h-auto rounded-2xl shadow-sm border border-zinc-100 mb-12" />
@@ -105,6 +105,37 @@ const articleSchema = JSON.stringify({
         ))}
       </div>
 
+      <!-- Month-by-month table -->
+      {region.monthByMonth && region.monthByMonth.length > 0 && (
+        <>
+          <h2 class="text-2xl font-bold text-zinc-900 mb-6">{region.shortName} & Yangshuo Weather by Month</h2>
+          <div class="overflow-x-auto mb-12">
+            <table class="w-full text-left border-collapse text-sm">
+              <thead>
+                <tr class="border-b border-zinc-200 text-zinc-400 uppercase text-xs tracking-wide">
+                  <th class="py-3 pr-4 font-semibold">Month</th>
+                  <th class="py-3 pr-4 font-semibold">Avg Temp</th>
+                  <th class="py-3 pr-4 font-semibold">Rain</th>
+                  <th class="py-3 pr-4 font-semibold">Recommended For</th>
+                  <th class="py-3 pr-4 font-semibold">Tip</th>
+                </tr>
+              </thead>
+              <tbody>
+                {region.monthByMonth.map((m) => (
+                  <tr class="border-b border-zinc-100 align-top">
+                    <td class="py-3 pr-4"><a href={`/month/${m.slug}`} class="font-semibold text-blue-700 hover:text-accent-600 no-underline">{m.month}</a></td>
+                    <td class="py-3 pr-4 text-zinc-700">{m.temp}</td>
+                    <td class="py-3 pr-4 text-zinc-700">{m.rain}</td>
+                    <td class="py-3 pr-4 text-zinc-600">{m.activity}</td>
+                    <td class="py-3 pr-4 text-zinc-500">{m.tip}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </>
+      )}
+
       <!-- Must do -->
       <h2 class="text-2xl font-bold text-zinc-900 mb-6">Must-Do Experiences</h2>
       <ul class="space-y-3 mb-12">
@@ -132,6 +163,26 @@ const articleSchema = JSON.stringify({
         <p class="text-xs font-bold tracking-wide text-accent-600 uppercase mb-1">Local Tip</p>
         <p class="text-sm text-zinc-700 leading-relaxed">{region.tip}</p>
       </div>
+
+      <!-- Guilin vs other regions -->
+      {region.comparison && region.comparison.length > 0 && (
+        <>
+          <h2 class="text-2xl font-bold text-zinc-900 mb-6">{region.shortName} vs Other Regions in China</h2>
+          <p class="text-zinc-600 leading-relaxed mb-6">Guilin sits in China's humid subtropical south. If you're choosing between regions, here's how its weather stacks up against the north and high plateau through the year.</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
+            {region.comparison.map((c) => (
+              <div class="bg-white border border-zinc-200 rounded-xl p-5">
+                <div class="flex items-center justify-between mb-2">
+                  <a href={c.link} class="text-sm font-bold text-blue-700 hover:text-accent-600 no-underline">{c.region}</a>
+                  <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-zinc-100 text-zinc-600">{c.when}</span>
+                </div>
+                <p class="text-sm text-zinc-700 leading-relaxed mb-1">{c.weather}</p>
+                <p class="text-sm text-zinc-500 leading-relaxed">{c.note}</p>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
 
       <!-- FAQ -->
       <h2 class="text-2xl font-bold text-zinc-900 mb-6">{region.shortName} FAQs</h2>
