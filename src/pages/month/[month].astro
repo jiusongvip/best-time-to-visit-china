@@ -20,7 +20,9 @@ export function getStaticPaths() {
 
 const { month } = Astro.props;
 const canonical = `https://www.best-time-to-visit-china.com/month/${month.month}`;
-const currentYear = 2026;
+const MONTH_INDEX = { january:0, february:1, march:2, april:3, may:4, june:5, july:6, august:7, september:8, october:9, november:10, december:11 };
+const now = new Date();
+const currentYear = now.getFullYear() + ((MONTH_INDEX[month.month] < now.getMonth() && month.month !== "august") ? 1 : 0); // August: keep current year for now (user requested no roll)
 
 // Match best regions to region guide slugs for internal linking (shared with region pages)
 const relatedRegions = (monthRegionSlugs[month.month] ?? [])
@@ -39,7 +41,7 @@ const articleSchema = JSON.stringify({
   "author": { "@type": "Person", "name": "Wei Zhang", "url": "https://www.best-time-to-visit-china.com/about" },
   "publisher": { "@type": "Organization", "name": "When to Visit China", "logo": { "@type": "ImageObject", "url": "https://www.best-time-to-visit-china.com/favicon.svg" } },
   "datePublished": "2026-01-15",
-  "dateModified": "2026-09-02",
+  "dateModified": "2026-09-03",
   "mainEntityOfPage": { "@type": "WebPage", "@id": canonical },
 });
 ---

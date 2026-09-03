@@ -39,9 +39,129 @@ export interface FaqItem {
 }
 
 export const monthlyData: MonthData[] = [
-  { month: "january", label: "January", tempLow: -5, tempHigh: 4, rainDays: 2, crowdLevel: 2, bestFor: "skiing, snowboarding, Harbin Ice Festival and other snow activities", image: "/images/month-january.webp", imageAlt: "Illuminated ice sculptures at the Harbin Ice and Snow Festival in January", highlights: ["Ice & Snow Festival in Harbin", "Lowest flight prices", "Quiet Great Wall"], downsides: ["Bitterly cold in Beijing and northern China", "Many outdoor attractions closed"], bestRegions: ["Harbin", "Beijing (indoor)", "Hong Kong"], packing: "Thermal layers, down jacket, boots, gloves" },
-  { month: "february", label: "February", tempLow: -2, tempHigh: 7, rainDays: 3, crowdLevel: 3, bestFor: "the Lantern Festival, blossoming flowers and Chinese New Year celebrations", image: "/images/month-february.webp", imageAlt: "Red lanterns hanging for Chinese New Year in February", highlights: ["Chinese New Year (most years)", "Spring Festival temple fairs", "Lantern Festival"], downsides: ["Chinese New Year travel chaos", "Everything closes for 3-7 days"], bestRegions: ["Beijing", "Xi'an", "Hong Kong"], packing: "Warm coat, layers, nice outfit for CNY dinners" },
-  { month: "march", label: "March", tempLow: 5, tempHigh: 13, rainDays: 5, crowdLevel: 3, bestFor: "cherry blossoms in Wuhan and Kunming and the start of spring", image: "/images/month-march.webp", imageAlt: "Cherry blossoms blooming at the Temple of Heaven in Beijing in March", highlights: ["Cherry blossoms in Wuhan & Kunming", "Warming temperatures", "Shoulder-season deals"], downsides: ["Unpredictable weather swings", "Dust storms possible in Beijing"], bestRegions: ["Wuhan", "Shanghai", "Kunming"], packing: "Layers, light rain jacket, comfortable shoes" },
+  { month: "january", label: "January", tempLow: -5, tempHigh: 4, rainDays: 2, crowdLevel: 2, bestFor: "skiing, snowboarding, Harbin Ice Festival and other snow activities", image: "/images/month-january.webp", imageAlt: "Illuminated ice sculptures at the Harbin Ice and Snow Festival in January", highlights: ["Ice & Snow Festival in Harbin", "Lowest flight prices", "Quiet Great Wall"], downsides: ["Bitterly cold in Beijing and northern China", "Many outdoor attractions closed"], bestRegions: ["Harbin", "Beijing (indoor)", "Hong Kong"], packing: "Thermal layers, down jacket, boots, gloves", regionalWeather: [
+    { region: "Northern China (Beijing, Xi'an)", temp: "-5 to 4°C", rain: "1-2 days", note: "Bitterly cold and dry; grey smog days possible." },
+    { region: "Eastern China (Shanghai, Hangzhou)", temp: "1 to 8°C", rain: "3-4 days", note: "Cold, damp and overcast - feels colder than the number." },
+    { region: "Southern China (Guangzhou, Guilin)", temp: "8 to 17°C", rain: "4-6 days", note: "Mild winter; green and pleasant with occasional drizzle." },
+    { region: "Southwestern China (Yunnan, Sichuan)", temp: "4 to 16°C", rain: "2-4 days", note: "Kunming 'Spring City' stays mild; Chengdu grey and damp." },
+    { region: "Northwestern China (Dunhuang, Xinjiang)", temp: "-12 to -2°C", rain: "1-2 days", note: "Freezing, brilliant sunshine, huge day-night swings." },
+    { region: "Northeastern China (Harbin, Changchun)", temp: "-20 to -8°C", rain: "2-3 days", note: "Deep freeze - the Ice Festival's natural habitat." },
+    { region: "Qinghai-Tibet Plateau (Lhasa, Everest)", temp: "-6 to 8°C", rain: "1-2 days", note: "Crisp, sunny days; brutal nights and thin air." },
+    { region: "Inner Mongolia (Hulunbuir)", temp: "-25 to -12°C", rain: "1-2 days", note: "Extreme cold; snowy grasslands, few tourists." },
+    { region: "Southern Coast (Sanya, Xiamen)", temp: "18 to 25°C", rain: "3-5 days", note: "The warm escape - swimsuit weather while the north freezes." }
+  ], topDestinations: [
+    { name: "Harbin (Ice & Snow Festival)", temp: "-18 to -6°C", why: "The Ice and Snow Festival peaks in January - illuminated ice castles, the Songhua River and winter sports." },
+    { name: "Sanya, Hainan", temp: "20 to 26°C", why: "China's tropical beach escape; warm sea and sunshine while everywhere else freezes." },
+    { name: "Beijing (indoor museums + snowy Great Wall)", temp: "-5 to 4°C", why: "Fewest crowds of the year, snow-dusted Great Wall and empty Forbidden City side halls." },
+    { name: "Xi'an", temp: "-3 to 6°C", why: "Cold but crowd-free; the Terracotta Army and city wall in crisp winter light." },
+    { name: "Yunnan (Kunming, Dali, Lijiang)", temp: "4 to 16°C", why: "Mild 'Spring City' weather, sunny old towns and the start of the tourist lull." },
+    { name: "Hong Kong", temp: "12 to 19°C", why: "Cool, comfortable sightseeing and post-Christmas sales; easy visa-free stopover." },
+    { name: "Yellow Mountains (Huangshan)", temp: "-5 to 5°C", why: "Famous snow-and-ice scenery and sea of clouds with far fewer hikers." },
+    { name: "Chengdu", temp: "3 to 10°C", why: "Panda bases, hotpot and the casual city mood; day trips to warmer Leshan." },
+    { name: "Tibet (Lhasa)", temp: "-2 to 10°C", why: "Clear, sunny winter days and the lowest prices - but cold nights and some closures." },
+    { name: "Shanghai", temp: "1 to 8°C", why: "Quiet museums, the Bund lit up and New Year shopping with minimal crowds." }
+  ], tips: [
+    "Dress for real cold in the north: thermal base layers, a down jacket rated to -20C, hat, gloves and insulated boots - exposed skin freezes fast in Harbin.",
+    "Use January's low crowds: the Forbidden City, Terracotta Army and Zhangjiajie are at their calmest; book nothing in advance and walk straight in.",
+    "Escape south for warmth: base a week in Yunnan or Hainan and you'll swap snow for 15-25C days.",
+    "Watch the Lunar New Year window: if CNY falls in late January, travel chaos and closures hit mid-month - check the date and plan around it.",
+    "Protect electronics and lips: cold drains phone batteries fast and the dry north air cracks skin - carry a power bank and moisturiser."
+  ], verdict: "January is a month of extremes - glorious for snow lovers and bargain hunters, miserable if you hate cold. Harbin's Ice Festival, the quiet Great Wall and the cheapest flights and hotels of the year are the draws; the warm south (Yunnan, Hainan, Hong Kong) lets you skip winter entirely. Crowds are low (2/5) except around the Lunar New Year. It is the wrong pick for anyone wanting comfortable open-everywhere sightseeing across the north, where many alpine cableways and northern lakes are closed.",
+  faq: [
+    { q: "Is January a good time to visit China?", a: "It depends on what you want. For snow, ice festivals, the cheapest prices and the fewest crowds, yes. For comfortable, open-everywhere sightseeing across the north, no - it is bitterly cold and some attractions close. The warm south (Yunnan, Hainan) is pleasant year-round." },
+    { q: "How cold is China in January?", a: "Northern and northeastern China plunge to -20C (Harbin) with Beijing around -5 to 4C. Central China (Shanghai, Xi'an) sits near 0-8C. The south stays mild (Guangzhou 8-17C) and Hainan is beach-warm at 20-26C." },
+    { q: "What is there to do in China in January?", a: "Harbin's Ice and Snow Festival, skiing in the north-east, snow views on the Great Wall and Yellow Mountains, pandas in Chengdu, and warm-weather escapes to Yunnan and Hainan. Lunar New Year (if it falls in January) brings festivals and closures." },
+    { q: "What should I pack for China in January?", a: "Thermal layers, a down jacket rated to at least -20C, hat, gloves, scarf and insulated boots for the north. Pack light clothes only if you stay in Yunnan or Hainan, where a jacket suffices." },
+    { q: "Is China crowded in January?", a: "No - it is the quietest month (2/5) outside the Lunar New Year, when crowds and closures spike for 3-7 days. Book transport around that window and you'll have the headline sights almost to yourself." }
+  ], wardrobe: [
+    { region: "North & Northeast China (Beijing, Xi'an, Harbin)", items: ["Down jacket rated to -20C", "Thermal base layers (top and bottom)", "Insulated waterproof boots, hat, gloves, scarf", "Hand warmers and a power bank (cold kills phone batteries)"] },
+    { region: "Eastern China (Shanghai, Hangzhou)", items: ["Warm coat and sweater", "Long-sleeve layers", "Waterproof shoes for damp days", "Moisturiser and lip balm for dry indoor heating"] },
+    { region: "South China (Yunnan, Guangzhou, Guilin)", items: ["Light jacket or sweater for cool mornings/evenings", "T-shirts for mild afternoons", "Comfortable walking shoes", "Light rain shell for drizzle"] },
+    { region: "Hainan (Sanya)", items: ["Summer clothes - shorts and t-shirts", "Swimwear", "Sandals / flip-flops", "A light layer for breezy evenings and aeroplane cabins"] },
+    { region: "Plateau (Tibet / Lhasa)", items: ["Heavy winter coat", "Thermal layers + high-SPF sunscreen (intense UV at altitude)", "Lip balm, moisturiser, sunglasses", "Warm hat and gloves for freezing nights"] }
+  ] },
+  { month: "february", label: "February", tempLow: -2, tempHigh: 7, rainDays: 3, crowdLevel: 3, bestFor: "the Lantern Festival, blossoming flowers and Chinese New Year celebrations", image: "/images/month-february.webp", imageAlt: "Red lanterns hanging for Chinese New Year in February", highlights: ["Chinese New Year (most years)", "Spring Festival temple fairs", "Lantern Festival"], downsides: ["Chinese New Year travel chaos", "Everything closes for 3-7 days"], bestRegions: ["Beijing", "Xi'an", "Hong Kong"], packing: "Warm coat, layers, nice outfit for CNY dinners", regionalWeather: [
+    { region: "Northern China (Beijing, Xi'an)", temp: "-4 to 8°C", rain: "2-3 days", note: "Cold but warming; CNY travel chaos if the holiday falls here." },
+    { region: "Eastern China (Shanghai, Hangzhou)", temp: "2 to 10°C", rain: "4-5 days", note: "Chilly, damp; Lantern Festival displays light up the cities." },
+    { region: "Southern China (Guangzhou, Guilin)", temp: "10 to 19°C", rain: "4-6 days", note: "Mild and green; comfortable sightseeing." },
+    { region: "Southwestern China (Yunnan, Sichuan)", temp: "5 to 17°C", rain: "2-4 days", note: "Mild and sunny in Kunming; Chengdu grey." },
+    { region: "Northwestern China (Dunhuang, Xinjiang)", temp: "-8 to 4°C", rain: "1-2 days", note: "Cold, sunny, dramatic light." },
+    { region: "Northeastern China (Harbin, Changchun)", temp: "-16 to -4°C", rain: "2-3 days", note: "Still deep winter; ice festivals run into Feb." },
+    { region: "Qinghai-Tibet Plateau (Lhasa, Everest)", temp: "-4 to 9°C", rain: "1-2 days", note: "Sunny but cold; thin air." },
+    { region: "Inner Mongolia (Hulunbuir)", temp: "-20 to -8°C", rain: "1-2 days", note: "Snowy and frigid; few visitors." },
+    { region: "Southern Coast (Sanya, Xiamen)", temp: "19 to 26°C", rain: "3-5 days", note: "Warm and pleasant - the winter-sun escape." }
+  ], topDestinations: [
+    { name: "Harbin", temp: "-16 to -4°C", why: "Ice and Snow Festival continues into February; the sculptures last until they melt." },
+    { name: "Beijing", temp: "-4 to 8°C", why: "Temple fairs for CNY/Lantern Festival and crowd-free landmarks if you avoid holiday week." },
+    { name: "Xi'an", temp: "-2 to 9°C", why: "City-wall lantern displays and the Terracotta Army with winter light." },
+    { name: "Yunnan (Kunming, Lijiang)", temp: "5 to 17°C", why: "Mild, sunny old towns; spring flowers begin to bud." },
+    { name: "Hong Kong", temp: "13 to 20°C", why: "Cool, comfortable and festive - Lunar New Year parades and flower markets." },
+    { name: "Sanya, Hainan", temp: "20 to 26°C", why: "Beach weather while the north freezes; family winter holidays." },
+    { name: "Shanghai", temp: "2 to 10°C", why: "Lantern Festival at Yuyuan Garden and quiet museums." },
+    { name: "Guilin", temp: "8 to 16°C", why: "Mild karst-river cruises with few tourists." },
+    { name: "Chengdu", temp: "4 to 11°C", why: "Pandas, hotpot and a relaxed winter mood; nearby Leshan." },
+    { name: "Tibet (Lhasa)", temp: "-2 to 11°C", why: "Sunny, crowd-free and cheap - for travellers who don't mind the cold." }
+  ], tips: [
+    "Check the Lunar New Year dates: if CNY falls in February, everything shuts for 3-7 days and transport sells out - build your plan around the holiday, not against it.",
+    "Catch the Lantern Festival (15th day of CNY): Yuyuan Garden in Shanghai and Qinhuai in Nanjing are the classic displays.",
+    "Dress in layers you can shed: heated museums and trains are warm, but streets in the north stay near freezing.",
+    "Book all transport early if you travel during CNY week - trains and flights within China sell out weeks ahead.",
+    "Use the lull before or after the holiday: the weeks either side of CNY are calm and cheap, with the same cold-but-clear weather."
+  ], verdict: "February is a tale of two trips: the Lunar New Year spectacle (temple fairs, lanterns, family reunions) if you time it right, or a cold, quiet, cheap shoulder month if you travel either side. The warm south and Yunnan are comfortable; the north is still deep winter. Crowds are moderate (3/5) and spike only around CNY. Best for festival-lovers and budget travellers who can plan around the holiday closures.",
+  faq: [
+    { q: "Is February a good time to visit China?", a: "Yes if you want the Lunar New Year atmosphere, low prices outside the holiday, or warm-weather escapes to Yunnan and Hainan. No if you need everything open and hate cold - CNY closes shops for days and the north stays freezing." },
+    { q: "Is the Lunar New Year a good time to visit?", a: "It's the most cultural time of year, but also the most disruptive: 3-7 days of closures, packed transport and higher prices around the dates. Go for the festivals, but book everything and accept the quiet." },
+    { q: "What is the weather in China in February?", a: "North and north-east remain winter-cold (-16 to 8C); central China 2-10C; the south mild (10-19C) and Hainan beach-warm (20-26C)." },
+    { q: "What should I pack for China in February?", a: "Warm coat, layers and a nice outfit for CNY dinners in the north; light layers and a jacket for Yunnan; summer clothes only for Hainan. Always pack a layer you can remove indoors." },
+    { q: "Where should I go in China in February?", a: "Harbin for ice, Beijing and Xi'an for temple fairs, Shanghai and Nanjing for Lantern Festival, Yunnan or Hainan for warmth, and Hong Kong for a festive, mild city break." }
+  ], wardrobe: [
+    { region: "North & Northeast China (Beijing, Xi'an, Harbin)", items: ["Warm coat and sweater", "Layers you can shed indoors", "Nice outfit for CNY dinners", "Hat, gloves, scarf for the cold north"] },
+    { region: "Eastern China (Shanghai, Hangzhou)", items: ["Warm coat and sweater", "Long-sleeve layers", "Waterproof shoes for damp days", "Moisturiser and lip balm"] },
+    { region: "South China (Yunnan, Guangzhou, Guilin)", items: ["Light jacket or sweater for cool mornings/evenings", "T-shirts for mild afternoons", "Comfortable walking shoes", "Light rain shell"] },
+    { region: "Hainan (Sanya)", items: ["Summer clothes - shorts and t-shirts", "Swimwear", "Sandals / flip-flops", "A light layer for breezy evenings"] },
+    { region: "Plateau (Tibet / Lhasa)", items: ["Heavy winter coat", "Thermal layers + high-SPF sunscreen", "Lip balm, moisturiser, sunglasses", "Warm hat and gloves for freezing nights"] }
+  ] },
+  { month: "march", label: "March", tempLow: 5, tempHigh: 13, rainDays: 5, crowdLevel: 3, bestFor: "cherry blossoms in Wuhan and Kunming and the start of spring", image: "/images/month-march.webp", imageAlt: "Cherry blossoms blooming at the Temple of Heaven in Beijing in March", highlights: ["Cherry blossoms in Wuhan & Kunming", "Warming temperatures", "Shoulder-season deals"], downsides: ["Unpredictable weather swings", "Dust storms possible in Beijing"], bestRegions: ["Wuhan", "Shanghai", "Kunming"], packing: "Layers, light rain jacket, comfortable shoes", regionalWeather: [
+    { region: "Northern China (Beijing, Xi'an)", temp: "2 to 14°C", rain: "3-5 days", note: "Thawing and windy; dust storms possible late month." },
+    { region: "Eastern China (Shanghai, Hangzhou)", temp: "6 to 14°C", rain: "6-8 days", note: "Cool, damp; cherry blossoms open." },
+    { region: "Southern China (Guangzhou, Guilin)", temp: "13 to 21°C", rain: "7-9 days", note: "Warm and green; occasional spring showers." },
+    { region: "Southwestern China (Yunnan, Sichuan)", temp: "8 to 20°C", rain: "3-5 days", note: "Kunming sunny and mild; Chengdu improving." },
+    { region: "Northwestern China (Dunhuang, Xinjiang)", temp: "0 to 13°C", rain: "2-3 days", note: "Rapid warming; sunny and windy." },
+    { region: "Northeastern China (Harbin, Changchun)", temp: "-6 to 6°C", rain: "3-4 days", note: "Last gasp of winter; snow melts fast." },
+    { region: "Qinghai-Tibet Plateau (Lhasa, Everest)", temp: "0 to 12°C", rain: "2-3 days", note: "Sunny days, cold nights; spring arrives late." },
+    { region: "Inner Mongolia (Hulunbuir)", temp: "-8 to 4°C", rain: "2-3 days", note: "Thawing grasslands; still chilly." },
+    { region: "Southern Coast (Sanya, Xiamen)", temp: "19 to 26°C", rain: "4-6 days", note: "Warm, breezy; pleasant sea air." }
+  ], topDestinations: [
+    { name: "Wuhan", temp: "8 to 18°C", why: "Cherry blossoms along the Yangtze and East Lake - the city's signature spring." },
+    { name: "Kunming, Yunnan", temp: "9 to 21°C", why: "Perpetual spring; flowers, mild hikes and the Stone Forest." },
+    { name: "Shanghai", temp: "6 to 14°C", why: "Cherry and magnolia blossoms in the parks; calm pre-peak crowds." },
+    { name: "Beijing", temp: "2 to 14°C", why: "Great Wall hikes before the heat; the Temple of Heaven's blossoms." },
+    { name: "Hangzhou", temp: "7 to 15°C", why: "West Lake framed by fresh willow and peach buds." },
+    { name: "Luoyang", temp: "5 to 16°C", why: "Peonies begin to bloom (peak in April) and the Longmen Grottoes are crowd-free." },
+    { name: "Guilin", temp: "13 to 20°C", why: "Mild Li River cruises as the hills turn green." },
+    { name: "Chengdu", temp: "8 to 16°C", why: "Pandas at their most active in spring; nearby Mount Qingcheng." },
+    { name: "Xiamen", temp: "13 to 20°C", why: "Warm island walks and the Gulangyu gardens." },
+    { name: "Hong Kong", temp: "15 to 21°C", why: "Pleasant hiking weather and the blooming floral displays." }
+  ], tips: [
+    "Time cherry blossoms: Wuhan and Kunming peak in March; book hotels early as domestic travellers chase the blooms.",
+    "Pack for swings: a 15C day-to-night gap is normal - layers, a light rain jacket and closed shoes.",
+    "Watch Beijing dust storms: late-March winds can be gritty; carry a mask and plan indoor days.",
+    "Shoulder-season deals: flights and hotels are cheap before the April-May peak; lock in now.",
+    "Avoid Qingming travel: the Tomb-Sweeping holiday (early April) spills into late-March weekends - book transport early."
+  ], verdict: "March is a shoulder-season sweet spot - winter loosens its grip, blossoms open and prices stay low before the spring peak. The south and Yunnan are lovely; the north is changeable and occasionally dusty. Crowds are moderate (3/5). It is a strong pick for blossom-chasers and budget-minded travellers who don't mind unpredictable weather, and a poor pick only if you need guaranteed blue skies.",
+  faq: [
+    { q: "Is March a good time to visit China?", a: "Yes for blossoms, mild weather in the south and low prices. The north is still variable (cold snaps, dust storms) so pack layers. Crowds are moderate outside the Qingming weekend." },
+    { q: "Where are the best cherry blossoms in China in March?", a: "Wuhan's East Lake and Yangtze boulevards are the most famous, with Kunming and Nanjing close behind. Peach and magnolia blooms open around Hangzhou's West Lake." },
+    { q: "What is the weather like in China in March", a: "Central and eastern China sit around 6-15C with spring showers; the south is 13-21C; the north swings 2-14C and can be windy or dusty." },
+    { q: "What should I pack for China in March?", a: "Layers you can add or remove, a light rain jacket, comfortable walking shoes and a scarf. Add a warm coat only for early-March trips to Beijing or Harbin." },
+    { q: "Is March crowded in China?", a: "Generally not (3/5). The main spike is the Qingming (Tomb-Sweeping) holiday in early April, which bleeds into late-March weekends - book trains then." }
+  ], wardrobe: [
+    { region: "North & Northeast China (Beijing, Xi'an, Harbin)", items: ["Light coat or warm jacket for cool days", "Sweater + long-sleeve layers", "Scarf and a dust mask for Beijing winds", "Comfortable closed shoes"] },
+    { region: "Eastern China (Shanghai, Hangzhou)", items: ["Light jacket or cardigan", "Long-sleeve layers + t-shirts", "Compact umbrella for spring showers", "Comfortable walking shoes"] },
+    { region: "South China (Yunnan, Guangzhou, Guilin)", items: ["Light layers and t-shirts", "A light jacket for cool mornings", "Light rain shell", "Comfortable shoes for walking"] },
+    { region: "Hainan (Sanya)", items: ["T-shirts and light clothes", "A light layer for breezy evenings", "Sandals", "Sunscreen"] },
+    { region: "Plateau (Tibet / Lhasa)", items: ["Warm jacket for cold nights", "Layers for sunny days", "High-SPF sunscreen + sunglasses (UV)", "Moisturiser and lip balm"] }
+  ] },
   { month: "april", label: "April", tempLow: 10, tempHigh: 20, rainDays: 7, crowdLevel: 4, bestFor: "hiking, cycling and walking through gardens", image: "/images/month-april.webp", imageAlt: "Great Wall of China winding over green mountains in April", highlights: ["Perfect spring weather", "Peony blossoms in Luoyang", "Great Wall hiking season"], downsides: ["Tomb Sweeping Day crowds", "Pollen / allergies for some"], bestRegions: ["Beijing", "Luoyang", "Guilin"], packing: "Light jacket, t-shirts, walking shoes, sunglasses" ,
   regionalWeather: [
     { region: "Northern China (Beijing, Xi'an)", temp: "10 to 22°C", rain: "5–7 days", note: "Mild and dry with blue skies; cherry and peach blossoms, but the Qingming holiday (early April) brings domestic crowds." },
@@ -84,9 +204,129 @@ export const monthlyData: MonthData[] = [
     { region: "Hainan (Sanya)", items: ["Summer clothes — shorts and t-shirts", "Swimwear for the beach", "A light layer for breezy evenings", "Sandals / flip-flops"] },
     { region: "Plateau (Tibet / Lhasa)", items: ["Warm jacket for cold, sunny days", "Sunglasses + high-SPF sunscreen (intense UV)", "Lip balm and moisturiser", "A hat for both sun and chill"] }
   ] },
-  { month: "may", label: "May", tempLow: 15, tempHigh: 26, rainDays: 9, crowdLevel: 5, bestFor: "kayaking, local markets and sightseeing in warm, pleasant weather", image: "/images/month-may.webp", imageAlt: "Misty granite peaks of the Yellow Mountains in May", highlights: ["Labor Day holiday (early May)", "Warm, pleasant everywhere", "Yellow Mountains at their best"], downsides: ["Labor Day week: massive domestic crowds", "Prices spike first week"], bestRegions: ["Yellow Mountains", "Zhangjiajie", "Chengdu"], packing: "Short sleeves, light layers, umbrella, sunscreen" },
-  { month: "june", label: "June", tempLow: 20, tempHigh: 30, rainDays: 12, crowdLevel: 4, bestFor: "the Dragon Boat Festival, long daylight hours and lush green scenery", image: "/images/month-june.webp", imageAlt: "Sandstone pillars of Zhangjiajie rising through green forest in June", highlights: ["Dragon Boat Festival", "Long daylight hours", "Lush green scenery"], downsides: ["Rainy season starts in south", "Hot and humid in Shanghai/Guangzhou"], bestRegions: ["Yunnan", "Guilin", "Inner Mongolia"], packing: "Light cotton, rain gear, mosquito repellent" },
-  { month: "july", label: "July", tempLow: 23, tempHigh: 32, rainDays: 14, crowdLevel: 5, bestFor: "cruising the Yangtze, chasing waterfalls and escaping to Tibet and Yunnan", image: "/images/month-july.webp", imageAlt: "Qinghai Lake with clear blue water and distant mountains in July", highlights: ["Summer festivals", "Tibet accessible", "Best month for Qinghai Lake"], downsides: ["Peak heat and humidity", "Typhoon risk on southeast coast", "Summer school holidays = crowds"], bestRegions: ["Tibet", "Qinghai", "Yunnan"], packing: "Breathable fabrics, wide-brim hat, sunscreen, bug spray" },
+  { month: "may", label: "May", tempLow: 15, tempHigh: 26, rainDays: 9, crowdLevel: 5, bestFor: "kayaking, local markets and sightseeing in warm, pleasant weather", image: "/images/month-may.webp", imageAlt: "Misty granite peaks of the Yellow Mountains in May", highlights: ["Labor Day holiday (early May)", "Warm, pleasant everywhere", "Yellow Mountains at their best"], downsides: ["Labor Day week: massive domestic crowds", "Prices spike first week"], bestRegions: ["Yellow Mountains", "Zhangjiajie", "Chengdu"], packing: "Short sleeves, light layers, umbrella, sunscreen", regionalWeather: [
+    { region: "Northern China (Beijing, Xi'an)", temp: "15 to 28°C", rain: "5-7 days", note: "Warm and pleasant; Labor Day week is packed." },
+    { region: "Eastern China (Shanghai, Hangzhou)", temp: "17 to 26°C", rain: "8-10 days", note: "Warm, humid; plum-rain season begins." },
+    { region: "Southern China (Guangzhou, Guilin)", temp: "21 to 30°C", rain: "10-12 days", note: "Hot, humid; rainy season building." },
+    { region: "Southwestern China (Yunnan, Sichuan)", temp: "14 to 26°C", rain: "6-8 days", note: "Mild and green; ideal everywhere." },
+    { region: "Northwestern China (Dunhuang, Xinjiang)", temp: "12 to 28°C", rain: "3-4 days", note: "Warm, dry, sunny; big day-night swings." },
+    { region: "Northeastern China (Harbin, Changchun)", temp: "10 to 23°C", rain: "6-8 days", note: "Pleasant spring; green returns." },
+    { region: "Qinghai-Tibet Plateau (Lhasa, Everest)", temp: "6 to 19°C", rain: "4-6 days", note: "Mild, sunny; a fine window before summer." },
+    { region: "Inner Mongolia (Hulunbuir)", temp: "8 to 22°C", rain: "5-7 days", note: "Green grasslands awaken; cool nights." },
+    { region: "Southern Coast (Sanya, Xiamen)", temp: "24 to 31°C", rain: "6-8 days", note: "Hot, humid; sea is swim-warm." }
+  ], topDestinations: [
+    { name: "Yellow Mountains (Huangshan)", temp: "12 to 22°C", why: "Lush green peaks, waterfalls and sea of clouds at their spring best." },
+    { name: "Zhangjiajie", temp: "16 to 26°C", why: "Misty sandstone pillars and full waterfalls after spring rain." },
+    { name: "Chengdu", temp: "16 to 27°C", why: "Pandas, hotpot and day trips to Mount Qingcheng and Leshan." },
+    { name: "Guilin", temp: "20 to 29°C", why: "Green karst and Li River cruises; warm but not yet sweltering." },
+    { name: "Yunnan (Dali, Lijiang)", temp: "14 to 24°C", why: "Mild, sunny highland lakes and old towns." },
+    { name: "Hangzhou", temp: "17 to 26°C", why: "West Lake in full green; boat rides before summer heat." },
+    { name: "Xi'an", temp: "15 to 28°C", why: "Comfortable wall cycling and Terracotta Army; avoid Labor Day week." },
+    { name: "Beijing", temp: "15 to 28°C", why: "Great Wall hikes in warm weather - but dodge the May 1 crowds." },
+    { name: "Jiuzhaigou", temp: "10 to 22°C", why: "Waterfalls at full flow and wildflowers in the valleys." },
+    { name: "Qingdao", temp: "16 to 24°C", why: "Cooler coastal air and the start of the beach season." }
+  ], tips: [
+    "Skip Labor Day week (May 1-5): crowd level hits 5/5 and prices spike - travel the weeks before or after for the same warm weather.",
+    "Pack for humidity and rain: light clothes, an umbrella and quick-dry layers, especially for the south and east.",
+    "Head to the highlands: Yunnan, Tibet and Sichuan stay cooler and greener than the muggy cities.",
+    "Book trains early: May is popular domestically; secure long-distance tickets 2-3 weeks ahead outside the holiday.",
+    "Start days early: warmth builds by noon; sightsee outdoors in the morning and use midday for museums."
+  ], verdict: "May is warm, green and gorgeous - but it owns China's busiest holiday week (Labor Day, May 1-5), when crowd level is 5/5 and prices jump. Outside that window it is one of the best months: comfortable everywhere, waterfalls full, highlands blooming. Crowds are high (5/5) only during the holiday. Ideal for nature and hiking if you time around Labor Day; avoid it if you can't stand peak crowds and prices.",
+  faq: [
+    { q: "Is May a good time to visit China?", a: "Yes - warm, green and generally pleasant, except during Labor Day week (May 1-5) when the whole country travels and prices spike. Go the weeks either side for near-ideal conditions." },
+    { q: "Is May crowded in China?", a: "Crowd level is 5/5 during Labor Day week and 3-4/5 otherwise. The headline sights (Great Wall, Zhangjiajie, West Lake) get busy on weekends." },
+    { q: "What is the weather in China in May", a: "Most of China is 15-28C and turning humid; the south reaches 21-30C with more rain; Yunnan and the plateau stay mild at 12-26C." },
+    { q: "What should I pack for China in May?", a: "Light, breathable clothes, an umbrella and quick-dry layers for rain, plus comfortable shoes. A light jacket only for cool highland nights in Yunnan or Tibet." },
+    { q: "Where is best to visit in China in May", a: "The Yellow Mountains, Zhangjiajie and Jiuzhaigou for waterfalls and green peaks; Yunnan and Chengdu for mild weather; the coast (Qingdao) as it warms up. Avoid Beijing and Shanghai in Labor Day week." }
+  ], wardrobe: [
+    { region: "North & Northeast China (Beijing, Xi'an, Harbin)", items: ["Light jacket or shirt for warm days", "T-shirts + a layer for cool evenings", "Comfortable walking shoes", "Light scarf"] },
+    { region: "Eastern China (Shanghai, Hangzhou)", items: ["Light cotton clothes", "Compact umbrella for plum rain", "Breathable shoes", "Light layers"] },
+    { region: "South China (Yunnan, Guangzhou, Guilin)", items: ["T-shirts and light clothes", "A light rain shell", "Sandals or breathable shoes", "Sunscreen"] },
+    { region: "Hainan (Sanya)", items: ["Summer clothes - shorts and t-shirts", "Swimwear", "Sandals", "High-SPF sunscreen"] },
+    { region: "Plateau (Tibet / Lhasa)", items: ["Light layers for warm days", "A warm jacket for cold nights", "High-SPF sunscreen + sunglasses", "Moisturiser and lip balm"] }
+  ] },
+  { month: "june", label: "June", tempLow: 20, tempHigh: 30, rainDays: 12, crowdLevel: 4, bestFor: "the Dragon Boat Festival, long daylight hours and lush green scenery", image: "/images/month-june.webp", imageAlt: "Sandstone pillars of Zhangjiajie rising through green forest in June", highlights: ["Dragon Boat Festival", "Long daylight hours", "Lush green scenery"], downsides: ["Rainy season starts in south", "Hot and humid in Shanghai/Guangzhou"], bestRegions: ["Yunnan", "Guilin", "Inner Mongolia"], packing: "Light cotton, rain gear, mosquito repellent", regionalWeather: [
+    { region: "Northern China (Beijing, Xi'an)", temp: "20 to 32°C", rain: "7-9 days", note: "Hot, turning humid; Dragon Boat Festival races." },
+    { region: "Eastern China (Shanghai, Hangzhou)", temp: "22 to 30°C", rain: "10-12 days", note: "Hot, humid; plum-rain peak." },
+    { region: "Southern China (Guangzhou, Guilin)", temp: "25 to 33°C", rain: "12-14 days", note: "Hot, wet; rainy season in full swing." },
+    { region: "Southwestern China (Yunnan, Sichuan)", temp: "16 to 27°C", rain: "10-12 days", note: "Mild and green; the cool refuge." },
+    { region: "Northwestern China (Dunhuang, Xinjiang)", temp: "18 to 32°C", rain: "3-5 days", note: "Hot, very dry, sunny." },
+    { region: "Northeastern China (Harbin, Changchun)", temp: "16 to 28°C", rain: "8-10 days", note: "Warm, pleasant; long days." },
+    { region: "Qinghai-Tibet Plateau (Lhasa, Everest)", temp: "9 to 22°C", rain: "6-9 days", note: "Mild, sunny; best highland window." },
+    { region: "Inner Mongolia (Hulunbuir)", temp: "14 to 27°C", rain: "7-9 days", note: "Green grasslands, cool nights." },
+    { region: "Southern Coast (Sanya, Xiamen)", temp: "26 to 33°C", rain: "8-11 days", note: "Hot, humid; sea is warm." }
+  ], topDestinations: [
+    { name: "Yunnan (Dali, Lijiang, Shangri-La)", temp: "15 to 26°C", why: "The cool, green highlands - China's summer escape starts here." },
+    { name: "Guilin", temp: "24 to 32°C", why: "Lush karst and Li River cruises; go early morning to beat heat and rain." },
+    { name: "Inner Mongolia (Hulunbuir)", temp: "14 to 27°C", why: "Endless green grasslands, horse rides and yurt stays." },
+    { name: "Tibet (Lhasa, Everest)", temp: "9 to 22°C", why: "Clear, mild and accessible - the prime highland month." },
+    { name: "Zhangjiajie", temp: "20 to 30°C", why: "Misty peaks and full waterfalls; cooler than the cities." },
+    { name: "Qinghai (Xining, Qinghai Lake)", temp: "10 to 22°C", why: "Cool plateau air, blooming rapeseed fields and the lake at its bluest." },
+    { name: "Chengdu", temp: "20 to 29°C", why: "Pandas and hotpot with day trips to the cooler mountains." },
+    { name: "Guizhou (Guiyang, Fanjingshan)", temp: "18 to 27°C", why: "The 'Cool Province' - misty peaks and minority villages." },
+    { name: "Xi'an", temp: "20 to 32°C", why: "Warm wall cycling; the Terracotta Army is fine if you go early." },
+    { name: "Hangzhou", temp: "22 to 30°C", why: "West Lake in lush green; boat rides beat the humidity." }
+  ], tips: [
+    "Flee the heat to the highlands: Yunnan, Tibet, Qinghai and Guizhou stay 10-20C cooler than the eastern cities.",
+    "Time the Dragon Boat Festival: races on the Yangtze and rivers (around mid-June) are fun, but transport books out - plan around the long weekend.",
+    "Pack serious rain gear in the south: the rainy season peaks (Guangzhou, Guilin, Shanghai) - quick-dry clothes and a real umbrella.",
+    "Start at dawn: heat and humidity peak by midday; hike and sightsee early, use afternoons for museums or a pool.",
+    "Bug repellent for the south: mosquitoes thrive in the wet heat - especially around Guilin and Yunnan's lowlands."
+  ], verdict: "June is the start of hot, humid summer in most of China, with the rainy season peaking in the south and east. But it is also when the highlands (Yunnan, Tibet, Qinghai, Guizhou) shine as cool green escapes, and the Dragon Boat Festival adds colour. Crowds are high (4/5) as school holidays begin. Best for highland and grassland travel; worst for low-elevation cities in the south and east unless you embrace the rain.",
+  faq: [
+    { q: "Is June a good time to visit China", a: "For the cool highlands and grasslands (Yunnan, Tibet, Qinghai, Inner Mongolia), yes - June is prime. For the hot, humid cities of the south and east, it is less comfortable as the rainy season peaks." },
+    { q: "What is the weather in China in June", a: "Northern and central China are hot (20-32C); the south and east are hot and humid (25-33C) with 10-14 rainy days; the highlands stay mild at 9-27C." },
+    { q: "Is June rainy in China", a: "Yes in the south and east - the plum-rain season peaks, with 10-14 wet days around Guangzhou, Guilin and Shanghai. The north-west stays dry; the highlands are moderate." },
+    { q: "What should I pack for China in June", a: "Light cotton clothes, a real umbrella and rain shell, mosquito repellent, and sunscreen. Add a light jacket only for cool highland nights in Yunnan or Tibet." },
+    { q: "Where should I go in China in June", a: "Yunnan, Tibet, Qinghai and Guizhou for cool green scenery; Inner Mongolia for grasslands; the coast for sea breeze. Avoid the deep south's cities unless you like heat and rain." }
+  ], wardrobe: [
+    { region: "North & Northeast China (Beijing, Xi'an, Harbin)", items: ["Light cotton clothes", "A sun hat and sunglasses", "Comfortable breathable shoes", "Light layer for air-conditioned indoors"] },
+    { region: "Eastern China (Shanghai, Hangzhou)", items: ["Light cotton / linen", "Compact umbrella + rain shell", "Breathable shoes", "Sunscreen"] },
+    { region: "South China (Yunnan, Guangzhou, Guilin)", items: ["T-shirts and light clothes", "Rain shell and umbrella", "Sandals / quick-dry shoes", "Mosquito repellent + sunscreen"] },
+    { region: "Hainan (Sanya)", items: ["Summer clothes - shorts and t-shirts", "Swimwear", "Sandals", "High-SPF sunscreen + hat"] },
+    { region: "Plateau (Tibet / Lhasa)", items: ["Light layers for warm days", "A warm jacket for cold nights", "High-SPF sunscreen + sunglasses", "Moisturiser, lip balm, rain shell"] }
+  ] },
+  { month: "july", label: "July", tempLow: 23, tempHigh: 32, rainDays: 14, crowdLevel: 5, bestFor: "cruising the Yangtze, chasing waterfalls and escaping to Tibet and Yunnan", image: "/images/month-july.webp", imageAlt: "Qinghai Lake with clear blue water and distant mountains in July", highlights: ["Summer festivals", "Tibet accessible", "Best month for Qinghai Lake"], downsides: ["Peak heat and humidity", "Typhoon risk on southeast coast", "Summer school holidays = crowds"], bestRegions: ["Tibet", "Qinghai", "Yunnan"], packing: "Breathable fabrics, wide-brim hat, sunscreen, bug spray", regionalWeather: [
+    { region: "Northern China (Beijing, Xi'an)", temp: "23 to 33°C", rain: "9-11 days", note: "Hot, humid; afternoon storms." },
+    { region: "Eastern China (Shanghai, Hangzhou)", temp: "26 to 35°C", rain: "10-12 days", note: "Hottest, muggiest; typhoon risk." },
+    { region: "Southern China (Guangzhou, Guilin)", temp: "26 to 35°C", rain: "12-14 days", note: "Hot, wet; lush but steamy." },
+    { region: "Southwestern China (Yunnan, Sichuan)", temp: "17 to 28°C", rain: "12-14 days", note: "The cool refuge; warm valleys, cool highlands." },
+    { region: "Northwestern China (Dunhuang, Xinjiang)", temp: "20 to 34°C", rain: "3-5 days", note: "Scorching days, cool nights; bone-dry." },
+    { region: "Northeastern China (Harbin, Changchun)", temp: "18 to 29°C", rain: "9-11 days", note: "Warm, pleasant; the north-east 'summer resort'." },
+    { region: "Qinghai-Tibet Plateau (Lhasa, Everest)", temp: "10 to 23°C", rain: "8-11 days", note: "Mild, sunny; peak highland season." },
+    { region: "Inner Mongolia (Hulunbuir)", temp: "16 to 29°C", rain: "8-10 days", note: "Green, warm; ideal grasslands." },
+    { region: "Southern Coast (Sanya, Xiamen)", temp: "27 to 34°C", rain: "9-12 days", note: "Hot, humid; typhoon season." }
+  ], topDestinations: [
+    { name: "Tibet (Lhasa, Everest)", temp: "10 to 23°C", why: "Cool, clear and at its most accessible - the classic summer window." },
+    { name: "Qinghai (Qinghai Lake)", temp: "10 to 22°C", why: "Blooming rapeseed fields ring the blue lake; cool plateau air." },
+    { name: "Yunnan (Shangri-La, Lijiang)", temp: "14 to 25°C", why: "Cool highland summers, wildflowers and old towns." },
+    { name: "Inner Mongolia (Hulunbuir)", temp: "16 to 29°C", why: "Vast green grasslands at their peak - China's summer retreat." },
+    { name: "Guizhou (Fanjingshan)", temp: "19 to 28°C", why: "The 'Cool Province' - misty peaks well under 30C." },
+    { name: "Zhangjiajie", temp: "21 to 31°C", why: "Misty sandstone pillars; cooler than the cities but humid." },
+    { name: "Chengdu", temp: "22 to 31°C", why: "Pandas and food; nearby Mt Qingcheng for cooler air." },
+    { name: "Harbin", temp: "18 to 29°C", why: "Comfortable 'summer resort' north-east; the Ice Festival park preps for winter." },
+    { name: "Xinjiang (Kashgar, Turpan)", temp: "20 to 35°C", why: "Dry, sunny and dramatic - long daylight for sightseeing (hot days, cool nights)." },
+    { name: "Yellow Mountains (Huangshan)", temp: "15 to 25°C", why: "Cooler summit air and summer sea of clouds; escape the lowland heat." }
+  ], tips: [
+    "Run to the highlands: Tibet, Qinghai, Yunnan and Guizhou are 10-15C cooler than the cities - July's best-kept secret.",
+    "Dodge the school-holiday crowds: July is peak family-travel season (5/5); book trains and hotels well ahead and prefer highland routes.",
+    "Watch typhoons on the coast: the southeast/south coast risks typhoons - keep a flexible backup plan for any Sanya/Xiamen itinerary.",
+    "Beat the heat: sightsee at dawn, use midday for museums or pools, and hydrate constantly in the cities.",
+    "Pack rain + sun: the south and east are both wet and blazing - umbrella, high-SPF sunscreen and a hat."
+  ], verdict: "July is peak summer - hot and humid across most of China, with school-holiday crowds at 5/5 and typhoon risk on the coast. But it is also the best month for the highlands and grasslands (Tibet, Qinghai, Yunnan, Inner Mongolia), which are cool, green and glorious. Best for highland and nature travel and family trips to escape the heat; worst for low-elevation eastern and southern cities unless you plan around the weather and crowds.",
+  faq: [
+    { q: "Is July a good time to visit China", a: "For the cool highlands and grasslands - Tibet, Qinghai, Yunnan, Inner Mongolia - July is excellent. For the hot, humid eastern and southern cities, it is the least comfortable month and the most crowded (school holidays)." },
+    { q: "What is the weather in China in July", a: "Most of China is 23-35C and humid; the south and east can hit 35C with typhoons; the highlands stay mild at 10-28C. The north-west is dry and scorching by day, cool at night." },
+    { q: "Is July crowded in China", a: "Yes - 5/5, the highest of the year, because of summer school holidays. Book all transport and hotels weeks ahead, especially for popular routes." },
+    { q: "What should I pack for China in July", a: "Breathable fabrics, a wide-brim hat, high-SPF sunscreen, an umbrella and bug spray for the cities; light layers plus a warm jacket for cold highland nights in Tibet or Yunnan." },
+    { q: "Where should I go in China in July", a: "Tibet, Qinghai Lake, Yunnan (Shangri-La), Inner Mongolia grasslands and Guizhou for cool scenery; the coast only if you accept heat and typhoon risk. Avoid Beijing and Shanghai at midday." }
+  ], wardrobe: [
+    { region: "North & Northeast China (Beijing, Xi'an, Harbin)", items: ["Breathable cotton/linen", "Sun hat + sunglasses", "Comfortable sandals or shoes", "Light layer for A/C indoors"] },
+    { region: "Eastern China (Shanghai, Hangzhou)", items: ["Light cotton / linen", "Compact umbrella + rain shell", "Breathable shoes", "Sunscreen"] },
+    { region: "South China (Yunnan, Guangzhou, Guilin)", items: ["T-shirts and light clothes", "Rain shell + umbrella", "Sandals / quick-dry shoes", "Mosquito repellent + sunscreen"] },
+    { region: "Hainan (Sanya)", items: ["Summer clothes - shorts and t-shirts", "Swimwear", "Sandals", "High-SPF sunscreen + hat"] },
+    { region: "Plateau (Tibet / Lhasa)", items: ["Light layers for warm days", "A warm jacket for cold nights", "High-SPF sunscreen + sunglasses", "Moisturiser, lip balm, rain shell"] }
+  ] },
   { month: "august", label: "August", tempLow: 22, tempHigh: 31, rainDays: 13, crowdLevel: 5, bestFor: "Inner Mongolia grasslands, water parks and high-altitude escapes", image: "/images/month-august.webp", imageAlt: "Vast green grasslands of Hulunbuir in Inner Mongolia in August", highlights: ["Qixi Festival (Chinese Valentine's)", "Inner Mongolia grasslands", "Lhasa Shoton Festival"], downsides: ["Still unbearably hot in most cities", "Typhoon season peaks"], bestRegions: ["Inner Mongolia", "Tibet", "Sichuan mountains"], packing: "Breathable cotton/linen shirts, shorts and a sun hat; high-SPF sunscreen, sunglasses and a compact umbrella. Add a light jacket for the highlands (Tibet, Sichuan, Yunnan) where nights are cool, plus mosquito repellent for the south.", regionalWeather: [ { region: "Northern China (Beijing, Xi'an)", temp: "24–35°C", rain: "8–10 days", note: "Hot and humid; afternoon thunderstorms common." }, { region: "Eastern China (Shanghai, Hangzhou)", temp: "27–35°C", rain: "9–11 days", note: "Peak heat and humidity; typhoon risk." }, { region: "Southern China (Guangzhou, Guilin)", temp: "26–35°C", rain: "10–12 days", note: "Long, wet and muggy; lush scenery." }, { region: "Southwestern China (Yunnan, Sichuan)", temp: "16–32°C", rain: "12–15 days", note: "Cool highlands, warm valleys; the best escape from the heat." }, { region: "Northwestern China (Dunhuang, Xinjiang)", temp: "18–29°C", rain: "4–6 days", note: "Dry, with big day-night temperature swings; comfortable." }, { region: "Northeastern China (Harbin, Changchun)", temp: "18–28°C", rain: "8–10 days", note: "Pleasant summer, far fewer tourists." }, { region: "Qinghai–Tibet Plateau (Lhasa, Everest)", temp: "12–25°C", rain: "8–12 days", note: "Cool and sunny; the best window to visit Tibet." }, { region: "Inner Mongolia (Hulunbuir)", temp: "16–28°C", rain: "7–9 days", note: "Green grasslands at their peak — an ideal summer retreat." }, { region: "Southern Coast (Sanya, Xiamen)", temp: "27–33°C", rain: "8–11 days", note: "Hot, humid; typhoon season peaks." } ], topDestinations: [ { name: "Hulunbuir Grasslands, Inner Mongolia", temp: "16–28°C", why: "Vast green pastures at their summer peak — comfortable and far less crowded than the city sights." }, { name: "Tibet (Lhasa & Everest)", temp: "12–25°C", why: "Cool, clear and accessible; time it with the Lhasa Shoton Festival in August." }, { name: "Yunnan (Dali, Lijiang, Kunming)", temp: "18–26°C", why: "Spring-like all year — combine ancient towns, alpine lakes and minority culture." }, { name: "Guizhou (Guiyang & Fanjingshan)", temp: "20–28°C", why: "The 'Cool Province' — a misty mountain escape crowned by the fan-shaped Fanjingshan peak." }, { name: "Qingdao & the Shandong Coast", temp: "25–30°C", why: "Sea breezes and the famous Qingdao International Beer Festival, held every August." }, { name: "Sichuan Highlands (Chengdu & Jiuzhaigou)", temp: "17–28°C", why: "Base yourself in Chengdu's food scene, then cool off in mountain parks and valleys." }, { name: "Dunhuang, Gansu", temp: "18–30°C", why: "Dry desert nights, the Mogao Caves and camel rides under enormous skies." }, { name: "Moganshan & Anji (near Shanghai/Hangzhou)", temp: "22–30°C", why: "Bamboo forests and hill resorts just a short drive from the east-coast cities." }, { name: "Beihai & the Guangxi Coast", temp: "27–32°C", why: "Calm South China Sea swimming and some of the most beautiful island sunsets." }, { name: "Enshi, Hubei", temp: "20–30°C", why: "A karst 'green maze' of canyons and caves, noticeably cooler than Wuhan." } ], tips: [ "Go late August rather than early: after the Start of Autumn (~Aug 7) it cools slightly, summer-vacation crowds thin out, and hotel and flight prices soften.", "Beat the midday heat — sightsee outdoors before noon and switch to indoor options at midday (National Museum, a Summer Palace boat ride, a palace banquet).", "Dodge crowds at headline sights: use the bag-free lane and side halls at the Forbidden City, and choose Mutianyu, Jinshanling or a night tour of Simatai on the Great Wall.", "Pack for two climates — cities are hot and humid, but the highlands (Tibet, Sichuan, Yunnan) are cool, so bring layers and strong sun protection, plus a compact umbrella for rain and typhoons.", "Watch the typhoon season on the southeast and south coasts (it peaks in August) and keep a flexible backup plan for any coastal itinerary." ], verdict: "August is ideal for travellers who want to escape the heat — grasslands, the highlands and the cool southwestern provinces are at their best, and festival-goers can catch the Shoton or Beer festivals. It is the wrong choice if you dislike heat, humidity and peak summer crowds in the big cities; for those trips, late August or September is far kinder.", faq: [ { q: "Is August a bad time to visit China?", a: "Not across the board. It is the best month for grasslands, Tibet and the cool highlands, but the worst for avoiding heat and crowds in Beijing, Shanghai and the east-coast cities. Plan around the climate and you will have a great trip." }, { q: "China in August vs July — which is better?", a: "Weather and crowds are similar, since both are peak summer. Late August has the edge: after the Start of Autumn (around Aug 7) temperatures dip a little, summer-vacation crowds thin, and hotel and flight prices ease." }, { q: "What should I pack for China in August?", a: "Breathable cotton or linen, a sun hat, sunglasses, high-SPF sunscreen and a compact umbrella. Add a light jacket for the highlands (Tibet, Sichuan, Yunnan) where nights are cool, and mosquito repellent for the south." }, { q: "Is it too hot to visit Beijing in August?", a: "Daytime highs of 30–35°C with humidity can be draining. Go out early, use indoor options at midday (the National Museum, a Summer Palace boat ride) and prefer late August." }, { q: "Are there festivals in China in August?", a: "Yes — the Lhasa Shoton Festival in Tibet, the Qingdao International Beer Festival and Qixi (Chinese Valentine's Day) all fall in August." } ],
   wardrobe: [
     { region: "North & Northeast China (Beijing, Xi'an, Harbin)", items: ["Breathable cotton or linen shirts and shorts for hot, humid days", "A compact umbrella for afternoon thunderstorms", "A light jacket for cooler highland evenings (Tibet, Sichuan, Yunnan)", "High-SPF sunscreen, sunglasses and a sun hat"] },

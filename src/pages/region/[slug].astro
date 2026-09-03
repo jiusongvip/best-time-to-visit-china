@@ -105,10 +105,25 @@ const articleSchema = JSON.stringify({
         ))}
       </div>
 
+      <!-- Through the seasons gallery -->
+      {region.seasonImages && region.seasonImages.length > 0 && (
+        <>
+          <h2 class="text-2xl font-bold text-zinc-900 mb-6">{region.shortName} Through the Seasons</h2>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-12">
+            {region.seasonImages.map((img) => (
+              <figure class="rounded-xl overflow-hidden border border-zinc-100">
+                <img src={img.src} alt={img.alt} width="600" height="800" loading="lazy" class="w-full h-44 object-cover" />
+                <figcaption class="text-xs text-zinc-500 px-2 py-1.5 text-center">{img.label}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </>
+      )}
+
       <!-- Month-by-month table -->
       {region.monthByMonth && region.monthByMonth.length > 0 && (
         <>
-          <h2 class="text-2xl font-bold text-zinc-900 mb-6">{region.shortName} & Yangshuo Weather by Month</h2>
+          <h2 class="text-2xl font-bold text-zinc-900 mb-6">{region.shortName} Weather by Month</h2>
           <div class="overflow-x-auto mb-12">
             <table class="w-full text-left border-collapse text-sm">
               <thead>
@@ -168,7 +183,7 @@ const articleSchema = JSON.stringify({
       {region.comparison && region.comparison.length > 0 && (
         <>
           <h2 class="text-2xl font-bold text-zinc-900 mb-6">{region.shortName} vs Other Regions in China</h2>
-          <p class="text-zinc-600 leading-relaxed mb-6">Guilin sits in China's humid subtropical south. If you're choosing between regions, here's how its weather stacks up against the north and high plateau through the year.</p>
+          <p class="text-zinc-600 leading-relaxed mb-6">{region.comparisonIntro ?? "If you're choosing between regions, here's how its weather compares through the year."}</p>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
             {region.comparison.map((c) => (
               <div class="bg-white border border-zinc-200 rounded-xl p-5">

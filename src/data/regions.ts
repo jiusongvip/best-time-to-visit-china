@@ -23,6 +23,8 @@ export interface RegionGuide {
   monthByMonth?: { slug: string; month: string; temp: string; rain: string; activity: string; tip: string }[];
   comparison?: { region: string; when: string; weather: string; note: string; link: string }[];
   related: string[];
+  seasonImages?: { label: string; src: string; alt: string }[];
+  comparisonIntro?: string;
 }
 
 export const regionGuides: RegionGuide[] = [
@@ -31,43 +33,76 @@ export const regionGuides: RegionGuide[] = [
     shortName: "Beijing",
     slug: "beijing",
     question: "When is the best time to visit Beijing and North China?",
-    title: "Best Time to Visit Beijing: Month-by-Month Guide (2026)",
-    meta: "The best time to visit Beijing is April-May and September-October for mild, clear weather. Avoid Golden Week. Get month-by-month temps, crowds and packing tips for the Great Wall.",
+    title: "Best Time to Visit Beijing: Month-by-Month Weather, Crowds & Costs",
+    meta: "The best time to visit Beijing is April-May and September-October for mild, clear weather and the cleanest air. Avoid Golden Week crowds and the July-August heat and humidity. Get a month-by-month breakdown of temperature, rain, crowds, air quality and what to pack.",
     image: "/images/region-beijing.webp",
     imageAlt: "Forbidden City rooftops in Beijing under clear blue autumn sky",
+    h1: "When Is the Best Time to Visit Beijing?",
     best: "April-May & September-October",
-    avoid: "July-August (heat), Jan-Feb (freezing)",
+    avoid: "July-August (heat & humidity), January-February (freezing + worst air)",
     months: "Mar-May & Sep-Nov",
     temp: "Spring 10-22°C / Autumn 8-20°C",
-    highlights: "Great Wall, Forbidden City, Summer Palace",
+    highlights: "Great Wall, Forbidden City, Summer Palace, Hutongs",
     budget: "$60-150 hotels / $5-30 meals / day",
-    tip: "Avoid Golden Week (Oct 1-7) at all costs. Go mid-October for perfect foliage.",
-    intro: "Beijing pairs dry, sunny springs and autumns with freezing winters and hot, dusty summers. April-May and September-October give you the best Great Wall weather: crisp air, blue skies, and temperatures between 10-25°C. Winters are bitterly cold (often below 0°C) but bring the city's quietest crowds and lowest prices, plus the charm of the Forbidden City under snow.",
+    tip: "Avoid Golden Week (Oct 1-7) at all costs. Go mid-October for perfect foliage and the clearest autumn air.",
+    intro: "Beijing has four sharply different seasons. Spring (Mar-May) and autumn (Sep-Nov) are short, dry and sunny - the consensus best windows, with blue skies and 10-22°C days. Summers (Jun-Aug) are hot, humid and the rainiest of the year, while winters (Dec-Feb) are freezing and bring the worst air quality, when cozy heating fills the air with smog. Spring also carries occasional sandstorms drifting in from the Gobi (late March-April). The payoff of winter is the city's quietest crowds, lowest prices and the Forbidden City dusted with snow.",
     weather: [
       { season: "Spring (Mar-May)", temp: "10-22°C", note: "Mild and dry. Cherry blossoms in April. Crowds build toward the May 1 Labor Day holiday." },
-      { season: "Summer (Jun-Aug)", temp: "23-32°C", note: "Hot, humid and occasionally dusty. Peak domestic tourist season; July-August is heavy." },
-      { season: "Autumn (Sep-Nov)", temp: "8-20°C", note: "The consensus best season. Clear skies and golden ginkgo trees. Avoid Oct 1-7 Golden Week." },
-      { season: "Winter (Dec-Feb)", temp: "-5 to 5°C", note: "Freezing but quiet and cheap. Beijing's ice rinks and snow-dusted rooftops are magical." },
+      { season: "Summer (Jun-Aug)", temp: "23-32°C", note: "Hot, humid and the rainiest season. Peak domestic tourist season; July-August is heaviest." },
+      { season: "Autumn (Sep-Nov)", temp: "8-20°C", note: "The consensus best season. Clear skies, low pollution and golden ginkgo. Avoid Oct 1-7 Golden Week." },
+      { season: "Winter (Dec-Feb)", temp: "-5 to 5°C", note: "Freezing, but quiet and cheap. Ice rinks open and snow-dusted rooftops are magical - though air quality dips." },
+    ],
+    seasonImages: [
+      { label: "Spring", src: "/images/spring-beijing.webp", alt: "Cherry blossoms and fresh green at a Beijing garden in spring" },
+      { label: "Summer", src: "/images/summer-beijing.webp", alt: "Lotus flowers in full bloom at Shichahai, Beijing summer" },
+      { label: "Autumn", src: "/images/autumn-beijing.webp", alt: "Golden ginkgo leaves across Beijing in autumn" },
+      { label: "Winter", src: "/images/winter-beijing.webp", alt: "The Forbidden City under snow in Beijing winter" },
+    ],
+    monthByMonth: [
+      { slug: "january", month: "January", temp: "-9 to 2°C", rain: "3 mm", activity: "Ice rinks, snow scenes, quiet landmarks", tip: "Worst air quality of the year; pack serious cold-weather gear" },
+      { slug: "february", month: "February", temp: "-7 to 4°C", rain: "6 mm", activity: "Temple fairs for CNY, Lantern Festival", tip: "CNY closures hit mid-month; still freezing" },
+      { slug: "march", month: "March", temp: "0 to 11°C", rain: "9 mm", activity: "Cherry blossoms start, Great Wall hikes", tip: "Late-month sandstorms possible; dress in layers" },
+      { slug: "april", month: "April", temp: "7 to 20°C", rain: "26 mm", activity: "Peak spring, blue skies, ideal Wall", tip: "Qingming holiday crowds in early April" },
+      { slug: "may", month: "May", temp: "13 to 26°C", rain: "29 mm", activity: "Warm, green, pleasant city walks", tip: "Avoid Labor Day week (May 1-5)" },
+      { slug: "june", month: "June", temp: "18 to 30°C", rain: "71 mm", activity: "Long days, early summer light", tip: "Heating up; humidity and rain build" },
+      { slug: "july", month: "July", temp: "22 to 31°C", rain: "176 mm", activity: "Lush but hot and humid", tip: "Hottest, rainiest, peak crowds; use indoor sites" },
+      { slug: "august", month: "August", temp: "20 to 30°C", rain: "182 mm", activity: "Still hot and wet", tip: "Museums and AC keep you cool" },
+      { slug: "september", month: "September", temp: "14 to 26°C", rain: "49 mm", activity: "Autumn arrives, comfortable", tip: "Best air of late summer; fewer crowds" },
+      { slug: "october", month: "October", temp: "7 to 19°C", rain: "19 mm", activity: "Prime month: clear, golden, foliage", tip: "Avoid Golden Week (Oct 1-7)" },
+      { slug: "november", month: "November", temp: "0 to 10°C", rain: "6 mm", activity: "Cold, crisp, quiet", tip: "Ginkgo trees turn gold mid-month" },
+      { slug: "december", month: "December", temp: "-7 to 3°C", rain: "2 mm", activity: "Snow scenes, lowest prices", tip: "Freezing; air quality dips again" },
     ],
     mustDo: [
-      "Hike the Great Wall at Mutianyu or Jinshanling - far less crowded than Badaling.",
-      "Arrive at the Forbidden City before 8:30 AM to beat the tour groups.",
-      "See the Summer Palace at sunset, when light hits the Long Corridor.",
-      "Eat Peking duck in a hutong courtyard restaurant, then stroll Nanluoguxiang.",
+      "Hike the Great Wall at Mutianyu or Jinshanling - far less crowded than Badaling, and stunning in autumn foliage or snow.",
+      "Arrive at the Forbidden City before 8:30 AM to beat the tour groups and catch clear morning light.",
+      "See the Summer Palace at sunset, when light hits the Long Corridor and Kunming Lake.",
+      "Eat Peking duck in a hutong courtyard restaurant, then stroll Nanluoguxiang and the lakes.",
+      "Time a visit to the Temple of Heaven or Ming Tombs for the quieter shoulder days.",
     ],
     festivals: [
       "Chinese New Year (Jan-Feb) - temple fairs and fireworks across the city.",
       "Cherry Blossom Festival at Yuyuantan Park (late March-April).",
-      "Golden Autumn leaf season at the Great Wall (mid-October).",
+      "Golden Autumn ginkgo and Great Wall foliage season (mid-to-late October).",
     ],
+    comparison: [
+      { region: "Shanghai", when: "All year", weather: "Shanghai is milder in winter (3-10°C vs Beijing's -9 to 2°C) but hotter and far more humid in summer, with a June-July plum-rain season Beijing doesn't get.", note: "Pick Beijing for crisp autumn and snow; Shanghai for damp-mild springs and easy winter walks.", link: "/region/shanghai" },
+      { region: "Xi'an", when: "All year", weather: "Xi'an shares Beijing's continental swing - cold winters, hot summers - but is drier and a touch warmer in winter.", note: "Both peak in Apr-May and Sep-Oct; Xi'an pairs perfectly as a second stop for the Terracotta Army.", link: "/region/xian" },
+      { region: "Chengdu", when: "All year", weather: "Chengdu is cloudier, more humid and a few degrees warmer in winter than Beijing, with panda bases and legendary hotpot.", note: "Choose Chengdu for milder winters and food; Beijing for iconic monuments and four distinct seasons.", link: "/region/chengdu" },
+    ],
+    comparisonIntro: "Beijing sits in North China's continental climate - hot, humid summers and cold, dry winters, with air quality that swings sharply by season. Here's how it compares with other popular regions when you're deciding where to go.",
     faqs: [
-      { q: "What is the weather like in Beijing in April?", a: "April averages 10-20°C with low humidity and blue skies. Perfect for the Great Wall, though the Qingming holiday (early April) brings domestic crowds." },
-      { q: "Is Beijing too hot in summer?", a: "July and August can reach 32°C with high humidity. Indoor sites like the Forbidden City's museums help, but it's the least comfortable season for walking the Wall." },
-      { q: "What should I pack for Beijing in winter?", a: "Temperatures drop below freezing. Bring thermal base layers, a down jacket, gloves, and a scarf. Indoor attractions are heated, so layers work best." },
-      { q: "How many days do I need in Beijing?", a: "Plan 4-5 days for the Great Wall, Forbidden City, Temple of Heaven, Summer Palace, and a hutong neighborhood. Add a day if you want to visit the 798 Art District." },
+      { q: "What is the best time to visit Beijing?", a: "April-May and September-October. These shoulder seasons bring mild temperatures (10-25°C), blue skies and Beijing's cleanest air. Avoid July-August (hot, humid, rainiest) and January-February (freezing, with the year's worst air quality)." },
+      { q: "What is the weather like in Beijing month by month?", a: "Winters are cold and dry (January averages -9 to 2°C), summers hot and humid (July 22-31°C with the most rain), and spring and autumn short, mild and mostly sunny. See the full month-by-month table above for temperature, rain and crowd tips." },
+      { q: "When is Beijing's air quality worst - and best?", a: "Generally worst in December-February, when winter heating fills stagnant cold air with smog, and again during late-March to April sandstorms from the Gobi. Air is usually cleanest in September-November, after summer rains wash the sky, though summer is also relatively clear but hot. Check a live AQI app before sensitive outdoor plans in winter." },
+      { q: "Is Beijing crowded? When should I avoid it?", a: "Crowds peak during Golden Week (Oct 1-7, level 5/5), Labor Day (May 1-5), the Spring Festival travel rush, and the July-August school holidays. The calmest, cheapest windows are mid-April, mid-to-late October, November, and deep winter - when the Forbidden City and Great Wall are blissfully quiet." },
+      { q: "What should I pack for Beijing?", a: "Layers for spring and autumn; light, breathable clothes plus a compact umbrella and rain shell for summer; thermal base layers, a down jacket, gloves and a scarf for winter. On high-pollution winter days, bring a KN95 mask. Comfortable shoes are essential for the Wall and hutongs." },
+      { q: "How many days do I need in Beijing?", a: "Plan 4-5 days for the Great Wall, Forbidden City, Temple of Heaven, Summer Palace and a hutong neighborhood. Add a day for the 798 Art District or a side trip to the Ming Tombs." },
+      { q: "When is the best time to visit the Great Wall?", a: "April-May and September-October are ideal - clear, comfortable hiking at Mutianyu or Jinshanling. Avoid Golden Week and the July-August heat; winter brings snow-dusted solitude and the fewest people, if you can handle the cold." },
+      { q: "Beijing or Shanghai - which is better to visit?", a: "It depends on the trip. Beijing wins for imperial history, iconic monuments and four distinct seasons (crisp autumn, snowy winter). Shanghai wins for a modern skyline, easier mild winters and walkable riverfront. Many itineraries do both - they're a 4.5-hour high-speed train apart and pair well in spring or autumn." },
     ],
     related: ["xian", "shanghai", "tibet"],
   },
+
   {
     name: "Shanghai & East China",
     shortName: "Shanghai",
@@ -168,7 +203,8 @@ export const regionGuides: RegionGuide[] = [
       { slug: "november", month: "November", temp: "16-22°C", rain: "7 days", activity: "Cool, dry, cheap; Longji golden harvest", tip: "Hidden-gem month: 30-40% lower hotel prices" },
       { slug: "december", month: "December", temp: "11-16°C", rain: "7 days", activity: "Quiet, misty, budget", tip: "Cool & hazy; pack a warm coat" },
     ],
-    comparison: [
+    comparisonIntro: "Guilin sits in China's humid subtropical south. If you're choosing between regions, here's how its weather stacks up against the north and high plateau through the year.",
+  comparison: [
       { region: "Beijing & North China", when: "Winter (Dec-Feb)", weather: "-5 to 5°C, dry & sunny", note: "Want snow on the Great Wall? Go north in winter - but Guilin stays green and misty all year.", link: "/region/beijing/" },
       { region: "Tibet (Plateau)", when: "May-Oct only", weather: "15-25°C day, freezing nights", note: "Tibet closes Nov-Apr; Guilin is reachable any month, the easier year-round choice.", link: "/region/tibet/" },
       { region: "Shanghai & East China", when: "Mar-May & Oct-Nov", weather: "15-24°C", note: "Similar comfortable windows, but Shanghai adds the humid June plum-rain season Guilin avoids by sitting further south.", link: "/region/shanghai/" },
