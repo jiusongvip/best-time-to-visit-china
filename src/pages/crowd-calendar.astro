@@ -26,20 +26,17 @@ function generateMonth(year: number, month: number): CalendarDay[] {
     const isWeekend = day.getDay() === 0 || day.getDay() === 6;
     if (isWeekend) crowd = 2;
 
-    if (month === 0) {
-      if (d >= 25 && d <= 31) { crowd = 5; note = "CNY peak"; }
-    }
     if (month === 1) {
-      if (d <= 8) { crowd = 5; note = "CNY wrap-up"; }
+      if (d >= 15 && d <= 22) { crowd = 5; note = "CNY peak"; }
     }
     if (month === 3) {
-      if (d >= 3 && d <= 5) { crowd = 4; note = "Qing Ming"; }
+      if (d >= 4 && d <= 6) { crowd = 4; note = "Qing Ming"; }
     }
     if (month === 4) {
       if (d >= 1 && d <= 5) { crowd = 4; note = "Labor Day"; }
     }
     if (month === 5) {
-      if (d >= 10 && d <= 15) { crowd = 4; note = "Dragon Boat"; }
+      if (d >= 19 && d <= 21) { crowd = 4; note = "Dragon Boat"; }
     }
     if (month === 6 || month === 7) {
       crowd = Math.max(crowd, 4);
@@ -47,6 +44,7 @@ function generateMonth(year: number, month: number): CalendarDay[] {
     }
     if (month === 8) {
       if (d >= 10 && d <= 16) crowd = Math.max(crowd, 3);
+      if (d >= 25 && d <= 27) { crowd = Math.max(crowd, 3); note = note || "Mid-Autumn"; }
       if (d >= 28) { crowd = 5; note = "National Day prep"; }
     }
     if (month === 9) {
@@ -89,18 +87,32 @@ const eventNotes: Record<string, string> = {
   "National Day prep": "Pre-Golden Week rush",
   "Golden Week!": "National Day Golden Week",
   "Best time!": "Low season, great deals",
+  "Mid-Autumn": "Mid-Autumn Festival",
 };
+
+const festivalDates: { name: string; date: string; type: string; duration: string; crowd: string; color: string }[] = [
+  { name: "New Year's Day", date: "Jan 1, 2026", type: "Public Holiday", duration: "1 day", crowd: "Low", color: "bg-emerald-500" },
+  { name: "Spring Festival (Chinese New Year)", date: "Feb 17, 2026", type: "Public Holiday", duration: "8 days (Feb 15-22)", crowd: "Extreme", color: "bg-red-500" },
+  { name: "Lantern Festival", date: "Mar 3, 2026", type: "Cultural", duration: "1 day", crowd: "Moderate", color: "bg-amber-400" },
+  { name: "Qingming (Tomb Sweeping)", date: "Apr 4-6, 2026", type: "Public Holiday", duration: "3 days", crowd: "High", color: "bg-red-400" },
+  { name: "Labor Day", date: "May 1-5, 2026", type: "Public Holiday", duration: "5 days", crowd: "Very High", color: "bg-red-500" },
+  { name: "Dragon Boat Festival", date: "Jun 19-21, 2026", type: "Public Holiday", duration: "3 days", crowd: "Moderate", color: "bg-amber-400" },
+  { name: "Mid-Autumn Festival", date: "Sep 25-27, 2026", type: "Public Holiday", duration: "3 days", crowd: "Moderate", color: "bg-amber-400" },
+  { name: "National Day Golden Week", date: "Oct 1-7, 2026", type: "Public Holiday", duration: "7 days", crowd: "Extreme", color: "bg-red-500" },
+  { name: "Double Ninth Festival", date: "Oct 18, 2026", type: "Cultural", duration: "1 day", crowd: "Low", color: "bg-emerald-500" },
+  { name: "Harbin Ice & Snow Festival", date: "Dec 2026 - Feb 2027", type: "Cultural", duration: "~2 months", crowd: "Moderate", color: "bg-amber-400" },
+];
 
 const yearMonths = months.map((_, i) => ({ label: months[i], index: i, days: generateMonth(2026, i) }));
 ---
 
-<BaseLayout title="China Travel Crowd Calendar 2026: Plan Around Peak Times" description="Interactive crowd calendar showing daily crowd levels for every day of 2026 across China's top attractions. Plan around peak times and save money.">
+<BaseLayout title="China Travel Crowd Calendar 2026: Plan Around Public Holidays &amp; Festivals" description="Interactive crowd calendar with China's 2026 public holidays and festival dates. See daily crowd levels, plan around peak travel weeks, and pick the best festivals to attend.">
   <section class="min-h-[100dvh]">
     <Nav />
     <div class="max-w-7xl mx-auto px-4 py-6">
       <p class="text-sm font-medium tracking-wide text-accent-600 uppercase mb-4">Crowd Calendar</p>
       <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-zinc-900 mb-4 leading-none">China Travel Crowd Calendar 2026</h1>
-      <p class="text-lg text-zinc-500 max-w-2xl leading-relaxed mb-4">See crowd levels for every single day of the year. Plan around major holidays and peak seasons.</p>
+      <p class="text-lg text-zinc-500 max-w-2xl leading-relaxed mb-4">See crowd levels for every single day of the year, matched to China's public holidays and traditional festivals. Plan around the peak travel weeks &mdash; or time your trip to catch a festival.</p>
 
       <PageHero image="/images/region-beijing.webp" alt="Crowded tourist square in Beijing with the Forbidden City entrance" overlay="Crowd Calendar" title="Avoid the 2 extreme weeks: CNY and October 1-7 Golden Week" />
 
@@ -157,6 +169,60 @@ const yearMonths = months.map((_, i) => ({ label: months[i], index: i, days: gen
           This calendar estimates crowd levels at China's top 20 attractions aggregated across Beijing, Shanghai, Xi'an, Guilin, and Chengdu. Red days mean queues of 2+ hours at major sites. Green days mean you will often have famous spots nearly to yourself. The sweet spot: light green in early March, late April (after Qing Ming), late May, early November, and early December.
         </p>
       </div>
+
+      <h2 class="text-2xl font-bold text-zinc-900 mb-4">China's Public Holidays &amp; Festivals 2026</h2>
+      <p class="text-sm text-zinc-500 max-w-2xl leading-relaxed mb-6">Every red or amber day on the calendar above lines up with one of these dates. Use this table to see exactly when China shuts down for travel &mdash; and when a festival is worth planning your whole trip around.</p>
+      <div class="overflow-x-auto mb-10">
+        <table class="w-full text-sm border-collapse">
+          <thead>
+            <tr class="text-left text-zinc-500 border-b border-zinc-200">
+              <th class="py-2 pr-4 font-semibold">Festival / Holiday</th>
+              <th class="py-2 pr-4 font-semibold">2026 Date</th>
+              <th class="py-2 pr-4 font-semibold">Type</th>
+              <th class="py-2 pr-4 font-semibold">Duration</th>
+              <th class="py-2 pr-4 font-semibold">Crowd Impact</th>
+            </tr>
+          </thead>
+          <tbody>
+            {festivalDates.map((f) => (
+              <tr class="border-b border-zinc-100 align-top">
+                <td class="py-3 pr-4 font-medium text-zinc-900">{f.name}</td>
+                <td class="py-3 pr-4 text-zinc-600 whitespace-nowrap">{f.date}</td>
+                <td class="py-3 pr-4 text-zinc-600">{f.type}</td>
+                <td class="py-3 pr-4 text-zinc-600 whitespace-nowrap">{f.duration}</td>
+                <td class="py-3 pr-4"><span class={`inline-block px-2 py-0.5 rounded-full text-xs font-semibold text-white ${f.color}`}>{f.crowd}</span></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="text-2xl font-bold text-zinc-900 mb-4">Best Festivals to Attend (and When to Skip)</h2>
+      <p class="text-sm text-zinc-500 max-w-2xl leading-relaxed mb-6">Searching &ldquo;best festivals to attend in China&rdquo;? The honest answer: two festivals are unmissable for culture but miserable for travel, and three are worth building a trip around.</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+        <div class="bg-white border border-zinc-200 rounded-2xl p-6">
+          <h3 class="text-lg font-bold text-zinc-900 mb-2">Worth attending</h3>
+          <ul class="text-sm text-zinc-600 space-y-2 list-disc pl-5">
+            <li><span class="font-semibold text-zinc-800">Lantern Festival (Mar 3)</span> &mdash; Nanjing's Qinhuai fair and Shanghai's Yuyuan Garden light up. Manageable crowds.</li>
+            <li><span class="font-semibold text-zinc-800">Dragon Boat Festival (Jun 19-21)</span> &mdash; races on the Yangtze, Hong Kong and Guangzhou. Book riverside dining early.</li>
+            <li><span class="font-semibold text-zinc-800">Mid-Autumn (Sep 25-27)</span> &mdash; mooncakes and rooftop views in Shanghai or a lakeside in Hangzhou.</li>
+            <li><span class="font-semibold text-zinc-800">Harbin Ice &amp; Snow (Dec-Feb)</span> &mdash; the world's largest ice festival; go at night for the full effect.</li>
+          </ul>
+        </div>
+        <div class="bg-white border border-zinc-200 rounded-2xl p-6">
+          <h3 class="text-lg font-bold text-zinc-900 mb-2">Skip the travel week</h3>
+          <ul class="text-sm text-zinc-600 space-y-2 list-disc pl-5">
+            <li><span class="font-semibold text-zinc-800">Spring Festival (Feb 15-22)</span> &mdash; incredible temple fairs, but transport is chaos and prices triple. Enjoy it locally; don't travel between cities.</li>
+            <li><span class="font-semibold text-zinc-800">Labor Day (May 1-5)</span> &mdash; every site hits capacity. Go after May 5.</li>
+            <li><span class="font-semibold text-zinc-800">National Day Golden Week (Oct 1-7)</span> &mdash; the busiest week on Earth. Arrive after Oct 8 for 90% fewer crowds.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-zinc-50 border border-zinc-200 rounded-2xl p-6 mb-8">
+        <p class="text-sm text-zinc-600 leading-relaxed">Want the full rundown with photos and per-festival travel tips? Read our <a href="/festivals/" class="text-accent-600 font-semibold underline">Chinese Festivals Calendar &amp; Travel Tips</a>, or jump to a <a href="/month/october/" class="text-accent-600 font-semibold underline">month-by-month guide</a> to plan around the dates above.</p>
+      </div>
+
     </div>
   </section>
   <Footer />
