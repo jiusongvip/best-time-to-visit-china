@@ -2,7 +2,6 @@
 // BaseLayout.astro - Design Read: travel planning content-tool hybrid
 // Dial: VARIANCE=6 MOTION=5 DENSITY=4
 // Aesthetic: Tailwind + custom teal accent + Geist + restrained motion
-import "@fontsource-variable/geist";
 export interface Props {
   title: string;
   description: string;
@@ -102,6 +101,8 @@ if (pathParts.length > 0) {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageURL} />
     <title>{fullTitle}</title>
+    <link rel="preload" href="/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/geist-mono-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
     <script is:inline>document.documentElement.classList.add('js');</script>
     {breadcrumbSchema && <>
       <!-- BreadcrumbList Schema -->
