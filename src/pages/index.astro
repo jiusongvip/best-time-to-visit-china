@@ -52,6 +52,15 @@ const monthCharm: Record<string, string> = {
   december: "Shanghai Christmas lights",
 };
 
+const sources = [
+  { name: "China Meteorological Administration (CMA)", url: "https://www.cma.gov.cn/en/" },
+  { name: "Ministry of Culture and Tourism of the PRC", url: "https://www.mct.gov.cn/" },
+  { name: "Google Flights", url: "https://www.google.com/travel/flights" },
+  { name: "Wikipedia: Golden Week (China)", url: "https://en.wikipedia.org/wiki/Golden_Week_(China)" },
+  { name: "Wikipedia: Harbin Ice & Snow Festival", url: "https://en.wikipedia.org/wiki/Harbin_International_Ice_and_Snow_Sculpture_Festival" },
+  { name: "Wikipedia: Climate of China", url: "https://en.wikipedia.org/wiki/Climate_of_China" },
+];
+
 const travelerStories = [
   { name: "Sarah from London", quote: "Went in early April. The Great Wall was warm, not crowded, and the cherry blossoms in Beijing were unforgettable.", verdict: "Spring --- nailed it", verdictColor: "text-emerald-600 bg-emerald-50", trip: "Beijing, 10 days, ~£1,400" },
   { name: "Mike from Austin", quote: "Booked during Golden Week by mistake. The Forbidden City felt like a subway at rush hour. Never again.", verdict: "Golden Week --- disaster", verdictColor: "text-red-600 bg-red-50", trip: "Beijing + Xi'an, 7 days, ~\$2,200" },
@@ -91,7 +100,12 @@ const faqPageSchema = JSON.stringify({
     "datePublished": "2026-01-15",
     "dateModified": "2026-07-31",
     "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.best-time-to-visit-china.com" },
-    "image": "https://www.best-time-to-visit-china.com/images/og-china-best-time.webp"
+    "image": "https://www.best-time-to-visit-china.com/images/og-china-best-time.webp",
+    "citation": [
+      { "@type": "CreativeWork", "name": "China Meteorological Administration", "url": "https://www.cma.gov.cn/en/" },
+      { "@type": "CreativeWork", "name": "Golden Week (China) - Wikipedia", "url": "https://en.wikipedia.org/wiki/Golden_Week_(China)" },
+      { "@type": "CreativeWork", "name": "Harbin International Ice and Snow Sculpture Festival - Wikipedia", "url": "https://en.wikipedia.org/wiki/Harbin_International_Ice_and_Snow_Sculpture_Festival" }
+    ]
   }`} />
   <!-- FAQPage Schema (AI citation signal) -->
   <script type="application/ld+json" set:html={faqPageSchema} />
@@ -545,7 +559,7 @@ const faqPageSchema = JSON.stringify({
       <div class="mb-8">
         <p class="text-xs font-semibold tracking-[0.2em] uppercase text-zinc-400 mb-5">Why Trust This Guide</p>
         <h3 class="text-2xl md:text-3xl font-bold tracking-tighter leading-tight text-zinc-900 mb-3">Built by travelers,<br /><em class="font-normal italic">backed by data</em></h3>
-        <p class="text-sm text-zinc-600 leading-relaxed max-w-3xl">Every recommendation is based on aggregated weather data (10-year averages), actual flight price tracking, crowd-sourced crowding reports, and firsthand experience traveling across 20+ Chinese cities. No AI-generated guesses. No sponsored rankings.</p>
+        <p class="text-sm text-zinc-600 leading-relaxed max-w-3xl">Every recommendation is based on aggregated weather data (10-year averages from the <a href="https://www.cma.gov.cn/en/" target="_blank" rel="noopener" class="text-accent-600 hover:text-accent-700 underline decoration-accent-300 underline-offset-2">China Meteorological Administration</a>), actual flight price tracking via <a href="https://www.google.com/travel/flights" target="_blank" rel="noopener" class="text-accent-600 hover:text-accent-700 underline decoration-accent-300 underline-offset-2">Google Flights</a>, crowd-sourced crowding reports, and firsthand experience traveling across 20+ Chinese cities. No AI-generated guesses. No sponsored rankings.</p>
       </div>
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-px bg-zinc-100 border border-zinc-100 rounded-xl overflow-hidden mb-6">
         {[
@@ -565,6 +579,28 @@ const faqPageSchema = JSON.stringify({
         <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> Flight price tracking</span>
         <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> Crowd reports</span>
         <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> Updated <span id="last-updated">Jul 2026</span></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== SOURCES & CITATIONS (AI citability + E-E-A-T) ======== -->
+  <section class="reveal max-w-7xl mx-auto px-4 py-16">
+    <div class="max-w-3xl mx-auto">
+      <p class="text-xs font-semibold tracking-[0.2em] uppercase text-zinc-400 mb-5">Sources</p>
+      <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter leading-[1.02] text-zinc-900 mb-5">Where our numbers<br /><em class="font-normal italic">come from</em></h2>
+      <p class="text-zinc-500 max-w-2xl leading-relaxed mb-8">Every figure on this page traces back to an authoritative source &mdash; weather to the China Meteorological Administration, crowds and holidays to Wikipedia and the Ministry of Culture and Tourism, prices to Google Flights. Verify us.</p>
+      <blockquote class="border-l-4 border-accent-300 pl-5 py-3 mb-6 text-sm text-zinc-600 italic leading-relaxed bg-zinc-50 rounded-r-lg">
+        <p>&ldquo;The Chinese government reported that more than 637 million people traveled within China, creating around 466 billion yuan ($68.6 billion) in tourism revenue, during their country&rsquo;s annual &lsquo;Golden Week&rsquo;.&rdquo;</p>
+        <footer class="mt-2 text-xs text-zinc-400 not-italic">&mdash; <cite><a href="https://en.wikipedia.org/wiki/Golden_Week_(China)" target="_blank" rel="noopener" class="underline hover:text-accent-600 transition-colors">Wikipedia, Golden Week (China)</a></cite></footer>
+      </blockquote>
+      <blockquote class="border-l-4 border-accent-300 pl-5 py-3 mb-8 text-sm text-zinc-600 italic leading-relaxed bg-zinc-50 rounded-r-lg">
+        <p>&ldquo;&hellip;an annual winter festival that takes place in Harbin, Heilongjiang, China, and is now the largest ice and snow festival in the world.&rdquo;</p>
+        <footer class="mt-2 text-xs text-zinc-400 not-italic">&mdash; <cite><a href="https://en.wikipedia.org/wiki/Harbin_International_Ice_and_Snow_Sculpture_Festival" target="_blank" rel="noopener" class="underline hover:text-accent-600 transition-colors">Wikipedia, Harbin International Ice and Snow Sculpture Festival</a></cite></footer>
+      </blockquote>
+      <div class="flex flex-wrap gap-2">
+        {sources.map((s) => (
+          <a href={s.url} target="_blank" rel="noopener" class="px-3 py-1.5 border border-zinc-200 rounded-full text-xs text-zinc-600 hover:text-accent-600 hover:border-accent-300 hover:bg-accent-50 transition-colors">{s.name}</a>
+        ))}
       </div>
     </div>
   </section>

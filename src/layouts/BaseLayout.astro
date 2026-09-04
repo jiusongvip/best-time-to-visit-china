@@ -9,6 +9,10 @@ export interface Props {
 }
 
 const { title, description, ogImage = "/og-default.png" } = Astro.props;
+// Brand suffix: standardize every title on the exact form "… | When to Visit China"
+// so <title>, og:title and og:site_name all agree with the schema brand name.
+const BRAND = "When to Visit China";
+const fullTitle = title.includes(BRAND) ? title : `${title} | ${BRAND}`;
 // og:image 统一转为绝对 URL（社交平台抓取器无法解析相对路径）
 const ogImageURL = ogImage.startsWith("http") ? ogImage : new URL(ogImage, Astro.site).href;
 const canonicalURL = Astro.url.pathname === "/"
@@ -27,6 +31,7 @@ const pageLabels: Record<string, string> = {
   "about": "About",
   "contact": "Contact",
   "privacy": "Privacy",
+  "terms": "Terms",
   "404": "404",
 };
 // Segments that map to a real hub page (the literal /month & /region paths do not exist)
@@ -78,19 +83,20 @@ if (pathParts.length > 0) {
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={canonicalURL} />
     <meta name="description" content={description} />
-    <meta property="og:title" content={title} />
+    <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
+    <meta property="og:site_name" content={BRAND} />
     <meta property="og:image" content={ogImageURL} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
+    <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageURL} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-    <title>{title}</title>
+    <title>{fullTitle}</title>
     <script is:inline>document.documentElement.classList.add('js');</script>
     {breadcrumbSchema && <>
       <!-- BreadcrumbList Schema -->
@@ -103,7 +109,10 @@ if (pathParts.length > 0) {
       "name": "When to Visit China",
       "url": "https://www.best-time-to-visit-china.com",
       "logo": "https://www.best-time-to-visit-china.com/favicon.svg",
-      "description": "Expert travel guide helping you find the best time to visit China. Month-by-month weather, crowd calendars, festival dates, and region-specific advice."
+      "description": "Expert travel guide helping you find the best time to visit China. Month-by-month weather, crowd calendars, festival dates, and region-specific advice.",
+      "sameAs": [
+        "https://github.com/jiusongvip/best-time-to-visit-china"
+      ]
     }`} />
     <script type="application/ld+json" set:html={`{
       "@context": "https://schema.org",

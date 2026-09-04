@@ -1,0 +1,55 @@
+---
+import "../styles/global.css";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<BaseLayout title="Terms of Use | When to Visit China" description="Terms of use for When to Visit China: how our content may be used, accuracy and correction policy, and limitations of liability for travel advice.">
+  <section class="min-h-[100dvh]">
+    <Nav />
+    <div class="max-w-2xl mx-auto px-4 py-6">
+      <p class="text-sm font-medium tracking-wide text-accent-600 uppercase mb-4">Legal</p>
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-zinc-900 mb-4 leading-none">Terms of Use</h1>
+      <p class="text-sm text-zinc-400 mb-12">Last updated: September 2026</p>
+
+      <div class="space-y-8 text-sm text-zinc-700 leading-relaxed">
+        <div>
+          <h2 class="text-lg font-bold text-zinc-900 mb-3">1. Acceptance of Terms</h2>
+          <p>By accessing When to Visit China (www.best-time-to-visit-china.com), you agree to these terms. If you do not agree, please do not use the site.</p>
+        </div>
+
+        <div>
+          <h2 class="text-lg font-bold text-zinc-900 mb-3">2. Informational Purpose</h2>
+          <p>All content on this site is provided for general informational and educational purposes only. Travel conditions, prices, weather patterns, and festival dates change over time. While we work hard to keep our data current and accurate, we make no warranties about the completeness, reliability, or accuracy of this information. Any action you take based on the information on this site is strictly at your own risk.</p>
+        </div>
+
+        <div>
+          <h2 class="text-lg font-bold text-zinc-900 mb-3">3. Content Ownership</h2>
+          <p>Unless otherwise noted, the content on this site — text, data compilations, and original images — is the property of When to Visit China. You may quote or reference our content with attribution and a link back to the relevant page. You may not republish substantial portions of the site without written permission.</p>
+        </div>
+
+        <div>
+          <h2 class="text-lg font-bold text-zinc-900 mb-3">4. Accuracy and Corrections</h2>
+          <p>We update weather and price data at least quarterly and festival dates annually. If you spot an error, email us at <a href="mailto:hello@best-time-to-visit-china.com" class="text-accent-600 hover:text-accent-700 underline">hello@best-time-to-visit-china.com</a> — we will verify and correct it, and note the correction where appropriate.</p>
+        </div>
+
+        <div>
+          <h2 class="text-lg font-bold text-zinc-900 mb-3">5. Limitation of Liability</h2>
+          <p>When to Visit China shall not be liable for any loss or damage arising from the use of, or reliance on, the information presented on this site, including travel bookings, missed connections, weather disruptions, or financial losses. Always confirm critical details — visa requirements, opening hours, ticket availability — with official sources before you travel.</p>
+        </div>
+
+        <div>
+          <h2 class="text-lg font-bold text-zinc-900 mb-3">6. External Links</h2>
+          <p>We link to third-party sites (such as Wikipedia, government sources, and booking tools) for reference. We do not control and are not responsible for their content or availability.</p>
+        </div>
+
+        <div>
+          <h2 class="text-lg font-bold text-zinc-900 mb-3">7. Changes to These Terms</h2>
+          <p>We may update these terms from time to time. The last updated date at the top of this page reflects the most recent revision. See also our <a href="/privacy/" class="text-accent-600 hover:text-accent-700 underline">Privacy Policy</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <Footer />
+</BaseLayout>
