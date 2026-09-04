@@ -11,35 +11,35 @@ https://www.best-time-to-visit-china.com
 Interactive guide covering best travel seasons, regional climate matrix, month timeline, crowd calendar, cost trends, and seasonal narratives. Includes comparison tool and interactive China region map.
 
 ### When to Go Quiz
-https://best-time-to-visit-china.com/when-to-go
+https://www.best-time-to-visit-china.com/when-to-go/
 Eight-question interactive quiz that recommends ideal travel months based on your preferences for region, budget, activity type, crowd tolerance, temperature, festivals, trip duration, and departure origin.
 
 ### Monthly Guide
-https://best-time-to-visit-china.com/monthly-guide
+https://www.best-time-to-visit-china.com/monthly-guide/
 Complete month-by-month breakdown of weather (temperature range, rain days), crowd levels (1-5 scale), best regions per month, highlights, downsides, and packing recommendations for all 12 months.
 
 ### By Region
-https://best-time-to-visit-china.com/by-region
+https://www.best-time-to-visit-china.com/by-region/
 Regional travel timing guide covering 8 major Chinese regions: Beijing/North, Shanghai/East, Guilin/South, Chengdu/Sichuan, Yunnan, Tibet, Xi'an/Central, and Hong Kong. Each with best months, avoidance windows, temperatures, highlights, and local tips.
 
 ### Festivals Calendar
-https://best-time-to-visit-china.com/festivals
+https://www.best-time-to-visit-china.com/festivals/
 Complete 2026 Chinese festival calendar with dates, durations, crowd levels, descriptions, and practical travel tips for 9 major festivals including Chinese New Year, Golden Week, Mid-Autumn, and Dragon Boat.
 
 ### Crowd Calendar
-https://best-time-to-visit-china.com/crowd-calendar
+https://www.best-time-to-visit-china.com/crowd-calendar/
 Interactive full-year crowd calendar for 2026. Each day color-coded by crowd level with event notes for major Chinese holidays. Covers aggregated data from China's top 20 attractions.
 
 ### Travel Cost Guide
-https://best-time-to-visit-china.com/travel-cost
+https://www.best-time-to-visit-china.com/travel-cost/
 Comprehensive cost breakdown including flight price trends by month (bar chart), hotel price index by season, city-by-city cost comparison table, three sample itineraries at budget/mid/luxury tiers, and 8 money-saving tips.
 
 ### FAQ
-https://best-time-to-visit-china.com/faq
+https://www.best-time-to-visit-china.com/faq/
 Twelve frequently asked questions covering best months, cheapest times, worst periods, Golden Week crowds, October weather, Chinese New Year travel, rainy season timing, visa requirements, safety, trip costs, tour vs independent travel, and booking timelines.
 
 ### About
-https://best-time-to-visit-china.com/about
+https://www.best-time-to-visit-china.com/about/
 Author bio, methodology explanation covering climate data sources (CMA), flight price methodology, crowd intelligence, and editorial policy.
 
 ## Data Sources
@@ -50,4 +50,4 @@ Author bio, methodology explanation covering climate data sources (CMA), flight 
 
 ## Contact
 - Email: hello@best-time-to-visit-china.com
-- Privacy: https://best-time-to-visit-china.com/privacy
+- Privacy: https://www.best-time-to-visit-china.com/privacy/

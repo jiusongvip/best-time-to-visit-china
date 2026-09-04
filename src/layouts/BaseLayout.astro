@@ -29,17 +29,31 @@ const pageLabels: Record<string, string> = {
   "privacy": "Privacy",
   "404": "404",
 };
+// Segments that map to a real hub page (the literal /month & /region paths do not exist)
+const segmentAliases: Record<string, { name: string; href: string }> = {
+  "month": { name: "Month-by-Month Guide", href: "/monthly-guide/" },
+  "region": { name: "By Region", href: "/by-region/" },
+};
+const baseUrl = Astro.site?.href.replace(/\/$/, "") ?? "";
 let breadcrumbSchema = "";
 let crumbs: { name: string; item: string }[] = [];
 const pathParts = Astro.url.pathname.split('/').filter(Boolean);
 if (pathParts.length > 0) {
-  const baseUrl = canonicalURL.replace(Astro.url.pathname, '/');
   const items = [{ "@type": "ListItem", "position": 1, "name": "Home", "item": baseUrl }];
   crumbs.push({ name: "Home", item: baseUrl });
   for (let i = 0; i < pathParts.length; i++) {
     const part = pathParts[i];
-    const name = pageLabels[part] ?? part.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase());
-    const item = baseUrl + pathParts.slice(0, i + 1).join('/');
+    const alias = segmentAliases[part];
+    let name: string;
+    let item: string;
+    if (alias && i < pathParts.length - 1) {
+      // Intermediate segment such as /month/… or /region/… → real hub page with trailing slash
+      name = alias.name;
+      item = baseUrl + alias.href;
+    } else {
+      name = pageLabels[part] ?? part.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase());
+      item = canonicalURL;
+    }
     items.push({ "@type": "ListItem", "position": (i + 2), "name": name, "item": item });
     crumbs.push({ name, item });
   }
@@ -103,7 +117,7 @@ if (pathParts.length > 0) {
       "@type": "Person",
       "name": "Wei Zhang",
       "jobTitle": "Founder & Lead Editor",
-      "url": "https://www.best-time-to-visit-china.com/about",
+      "url": "https://www.best-time-to-visit-china.com/about/",
       "description": "Travel writer and China specialist with over a decade of firsthand experience across 20+ Chinese cities. Founder of When to Visit China."
     }`} />
   </head>

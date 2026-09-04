@@ -19,7 +19,7 @@ export function getStaticPaths() {
 }
 
 const { month } = Astro.props;
-const canonical = `https://www.best-time-to-visit-china.com/month/${month.month}`;
+const canonical = `https://www.best-time-to-visit-china.com/month/${month.month}/`;
 const MONTH_INDEX = { january:0, february:1, march:2, april:3, may:4, june:5, july:6, august:7, september:8, october:9, november:10, december:11 };
 const now = new Date();
 const currentYear = now.getFullYear() + ((MONTH_INDEX[month.month] < now.getMonth() && month.month !== "august") ? 1 : 0); // August: keep current year for now (user requested no roll)
@@ -29,16 +29,16 @@ const relatedRegions = (monthRegionSlugs[month.month] ?? [])
   .map((slug) => regionGuides.find((r) => r.slug === slug))
   .filter((r): r is NonNullable<typeof r> => Boolean(r));
 
-const title = `China Weather in ${month.label} ${currentYear}: ${month.tempLow}–${month.tempHigh}°C, Rain Days & Crowd Guide`;
-const meta = `China weather in ${month.label} ${currentYear}: averages ${month.tempLow}–${month.tempHigh}°C with ${month.rainDays} rainy days, crowd level ${month.crowdLevel}/5. Best regions, packing list and tips to dodge the crowds.`;
-const desc = `China weather in ${month.label} ${currentYear}: averages ${month.tempLow}–${month.tempHigh}°C, ${month.rainDays} rainy days, crowd level ${month.crowdLevel}/5. See the best regions, packing list, festivals and tips to beat the crowds.`;
+const title = `China Weather in ${month.label} ${currentYear}: ${month.tempLow}–${month.tempHigh}°C & Crowds`;
+const meta = `China weather in ${month.label} ${currentYear}: averages ${month.tempLow}–${month.tempHigh}°C with ${month.rainDays} rainy days and crowd level ${month.crowdLevel}/5. See the best regions, packing list and tips to dodge the crowds.`;
+const desc = `China weather in ${month.label} ${currentYear}: averages ${month.tempLow}–${month.tempHigh}°C, ${month.rainDays} rainy days and a ${month.crowdLevel}/5 crowd level. See the best regions, packing list, festivals and tips to beat the crowds.`;
 
 const articleSchema = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": title,
   "description": meta,
-  "author": { "@type": "Person", "name": "Wei Zhang", "url": "https://www.best-time-to-visit-china.com/about" },
+  "author": { "@type": "Person", "name": "Wei Zhang", "url": "https://www.best-time-to-visit-china.com/about/" },
   "publisher": { "@type": "Organization", "name": "When to Visit China", "logo": { "@type": "ImageObject", "url": "https://www.best-time-to-visit-china.com/favicon.svg" } },
   "datePublished": "2026-01-15",
   "dateModified": "2026-09-03",
@@ -109,7 +109,7 @@ const articleSchema = JSON.stringify({
         {relatedRegions.length > 0 && (
           <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {relatedRegions.map((r) => (
-              <a href={`/region/${r.slug}`} class="group bg-white border border-zinc-200 rounded-xl p-4 hover:border-accent-300 transition-colors no-underline">
+              <a href={`/region/${r.slug}/`} class="group bg-white border border-zinc-200 rounded-xl p-4 hover:border-accent-300 transition-colors no-underline">
                 <p class="text-sm font-bold text-zinc-900 group-hover:text-accent-600 transition-colors">{r.name}</p>
                 <p class="text-xs text-blue-700 font-medium mt-0.5">Best: {r.best}</p>
               </a>
@@ -278,13 +278,13 @@ const articleSchema = JSON.stringify({
           return (
             <>
               {prev ? (
-                <a href={`/month/${prev.month}`} class="inline-flex items-center gap-1.5 text-sm font-medium text-zinc-500 hover:text-accent-600 transition-colors no-underline">
+                <a href={`/month/${prev.month}/`} class="inline-flex items-center gap-1.5 text-sm font-medium text-zinc-500 hover:text-accent-600 transition-colors no-underline">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
                   Previous: {prev.label}
                 </a>
               ) : <span />}
               {next && (
-                <a href={`/month/${next.month}`} class="inline-flex items-center gap-1.5 text-sm font-medium text-zinc-500 hover:text-accent-600 transition-colors no-underline">
+                <a href={`/month/${next.month}/`} class="inline-flex items-center gap-1.5 text-sm font-medium text-zinc-500 hover:text-accent-600 transition-colors no-underline">
                   Next: {next.label}
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
@@ -301,7 +301,7 @@ const articleSchema = JSON.stringify({
           {monthlyData.map((m) => (
             m.month === month.month
               ? <span class="px-3 py-1.5 rounded-full text-xs font-medium bg-accent-600 text-white">{m.label}</span>
-              : <a href={`/month/${m.month}`} class="px-3 py-1.5 rounded-full text-xs font-medium bg-white border border-zinc-200 text-zinc-600 hover:border-accent-300 hover:text-accent-600 transition-colors no-underline">{m.label}</a>
+              : <a href={`/month/${m.month}/`} class="px-3 py-1.5 rounded-full text-xs font-medium bg-white border border-zinc-200 text-zinc-600 hover:border-accent-300 hover:text-accent-600 transition-colors no-underline">{m.label}</a>
           ))}
         </div>
       </section>

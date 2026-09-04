@@ -86,7 +86,7 @@ const faqPageSchema = JSON.stringify({
     "@type": "Article",
     "headline": "${pageTitle}",
     "description": "${pageDesc}",
-    "author": { "@type": "Person", "name": "Wei Zhang", "url": "https://www.best-time-to-visit-china.com/about" },
+    "author": { "@type": "Person", "name": "Wei Zhang", "url": "https://www.best-time-to-visit-china.com/about/" },
     "publisher": { "@type": "Organization", "name": "When to Visit China", "logo": { "@type": "ImageObject", "url": "https://www.best-time-to-visit-china.com/favicon.svg" } },
     "datePublished": "2026-01-15",
     "dateModified": "2026-07-31",
@@ -138,7 +138,7 @@ const faqPageSchema = JSON.stringify({
           12 months, 12 reasons to go
         </p>
         <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.95] text-zinc-950">
-          Best time to visit<br />
+          Best time to visit <br />
           <em class="font-normal italic">China</em>
         </h1>
         <p class="text-base md:text-lg text-zinc-500 leading-relaxed mt-6 mb-8 max-w-xl mx-auto">Almost all year round &mdash; every month has somewhere that shines.</p>
@@ -160,7 +160,7 @@ const faqPageSchema = JSON.stringify({
           const col = i % 4;
           const offset = col === 1 ? "lg:-mt-10" : col === 2 ? "lg:-mt-20" : col === 3 ? "lg:-mt-28" : "";
           return (
-            <a href={`/month/${m.month}`} class={`group relative overflow-hidden rounded-2xl aspect-[4/5] block no-underline shadow-sm ${offset}`}>
+            <a href={`/month/${m.month}/`} class={`group relative overflow-hidden rounded-2xl aspect-[4/5] block no-underline shadow-sm ${offset}`}>
               <img src={m.image} alt={m.imageAlt} width="1200" height="800" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
               <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/85 via-zinc-950/20 to-transparent"></div>
               <div class="absolute bottom-0 left-0 right-0 p-4 md:p-5">
