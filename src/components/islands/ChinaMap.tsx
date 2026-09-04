@@ -72,7 +72,7 @@ function RegionCard({ region, active, setActive }: { region: Region; active: str
   const isActive = active === region.slug;
   return (
     <a
-      href={`/by-region#${region.slug}`}
+      href={`/by-region/#${region.slug}`}
       className={`block rounded-xl border p-3 md:p-4 text-left transition-all cursor-pointer hover:shadow-md ${
         isActive ? "border-accent-400 bg-accent-50 shadow-md ring-1 ring-accent-200" : "border-zinc-200 bg-white hover:border-accent-200"
       }`}
