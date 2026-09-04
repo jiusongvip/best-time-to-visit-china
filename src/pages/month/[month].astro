@@ -30,6 +30,7 @@ const relatedRegions = (monthRegionSlugs[month.month] ?? [])
   .filter((r): r is NonNullable<typeof r> => Boolean(r));
 
 const title = `China Weather in ${month.label} ${currentYear}: ${month.tempLow}–${month.tempHigh}°C & Crowds`;
+const seoTitle = `China Weather in ${month.label}: ${month.tempLow}–${month.tempHigh}°C`;
 const meta = `China weather in ${month.label} ${currentYear}: averages ${month.tempLow}–${month.tempHigh}°C with ${month.rainDays} rainy days and crowd level ${month.crowdLevel}/5. See the best regions, packing list and tips to dodge the crowds.`;
 const desc = `China weather in ${month.label} ${currentYear}: averages ${month.tempLow}–${month.tempHigh}°C, ${month.rainDays} rainy days and a ${month.crowdLevel}/5 crowd level. See the best regions, packing list, festivals and tips to beat the crowds.`;
 
@@ -46,7 +47,7 @@ const articleSchema = JSON.stringify({
 });
 ---
 
-<BaseLayout title={title} description={meta} ogImage={month.image}>
+<BaseLayout title={seoTitle} description={meta} ogImage={month.image}>
   <script type="application/ld+json" set:html={articleSchema} />
   {month.faq && month.faq.length > 0 && (
     <script type="application/ld+json" set:html={JSON.stringify({

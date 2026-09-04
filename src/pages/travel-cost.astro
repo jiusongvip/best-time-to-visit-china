@@ -74,7 +74,7 @@ const cityCosts = [
 ];
 ---
 
-<BaseLayout title="China Travel Cost Guide: Flights, Hotels & Budgets" description="Complete cost breakdown for traveling in China: flight prices by month, hotel costs by season & city, three sample itineraries at every budget level.">
+<BaseLayout title="China Travel Cost Guide" description="Complete cost breakdown for traveling in China: flight prices by month, hotel costs by season & city, three sample itineraries at every budget level.">
   <section class="min-h-[100dvh]">
     <Nav />
     <div class="max-w-7xl mx-auto px-4 py-6">
@@ -131,7 +131,7 @@ const cityCosts = [
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           {itineraries.map((iti) => (
             <div class="bg-white border border-zinc-200 rounded-2xl p-6">
-              <p class="text-base font-bold text-zinc-900 mb-1">{iti.name}</p>
+              <h3 class="text-base font-bold text-zinc-900 mb-1">{iti.name}</h3>
               <div class="flex items-baseline gap-2 mb-4">
                 <span class="text-3xl font-bold text-accent-600">{iti.total}</span>
                 <span class="text-sm text-zinc-400">{iti.perDay}/day</span>
@@ -157,7 +157,7 @@ const cityCosts = [
           {cityCosts.map((c) => (
             <div class="bg-white border border-zinc-200 rounded-xl p-5">
               <div class="flex items-center justify-between mb-3">
-                <p class="text-base font-bold text-zinc-800">{c.city}</p>
+                <h3 class="text-base font-bold text-zinc-800">{c.city}</h3>
                 <span class="text-[10px] font-semibold tracking-widest uppercase px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-500">{c.tier}</span>
               </div>
               <div class="space-y-2 text-xs">

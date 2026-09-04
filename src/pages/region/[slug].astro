@@ -55,7 +55,7 @@ const articleSchema = JSON.stringify({
     <Nav />
     <div class="max-w-4xl mx-auto px-4 py-8">
       <p class="text-sm font-medium tracking-wide text-accent-600 uppercase mb-4">Region Guide</p>
-      <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-zinc-900 mb-4 leading-none">{region.h1 ?? region.title}</h1>
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-zinc-900 mb-4 leading-none">{region.h1 ?? region.question}</h1>
       <p class="text-lg text-zinc-500 leading-relaxed mb-10">{region.meta}</p>
 
       <img src={region.image} alt={region.imageAlt} width="1200" height="800" fetchpriority="high" class="w-full h-auto rounded-2xl shadow-sm border border-zinc-100 mb-12" />
@@ -97,7 +97,7 @@ const articleSchema = JSON.stringify({
         {region.weather.map((w) => (
           <div class="bg-white border border-zinc-200 rounded-xl p-5">
             <div class="flex items-center justify-between mb-2">
-              <p class="text-sm font-bold text-zinc-800">{w.season}</p>
+              <h3 class="text-sm font-bold text-zinc-800">{w.season}</h3>
               <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-zinc-100 text-zinc-600">{w.temp}</span>
             </div>
             <p class="text-sm text-zinc-600 leading-relaxed">{w.note}</p>
@@ -188,7 +188,7 @@ const articleSchema = JSON.stringify({
             {region.comparison.map((c) => (
               <div class="bg-white border border-zinc-200 rounded-xl p-5">
                 <div class="flex items-center justify-between mb-2">
-                  <a href={c.link} class="text-sm font-bold text-blue-700 hover:text-accent-600 no-underline">{c.region}</a>
+                  <h3 class="text-sm font-bold"><a href={c.link} class="text-blue-700 hover:text-accent-600 no-underline">{c.region}</a></h3>
                   <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-zinc-100 text-zinc-600">{c.when}</span>
                 </div>
                 <p class="text-sm text-zinc-700 leading-relaxed mb-1">{c.weather}</p>
