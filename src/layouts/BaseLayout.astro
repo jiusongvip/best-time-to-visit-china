@@ -2,13 +2,16 @@
 // BaseLayout.astro - Design Read: travel planning content-tool hybrid
 // Dial: VARIANCE=6 MOTION=5 DENSITY=4
 // Aesthetic: Tailwind + custom teal accent + Geist + restrained motion
+import { imgSrcset } from "../lib/img";
 export interface Props {
   title: string;
   description: string;
   ogImage?: string;
+  /** URL of the page's LCP image; emits a <link rel=preload> with a responsive imagesrcset */
+  preloadImage?: string;
 }
 
-const { title, description, ogImage = "/og-default.png" } = Astro.props;
+const { title, description, ogImage = "/og-default.png", preloadImage } = Astro.props;
 // Brand suffix: standardize every title on the exact form "… | When to Visit China"
 // so <title>, og:title and og:site_name all agree with the schema brand name.
 const BRAND = "When to Visit China";
@@ -69,20 +72,27 @@ if (pathParts.length > 0) {
 <!doctype html>
 <html lang="en" class="scroll-smooth">
   <head>
-    <!-- Google tag (gtag.js) - deferred until after page load to avoid TBT -->
+    <!-- Google tag (gtag.js) - deferred until first interaction (or 5s) to keep the main thread free during LCP -->
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-V8ZY1K3CBW');
-      window.addEventListener('load', function () {
-        setTimeout(function () {
+      (function () {
+        var loaded = false;
+        function loadGtag() {
+          if (loaded) return;
+          loaded = true;
           var s = document.createElement('script');
           s.async = true;
           s.src = 'https://www.googletagmanager.com/gtag/js?id=G-V8ZY1K3CBW';
           document.head.appendChild(s);
-        }, 1200);
-      });
+        }
+        ['pointerdown', 'keydown', 'touchstart', 'scroll'].forEach(function (evt) {
+          window.addEventListener(evt, loadGtag, { once: true, passive: true });
+        });
+        setTimeout(loadGtag, 8000);
+      })();
     </script>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -103,6 +113,16 @@ if (pathParts.length > 0) {
     <title>{fullTitle}</title>
     <link rel="preload" href="/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/geist-mono-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+    {preloadImage && imgSrcset(preloadImage) && (
+      <link
+        rel="preload"
+        as="image"
+        href={preloadImage}
+        imagesrcset={imgSrcset(preloadImage)}
+        imagesizes="(min-width: 1280px) 22vw, (min-width: 1024px) 25vw, (min-width: 640px) 30vw, 46vw"
+        fetchpriority="high"
+      />
+    )}
     <script is:inline>document.documentElement.classList.add('js');</script>
     {breadcrumbSchema && <>
       <!-- BreadcrumbList Schema -->

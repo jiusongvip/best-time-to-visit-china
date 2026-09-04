@@ -89,7 +89,7 @@ const faqPageSchema = JSON.stringify({
 });
 ---
 
-<BaseLayout title={pageTitle} description={pageDesc} ogImage="/images/og-china-best-time.webp">
+<BaseLayout title={pageTitle} description={pageDesc} ogImage="/images/og-china-best-time.webp" preloadImage={monthlyData[0].image}>
   <!-- JSON-LD Schema -->
   <script type="application/ld+json" set:html={`{
     "@context": "https://schema.org",
