@@ -88,6 +88,7 @@ export default function ComparisonTool({ initialMode = "months", initialA = "apr
         <select
           value={a}
           onChange={(e) => setA(e.target.value)}
+          aria-label={mode === "months" ? "First month to compare" : "First region to compare"}
           className="w-full p-3 rounded-xl border border-zinc-200 text-sm font-medium text-zinc-700 bg-white focus:border-accent-400 focus:ring-1 focus:ring-accent-200 outline-none"
         >
           {labels.map(([k, v]) => <option key={k as string} value={k as string}>{v as string}</option>)}
@@ -95,6 +96,7 @@ export default function ComparisonTool({ initialMode = "months", initialA = "apr
         <select
           value={b}
           onChange={(e) => setB(e.target.value)}
+          aria-label={mode === "months" ? "Second month to compare" : "Second region to compare"}
           className="w-full p-3 rounded-xl border border-zinc-200 text-sm font-medium text-zinc-700 bg-white focus:border-accent-400 focus:ring-1 focus:ring-accent-200 outline-none"
         >
           {labels.map(([k, v]) => <option key={k as string} value={k as string}>{v as string}</option>)}
