@@ -1,2 +1,9 @@
 # sitemap default path → sitemap index (Google crawlers probe /sitemap.xml first)
 /sitemap.xml  https://www.best-time-to-visit-china.com/sitemap-index.xml  301
+
+# External links point to the bare hub paths; the real pages live elsewhere.
+# Exact matches only — /month/<name>/ and /region/<slug>/ are real static pages.
+/region  https://www.best-time-to-visit-china.com/by-region/  301
+/region/  https://www.best-time-to-visit-china.com/by-region/  301
+/month  https://www.best-time-to-visit-china.com/monthly-guide/  301
+/month/  https://www.best-time-to-visit-china.com/monthly-guide/  301
