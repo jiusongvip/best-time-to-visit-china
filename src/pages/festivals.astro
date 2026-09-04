@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { imgSrcset } from "../lib/img";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
@@ -36,7 +37,7 @@ const festivals = [
         {festivals.map((f) => (
           <div class="bg-white border border-zinc-200 rounded-2xl overflow-hidden">
             <div class="relative">
-              <img src={f.image} alt={f.imageAlt} width="1200" height="360" loading="lazy" class="w-full h-44 md:h-56 object-cover" />
+              <img src={f.image} srcset={imgSrcset(f.image)} sizes="(min-width: 768px) 768px, 92vw" alt={f.imageAlt} width="1200" height="360" loading="lazy" class="w-full h-44 md:h-56 object-cover" />
               <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/60 via-transparent to-transparent"></div>
             </div>
             <div class="p-6 md:p-8">

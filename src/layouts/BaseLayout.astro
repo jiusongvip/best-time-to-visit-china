@@ -2,6 +2,7 @@
 // BaseLayout.astro - Design Read: travel planning content-tool hybrid
 // Dial: VARIANCE=6 MOTION=5 DENSITY=4
 // Aesthetic: Tailwind + custom teal accent + Geist + restrained motion
+import "@fontsource-variable/geist";
 export interface Props {
   title: string;
   description: string;
@@ -69,13 +70,20 @@ if (pathParts.length > 0) {
 <!doctype html>
 <html lang="en" class="scroll-smooth">
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V8ZY1K3CBW"></script>
-    <script>
+    <!-- Google tag (gtag.js) - deferred until after page load to avoid TBT -->
+    <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-V8ZY1K3CBW');
+      window.addEventListener('load', function () {
+        setTimeout(function () {
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=G-V8ZY1K3CBW';
+          document.head.appendChild(s);
+        }, 1200);
+      });
     </script>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -93,9 +101,6 @@ if (pathParts.length > 0) {
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageURL} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
     <title>{fullTitle}</title>
     <script is:inline>document.documentElement.classList.add('js');</script>
     {breadcrumbSchema && <>

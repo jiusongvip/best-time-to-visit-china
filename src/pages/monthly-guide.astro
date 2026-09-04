@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { imgSrcset } from "../lib/img";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
@@ -47,7 +48,7 @@ import { regionGuides } from "../data/regions.ts";
         {monthlyData.map((m) => (
           <div class="bg-white border border-zinc-200 rounded-2xl overflow-hidden">
             <a href={`/month/${m.month}/`} class="relative block overflow-hidden no-underline group">
-              <img src={m.image} alt={m.imageAlt} width="1200" height="360" loading="lazy" class="w-full h-48 md:h-60 object-cover transition-transform duration-500 group-hover:scale-105" />
+              <img src={m.image} srcset={imgSrcset(m.image)} sizes="(min-width: 768px) 768px, 92vw" alt={m.imageAlt} width="1200" height="360" loading="lazy" class="w-full h-48 md:h-60 object-cover transition-transform duration-500 group-hover:scale-105" />
               <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-zinc-950/20 to-transparent"></div>
               <div class="absolute bottom-0 left-0 right-0 p-5">
                 <p class="text-xs font-bold tracking-widest uppercase text-accent-300 mb-1">Best for: {m.bestFor}</p>

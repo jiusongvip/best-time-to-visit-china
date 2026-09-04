@@ -1,5 +1,6 @@
 ---
 import "../../styles/global.css";
+import { imgSrcset } from "../../lib/img";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Nav from "../../components/Nav.astro";
 import Footer from "../../components/Footer.astro";
@@ -58,7 +59,7 @@ const articleSchema = JSON.stringify({
       <h1 class="text-4xl md:text-5xl font-bold tracking-tighter text-zinc-900 mb-4 leading-none">{region.h1 ?? region.question}</h1>
       <p class="text-lg text-zinc-500 leading-relaxed mb-10">{region.meta}</p>
 
-      <img src={region.image} alt={region.imageAlt} width="1200" height="800" fetchpriority="high" class="w-full h-auto rounded-2xl shadow-sm border border-zinc-100 mb-12" />
+      <img src={region.image} srcset={imgSrcset(region.image)} sizes="(min-width: 1024px) 896px, 92vw" alt={region.imageAlt} width="1200" height="800" fetchpriority="high" class="w-full h-auto rounded-2xl shadow-sm border border-zinc-100 mb-12" />
 
       <!-- Quick answer box -->
       <div class="bg-accent-50 border border-accent-200 rounded-2xl p-6 mb-12">
@@ -112,7 +113,7 @@ const articleSchema = JSON.stringify({
           <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-12">
             {region.seasonImages.map((img) => (
               <figure class="rounded-xl overflow-hidden border border-zinc-100">
-                <img src={img.src} alt={img.alt} width="600" height="800" loading="lazy" class="w-full h-44 object-cover" />
+                <img src={img.src} srcset={imgSrcset(img.src)} sizes="(min-width: 768px) 22vw, 46vw" alt={img.alt} width="600" height="800" loading="lazy" class="w-full h-44 object-cover" />
                 <figcaption class="text-xs text-zinc-500 px-2 py-1.5 text-center">{img.label}</figcaption>
               </figure>
             ))}

@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { imgSrcset } from "../lib/img";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { monthlyData } from "../data/weather.ts";
 import CostChart from "../components/islands/CostChart";
@@ -175,7 +176,7 @@ const faqPageSchema = JSON.stringify({
           const offset = col === 1 ? "lg:-mt-10" : col === 2 ? "lg:-mt-20" : col === 3 ? "lg:-mt-28" : "";
           return (
             <a href={`/month/${m.month}/`} class={`group relative overflow-hidden rounded-2xl aspect-[4/5] block no-underline shadow-sm ${offset}`}>
-              <img src={m.image} alt={m.imageAlt} width="1200" height="800" loading="lazy" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              <img src={m.image} srcset={imgSrcset(m.image)} sizes="(min-width: 1280px) 22vw, (min-width: 1024px) 25vw, (min-width: 640px) 30vw, 46vw" alt={m.imageAlt} width="1200" height="800" loading={i === 0 ? "eager" : "lazy"} fetchpriority={i === 0 ? "high" : undefined} class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
               <div class="absolute inset-0 bg-gradient-to-t from-zinc-950/85 via-zinc-950/20 to-transparent"></div>
               <div class="absolute bottom-0 left-0 right-0 p-4 md:p-5">
                 <p class="text-xs font-bold tracking-widest uppercase text-accent-300 mb-1">{m.label}</p>
@@ -375,7 +376,7 @@ const faqPageSchema = JSON.stringify({
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div class="bg-gradient-to-br from-sky-50 to-blue-50 border border-sky-200 rounded-2xl p-6 md:p-8">
-        <img src="/images/spring-beijing.webp" alt="The Great Wall at Mutianyu with cherry blossoms in April spring" width="800" height="450" loading="lazy" class="w-full h-auto rounded-xl mb-6" />
+        <img src="/images/spring-beijing.webp" srcset={imgSrcset("/images/spring-beijing.webp")} sizes="(min-width: 768px) 40vw, 92vw" alt="The Great Wall at Mutianyu with cherry blossoms in April spring" width="800" height="450" loading="lazy" class="w-full h-auto rounded-xl mb-6" />
         <p class="text-xs font-semibold tracking-widest text-sky-600 uppercase mb-4">Spring &middot; April &middot; Beijing</p>
         <h3 class="text-xl font-bold text-zinc-900 mb-3">Cherry Blossoms and Clear Skies</h3>
         <p class="text-sm text-zinc-600 leading-relaxed mb-4">6:30 AM. You step onto the Great Wall at Mutianyu as the morning mist clears. Temperature: 16&deg;C, no humidity, visibility stretching to the mountains beyond. By 9 AM you have the watchtowers nearly to yourself. Lunch is jianbing from a roadside stall in Huairou &mdash; crispy crepe, egg, hoisin, 12 RMB. Afternoon: the Forbidden City under a piercing blue sky, cherry blossoms framing the Hall of Supreme Harmony. Evening: Peking duck at a courtyard restaurant in a hutong, the skin crackling under your teeth. You walk home through Nanluoguxiang as lanterns flicker on. You realize you have not checked your phone in eight hours.</p>
@@ -384,7 +385,7 @@ const faqPageSchema = JSON.stringify({
         </div>
       </div>
       <div class="bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-200 rounded-2xl p-6 md:p-8">
-        <img src="/images/summer-yunnan.webp" alt="Erhai Lake and Cangshan mountains near Dali, Yunnan in July summer" width="800" height="450" loading="lazy" class="w-full h-auto rounded-xl mb-6" />
+        <img src="/images/summer-yunnan.webp" srcset={imgSrcset("/images/summer-yunnan.webp")} sizes="(min-width: 768px) 40vw, 92vw" alt="Erhai Lake and Cangshan mountains near Dali, Yunnan in July summer" width="800" height="450" loading="lazy" class="w-full h-auto rounded-xl mb-6" />
         <p class="text-xs font-semibold tracking-widest text-blue-600 uppercase mb-4">Summer &middot; July &middot; Yunnan</p>
         <h3 class="text-xl font-bold text-zinc-900 mb-3">Escape to the Roof of Southeast Asia</h3>
         <p class="text-sm text-zinc-600 leading-relaxed mb-4">While Shanghai sweats through 35&deg;C and 80% humidity, you are at 2,400 meters in Lijiang. Morning: a bike ride around Erhai Lake near Dali, the Cangshan mountains reflecting perfectly in still water. Temperature: 22&deg;C. Lunch: crossing-the-bridge noodles at a family-run shop where the owner has been making the same broth for 30 years. Afternoon: Tiger Leaping Gorge. The Jinsha River roars 2,000 meters below as you hike one of the world&rsquo;s deepest canyons. Evening: old town Lijiang, stone streets lit by paper lanterns, Naxi musicians playing ancient melodies. You order a second round of yak butter tea. Nobody back home will believe this is the same country as Beijing.</p>
@@ -393,7 +394,7 @@ const faqPageSchema = JSON.stringify({
         </div>
       </div>
       <div class="bg-gradient-to-br from-indigo-50 to-blue-50 border border-indigo-200 rounded-2xl p-6 md:p-8">
-        <img src="/images/autumn-xian.webp" alt="Terracotta Warriors in Xi'an under golden October autumn light" width="800" height="450" loading="lazy" class="w-full h-auto rounded-xl mb-6" />
+        <img src="/images/autumn-xian.webp" srcset={imgSrcset("/images/autumn-xian.webp")} sizes="(min-width: 768px) 40vw, 92vw" alt="Terracotta Warriors in Xi'an under golden October autumn light" width="800" height="450" loading="lazy" class="w-full h-auto rounded-xl mb-6" />
         <p class="text-xs font-semibold tracking-widest text-indigo-600 uppercase mb-4">Autumn &middot; October &middot; Xi&rsquo;an</p>
         <h3 class="text-xl font-bold text-zinc-900 mb-3">Golden Light and Ancient Stones</h3>
         <p class="text-sm text-zinc-600 leading-relaxed mb-4">8:00 AM. You are the first person through the doors at the Terracotta Warriors museum. Pit 1 stretches before you in silence &mdash; 2,000 clay soldiers, each face unique, bathed in the low golden light of an October morning. No jostling, no selfie sticks. Just you and two millennia of history. After lunch at the Muslim Quarter &mdash; hand-pulled biangbiang noodles, cumin-dusted lamb skewers, a pomegranate juice for the road &mdash; you bike the 14-kilometer Xi&rsquo;an City Wall as the sun sets behind the Bell Tower. The air is crisp, 19&deg;C, the perfect temperature for a sweater and a sense of wonder. Dinner is hot pot, and the conversation is about how this might be the best day of the trip.</p>
@@ -402,7 +403,7 @@ const faqPageSchema = JSON.stringify({
         </div>
       </div>
       <div class="bg-gradient-to-br from-slate-50 to-blue-50 border border-slate-200 rounded-2xl p-6 md:p-8">
-        <img src="/images/winter-harbin.webp" alt="Illuminated ice castle at the Harbin Ice and Snow Festival in January" width="800" height="450" loading="lazy" class="w-full h-auto rounded-xl mb-6" />
+        <img src="/images/winter-harbin.webp" srcset={imgSrcset("/images/winter-harbin.webp")} sizes="(min-width: 768px) 40vw, 92vw" alt="Illuminated ice castle at the Harbin Ice and Snow Festival in January" width="800" height="450" loading="lazy" class="w-full h-auto rounded-xl mb-6" />
         <p class="text-xs font-semibold tracking-widest text-slate-600 uppercase mb-4">Winter &middot; January &middot; Harbin</p>
         <h3 class="text-xl font-bold text-zinc-900 mb-3">Ice Castles at -25&deg;C</h3>
         <p class="text-sm text-zinc-600 leading-relaxed mb-4">It is -25&deg;C and your eyelashes have frozen. You do not care. You are standing inside a life-sized ice castle illuminated in electric blue and neon pink, part of the Harbin Ice and Snow Festival &mdash; the largest ice sculpture event on Earth. Morning: you brave the cold at Sun Island to see snow sculptures the size of apartment buildings. Lunch: guobaorou (sweet and sour pork) and a flask of baijiu for warmth at a Russian-influenced Harbin restaurant. Afternoon: Siberian tigers at the Harbin Tiger Park, impossibly massive, their breath visible in the frozen air. Evening: back to the ice city, now glowing under thousands of LED lights. You feel like you have wandered into a fairytale. You have never been this cold. You have never been this happy.</p>
