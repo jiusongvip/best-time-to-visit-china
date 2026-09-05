@@ -30,10 +30,10 @@ const relatedRegions = (monthRegionSlugs[month.month] ?? [])
   .map((slug) => regionGuides.find((r) => r.slug === slug))
   .filter((r): r is NonNullable<typeof r> => Boolean(r));
 
-const title = `China Weather in ${month.label} ${currentYear}: ${month.tempLow}–${month.tempHigh}°C & Crowds`;
-const seoTitle = `China Weather in ${month.label}: ${month.tempLow}–${month.tempHigh}°C`;
-const meta = `China weather in ${month.label} ${currentYear}: averages ${month.tempLow}–${month.tempHigh}°C with ${month.rainDays} rainy days and crowd level ${month.crowdLevel}/5. See the best regions, packing list and tips to dodge the crowds.`;
-const desc = `China weather in ${month.label} ${currentYear}: averages ${month.tempLow}–${month.tempHigh}°C, ${month.rainDays} rainy days and a ${month.crowdLevel}/5 crowd level. See the best regions, packing list, festivals and tips to beat the crowds.`;
+const title = `China Weather in ${month.label} ${currentYear}: Temp, Rain & Best Regions`;
+const seoTitle = `China Weather in ${month.label} ${currentYear}: ${month.tempLow}–${month.tempHigh}°C`;
+const meta = `${month.label} China weather: ${month.tempLow}–${month.tempHigh}°C, ${month.rainDays} rain days. See best regions, packing list & crowd tips. Real 10-year data.`;
+const desc = `Planning a China trip in ${month.label}? Get ${month.tempLow}–${month.tempHigh}°C weather, ${month.rainDays} rainy days, best regions to visit & insider tips to avoid crowds.`;
 
 const articleSchema = JSON.stringify({
   "@context": "https://schema.org",
@@ -256,6 +256,170 @@ const articleSchema = JSON.stringify({
         )}
       </div>
 
+      <!-- Budget Guide -->
+      {month.budget && (
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-zinc-900 mb-6">{month.label} Budget Guide</h2>
+          <div class="bg-white border border-zinc-200 rounded-xl p-6">
+            <div class="grid grid-cols-2 gap-4 mb-4">
+              <div class="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+                <p class="text-xs font-semibold text-emerald-700 uppercase mb-1">Budget Travel</p>
+                <p class="text-lg font-bold text-emerald-800">${month.budget.dailyLow}/day</p>
+              </div>
+              <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <p class="text-xs font-semibold text-blue-700 uppercase mb-1">Mid-Range</p>
+                <p class="text-lg font-bold text-blue-800">${month.budget.dailyHigh}/day</p>
+              </div>
+            </div>
+            <ul class="space-y-2">
+              {month.budget.tips.map((tip) => (
+                <li class="flex gap-2.5 text-sm text-zinc-700 leading-relaxed">
+                  <span class="flex-shrink-0 mt-0.5 w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center"><Icon name="check" class="w-3 h-3" /></span>
+                  {tip}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
+
+      <!-- Transportation Tips -->
+      {month.transportation && (
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-zinc-900 mb-6">Getting There & Around</h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="bg-white border border-zinc-200 rounded-xl p-5">
+              <p class="text-xs font-bold tracking-wide text-accent-600 uppercase mb-2">Flights</p>
+              <p class="text-sm text-zinc-700 leading-relaxed">{month.transportation.flightTips}</p>
+            </div>
+            <div class="bg-white border border-zinc-200 rounded-xl p-5">
+              <p class="text-xs font-bold tracking-wide text-accent-600 uppercase mb-2">Trains</p>
+              <p class="text-sm text-zinc-700 leading-relaxed">{month.transportation.trainTips}</p>
+            </div>
+            <div class="bg-white border border-zinc-200 rounded-xl p-5">
+              <p class="text-xs font-bold tracking-wide text-accent-600 uppercase mb-2">Local Transport</p>
+              <p class="text-sm text-zinc-700 leading-relaxed">{month.transportation.localTransport}</p>
+            </div>
+          </div>
+        </section>
+      )}
+
+      <!-- Accommodation Guide -->
+      {month.accommodation && (
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-zinc-900 mb-6">Where to Stay</h2>
+          <div class="bg-white border border-zinc-200 rounded-xl p-6">
+            <div class="flex items-baseline gap-2 mb-4">
+              <p class="text-xs font-semibold text-zinc-500 uppercase">Price Range:</p>
+              <p class="text-lg font-bold text-zinc-800">${month.accommodation.rangeLow} – ${month.accommodation.rangeHigh}/night</p>
+            </div>
+            <div class="mb-4">
+              <p class="text-xs font-semibold text-zinc-500 uppercase mb-2">Best Areas to Stay</p>
+              <div class="flex flex-wrap gap-2">
+                {month.accommodation.bestAreas.map((area) => (
+                  <span class="px-3 py-1.5 bg-accent-50 text-accent-700 text-xs font-medium rounded-full">{area}</span>
+                ))}
+              </div>
+            </div>
+            <ul class="space-y-2">
+              {month.accommodation.tips.map((tip) => (
+                <li class="flex gap-2.5 text-sm text-zinc-700 leading-relaxed">
+                  <span class="flex-shrink-0 mt-0.5 w-5 h-5 rounded-full bg-accent-100 text-accent-700 flex items-center justify-center"><Icon name="check" class="w-3 h-3" /></span>
+                  {tip}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
+
+      <!-- Food & Dining -->
+      {month.food && month.food.length > 0 && (
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-zinc-900 mb-6">What to Eat in {month.label}</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {month.food.map((item) => (
+              <div class="flex items-center gap-3 bg-white border border-zinc-200 rounded-xl p-4">
+                <span class="flex-shrink-0 w-8 h-8 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-sm">🍜</span>
+                <p class="text-sm text-zinc-700">{item}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- Cultural Events -->
+      {month.culturalEvents && month.culturalEvents.length > 0 && (
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-zinc-900 mb-6">Festivals & Events in {month.label}</h2>
+          <div class="flex flex-wrap gap-2">
+            {month.culturalEvents.map((event) => (
+              <a href="/festivals/" class="px-4 py-2 bg-accent-50 text-accent-700 text-sm font-medium rounded-full hover:bg-accent-100 transition-colors no-underline">{event}</a>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- Photography Tips -->
+      {month.photographyTips && month.photographyTips.length > 0 && (
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-zinc-900 mb-6">Photography Tips for {month.label}</h2>
+          <div class="bg-zinc-50 border border-zinc-100 rounded-xl p-6">
+            <ul class="space-y-3">
+              {month.photographyTips.map((tip) => (
+                <li class="flex gap-3 text-sm text-zinc-700 leading-relaxed">
+                  <span class="flex-shrink-0 mt-0.5 w-5 h-5 rounded-full bg-zinc-200 text-zinc-700 flex items-center justify-center text-xs">📷</span>
+                  <span>{tip}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
+
+      <!-- Traveler Ratings -->
+      {(month.familyFriendly || month.soloTravel) && (
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-zinc-900 mb-6">Is {month.label} Good For You?</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {month.familyFriendly && (
+              <div class="bg-white border border-zinc-200 rounded-xl p-5">
+                <div class="flex items-center gap-2 mb-3">
+                  <p class="text-sm font-bold text-zinc-900">Family Travel</p>
+                  <div class="flex gap-0.5">
+                    {[1,2,3,4,5].map((i) => (
+                      <span class={`w-4 h-4 rounded-full ${i <= month.familyFriendly!.rating ? 'bg-emerald-500' : 'bg-zinc-200'}`}></span>
+                    ))}
+                  </div>
+                </div>
+                <ul class="space-y-1.5">
+                  {month.familyFriendly.tips.map((tip) => (
+                    <li class="text-xs text-zinc-600 leading-relaxed">• {tip}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {month.soloTravel && (
+              <div class="bg-white border border-zinc-200 rounded-xl p-5">
+                <div class="flex items-center gap-2 mb-3">
+                  <p class="text-sm font-bold text-zinc-900">Solo Travel</p>
+                  <div class="flex gap-0.5">
+                    {[1,2,3,4,5].map((i) => (
+                      <span class={`w-4 h-4 rounded-full ${i <= month.soloTravel!.rating ? 'bg-emerald-500' : 'bg-zinc-200'}`}></span>
+                    ))}
+                  </div>
+                </div>
+                <ul class="space-y-1.5">
+                  {month.soloTravel.tips.map((tip) => (
+                    <li class="text-xs text-zinc-600 leading-relaxed">• {tip}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
       <!-- FAQ -->
       {month.faq && month.faq.length > 0 && (
         <section class="mb-12">
@@ -270,6 +434,43 @@ const articleSchema = JSON.stringify({
           </div>
         </section>
       )}
+
+      <!-- Best Regions This Month -->
+      {monthRegionSlugs[month.month] && monthRegionSlugs[month.month].length > 0 && (
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-zinc-900 mb-6">Best Regions to Visit in {month.label}</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {monthRegionSlugs[month.month].map((regionSlug) => {
+              const regionName = regionSlug.charAt(0).toUpperCase() + regionSlug.slice(1);
+              return (
+                <a href={`/region/${regionSlug}/`} class="flex items-center gap-3 bg-white border border-zinc-200 rounded-xl p-4 hover:border-accent-300 hover:bg-accent-50/30 transition-colors no-underline">
+                  <span class="flex-shrink-0 w-8 h-8 rounded-full bg-accent-100 text-accent-700 flex items-center justify-center text-xs">📍</span>
+                  <span class="text-sm font-medium text-zinc-700">{regionName}</span>
+                </a>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
+      <!-- Related Resources -->
+      <section class="mb-12 bg-zinc-50 border border-zinc-100 rounded-xl p-6">
+        <h2 class="text-lg font-bold text-zinc-900 mb-4">Plan Your China Trip</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <a href="/crowd-calendar/" class="flex items-center gap-2 text-sm text-accent-600 hover:text-accent-700 no-underline">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Crowd Calendar
+          </a>
+          <a href="/travel-cost/" class="flex items-center gap-2 text-sm text-accent-600 hover:text-accent-700 no-underline">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            Travel Cost Guide
+          </a>
+          <a href="/festivals/" class="flex items-center gap-2 text-sm text-accent-600 hover:text-accent-700 no-underline">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            Festivals & Events
+          </a>
+        </div>
+      </section>
 
       <!-- Prev / Next month -->
       <div class="flex flex-col sm:flex-row justify-between gap-3 border-t border-zinc-100 pt-8 mb-4">
