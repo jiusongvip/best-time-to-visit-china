@@ -30,9 +30,55 @@ const relatedRegions = (monthRegionSlugs[month.month] ?? [])
   .map((slug) => regionGuides.find((r) => r.slug === slug))
   .filter((r): r is NonNullable<typeof r> => Boolean(r));
 
+// City-level weather rows. Rain comes from the regional band each city sits in, never invented.
+const PLACE_ZONES: [string, string][] = [
+  ["inner mongolia", "mongolia"], ["hulunbuir", "mongolia"],
+  ["changchun", "northeastern"], ["harbin", "northeastern"],
+  ["beijing", "northern"], ["xi'an", "northern"],
+  ["shanghai", "eastern"], ["hangzhou", "eastern"], ["nanjing", "eastern"],
+  ["guangzhou", "southern"], ["guilin", "southern"], ["yangshuo", "southern"],
+  ["kunming", "southwestern"], ["dali", "southwestern"], ["lijiang", "southwestern"],
+  ["shangri-la", "southwestern"], ["jiuzhaigou", "southwestern"], ["chengdu", "southwestern"],
+  ["sichuan", "southwestern"], ["yunnan", "southwestern"],
+  ["lhasa", "plateau"], ["everest", "plateau"], ["qinghai", "plateau"], ["tibet", "plateau"],
+  ["sanya", "coast"], ["xiamen", "coast"],
+  ["xinjiang", "northwestern"], ["dunhuang", "northwestern"],
+];
+const ZONE_NEEDLE: Record<string, string> = {
+  northern: "northern china", eastern: "eastern china", southern: "southern china",
+  southwestern: "southwestern china", northwestern: "northwestern china",
+  northeastern: "northeastern china", plateau: "qinghai",
+  mongolia: "inner mongolia", coast: "southern coast",
+};
+function cityLabel(raw: string) {
+  return raw.replace(/\s*\(.*?\)\s*/g, " ").split(",")[0].split("&")[0].trim();
+}
+function regionLabel(raw: string) {
+  return raw.replace(/\s*\(.*?\)\s*/g, " ").trim();
+}
+const guidesByLongestSlug = [...regionGuides].sort((a, b) => b.slug.length - a.slug.length);
+const cityRows = (month.topDestinations ?? []).map((d) => {
+  const haystack = d.name.toLowerCase();
+  const zoneHit = PLACE_ZONES.find(([place]) => haystack.includes(place));
+  const band = zoneHit
+    ? (month.regionalWeather ?? []).find((rw) => rw.region.toLowerCase().includes(ZONE_NEEDLE[zoneHit[1]]))
+    : undefined;
+  const flat = haystack.replace(/[^a-z]/g, "");
+  const guide = guidesByLongestSlug.find((r) => flat.includes(r.slug));
+  return {
+    city: cityLabel(d.name),
+    temp: d.temp,
+    why: d.why,
+    band: band ? regionLabel(band.region) : "",
+    rain: band ? band.rain : "",
+    href: guide ? `/region/${guide.slug}/` : "",
+  };
+});
+const metaCities = cityRows.slice(0, 3).map((c) => `${c.city} ${c.temp}`).join(", ");
+
 const title = `China Weather in ${month.label} ${currentYear}: Temp, Rain & Best Regions`;
 const seoTitle = `China Weather in ${month.label} ${currentYear}: ${month.tempLow}–${month.tempHigh}°C`;
-const meta = `${month.label} China weather: ${month.tempLow}–${month.tempHigh}°C, ${month.rainDays} rain days. See best regions, packing list & crowd tips. Real 10-year data.`;
+const meta = `${month.label} China weather: ${month.tempLow}–${month.tempHigh}°C, ${month.rainDays} rain days. ${metaCities}. Best regions, packing list & crowd tips.`;
 const desc = `Planning a China trip in ${month.label}? Get ${month.tempLow}–${month.tempHigh}°C weather, ${month.rainDays} rainy days, best regions to visit & insider tips to avoid crowds.`;
 
 const articleSchema = JSON.stringify({
@@ -43,7 +89,7 @@ const articleSchema = JSON.stringify({
   "author": { "@type": "Person", "name": "Wei Zhang", "url": "https://www.best-time-to-visit-china.com/about/" },
   "publisher": { "@type": "Organization", "name": "When to Visit China", "logo": { "@type": "ImageObject", "url": "https://www.best-time-to-visit-china.com/favicon.svg" } },
   "datePublished": "2026-01-15",
-  "dateModified": "2026-09-03",
+  "dateModified": "2026-10-19",
   "mainEntityOfPage": { "@type": "WebPage", "@id": canonical },
 });
 ---
@@ -120,10 +166,35 @@ const articleSchema = JSON.stringify({
         )}
       </div>
 
+      <!-- City-by-city weather -->
+      {cityRows.length > 0 && (
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-zinc-900 mb-2">City-by-City Weather in {month.label} {currentYear}</h2>
+          <p class="text-sm text-zinc-500 leading-relaxed mb-6">Average low and high temperatures for {cityRows.length} Chinese cities in {month.label} {currentYear}, from the same 10-year records behind the national figures. Rainy-day counts are for the wider region each city sits in.</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {cityRows.map((row) => (
+              <article class="bg-white border border-zinc-200 rounded-xl p-5">
+                <h3 class="text-base font-bold text-zinc-900 leading-snug">{row.city} weather in {month.label} {currentYear}</h3>
+                <p class="text-xs font-semibold text-zinc-400 uppercase tracking-wide mt-1.5">{row.temp}</p>
+                <p class="text-sm text-zinc-700 leading-relaxed mt-2">{row.why}</p>
+                {row.rain && (
+                  <p class="text-xs text-zinc-500 mt-2">Rain: about {row.rain} &mdash; the {row.band} average.</p>
+                )}
+                {row.href && (
+                  <a href={row.href} class="inline-block mt-2 text-xs font-semibold text-accent-600 hover:text-accent-700 no-underline">
+                    {row.city}&rsquo;s month-by-month timing &rarr;
+                  </a>
+                )}
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
+
       <!-- Regional weather table -->
       {month.regionalWeather && month.regionalWeather.length > 0 && (
         <section class="mb-12">
-          <h2 class="text-2xl font-bold text-zinc-900 mb-6">{month.label} Weather by Region</h2>
+          <h2 class="text-2xl font-bold text-zinc-900 mb-6">{month.label} {currentYear} Weather by Region</h2>
           <div class="overflow-x-auto border border-zinc-200 rounded-xl">
             <table class="w-full text-sm">
               <thead class="bg-zinc-50 text-zinc-500">
@@ -164,25 +235,6 @@ const articleSchema = JSON.stringify({
           <ComparisonTool client:visible initialMode="months" initialA={month.month} initialB="october" />
         </div>
       </section>
-
-      <!-- Top destinations -->
-      {month.topDestinations && month.topDestinations.length > 0 && (
-        <section class="mb-12">
-          <h2 class="text-2xl font-bold text-zinc-900 mb-6">Top Places to Visit in {month.label}</h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {month.topDestinations.map((d, i) => (
-              <div class="bg-white border border-zinc-200 rounded-xl p-5">
-                <div class="flex items-baseline gap-2 mb-1">
-                  <span class="text-accent-600 font-bold">{i + 1}.</span>
-                  <h3 class="text-base font-bold text-zinc-900">{d.name}</h3>
-                </div>
-                <p class="text-xs font-semibold text-zinc-400 uppercase tracking-wide mb-2">{d.temp}</p>
-                <p class="text-sm text-zinc-700 leading-relaxed">{d.why}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
 
       <!-- Tips -->
       {month.tips && month.tips.length > 0 && (
